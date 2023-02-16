@@ -41,11 +41,18 @@ Recipe book
 ### Design
 
 - Color palette:
-  - Neutral colours:
+  - Gradient:
 
-  ![light](media/)
-  ![dark](media/)
+  ![gradient](media/design/gradient-palette.png)
 
+  - Neutral:
+
+  ![neutral](media/design/neutral.png)
+
+  - Contrast:
+
+  ![contrast](media/design/contrast.png)
+  ![contrast](media/design/contrast-1.png)
 
 ### User Stories
 
