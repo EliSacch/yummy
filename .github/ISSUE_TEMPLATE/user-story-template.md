@@ -1,7 +1,7 @@
 ---
 name: User Story Template
 about: Stadard user story
-title: ''
+title: 'USER STORY: <title>'
 labels: ''
 assignees: EliSacch
 
