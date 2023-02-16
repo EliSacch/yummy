@@ -56,17 +56,30 @@ Recipe book
 ### Wireframes
 
 <details>
-  <summary>Landing page mobile</summary>
+  <summary>Mobile</summary>
 
-   ![Mobile Wireframe](media/wireframes)
+   ![Mobile Wireframe](media/wireframes/mobile/landing-page.png)
+   ![Mobile Wireframe](media/wireframes/mobile/signup.png)
+   ![Mobile Wireframe](media/wireframes/mobile/login.png)
+   ![Mobile Wireframe](media/wireframes/mobile/dashboard.png)
+   ![Mobile Wireframe](media/wireframes/mobile/sidebar.png)
+   ![Mobile Wireframe](media/wireframes/mobile/new-recipe.png)
+   ![Mobile Wireframe](media/wireframes/mobile/recipe-page-overview.png)
+   ![Mobile Wireframe](media/wireframes/mobile/recipe-page-full.png)
+   ![Mobile Wireframe](media/wireframes/mobile/profile.png)
 
 </details>
 
 
 <details>
-  <summary>Landing page desktop</summary>
+  <summary>Desktop</summary>
 
-   ![Desktop Wireframe](media/wireframes/)
+   ![Desktop Wireframe](media/wireframes/desktop/landing-page.png)
+   ![Desktop Wireframe](media/wireframes/desktop/signup.png)
+   ![Desktop Wireframe](media/wireframes/desktop/dashboard.png)
+   ![Desktop Wireframe](media/wireframes/desktop/new-recipe.png)
+   ![Desktop Wireframe](media/wireframes/desktop/recipe-page.png)
+   ![Desktop Wireframe](media/wireframes/desktop/profile.png)
 
 </details>
 
