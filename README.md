@@ -11,6 +11,7 @@ Recipe book
 - [Design and User Experience](#design-and-user-experience)
   - [Design](#design)
   - [User Stories](#user-stories)
+  - [Recipes database model](#recipes-model)
   - [Wireframes](#wireframes)
 
 - [Features](#features)
@@ -59,6 +60,13 @@ Recipe book
 - As website owner I want:
 
 - As a user I want:
+
+
+### Recipes model
+
+The recipes table will contain the following columns:
+
+![Database Model](media/design/recipe-model.png)
 
 ### Wireframes
 
@@ -185,6 +193,9 @@ Check if Errors are returned when passing the final version through the official
 ### Code
 
 ### Content
+
+- The color palette was generated using [Color Space](https://mycolor.space/)
+- The recipe model was drawn using [Smart Draw](https://www.smartdraw.com/)
 
 - The icons were taken from [Font Awesome](https://fontawesome.com/)
 
