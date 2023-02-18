@@ -1,0 +1,26 @@
+/* ----------------------------------------------- Generic CSS */
+:root {
+    /* Fonts */
+    --font-basic: 'Quicksand', sans-serif;
+    --font-headers: 'Source Sans Pro', sans-serif;
+
+    /* Primary Color Gradient */
+    --clr-primary-0: #A0EAA7;
+    --clr-primary-1: #6BCBA6;
+    --clr-primary-2: #44AAA0;
+    --clr-primary-3: #328890;
+    --clr-primary-4: #306777;
+    --clr-primary-5: #2F4858;
+
+    /* Secondary color */
+    --clr-secondary: #E3E4D4;
+
+    /* Tertiary colors */
+    --clr-tertiary-0: #00B1FF;
+    --clr-tertiary-1: #FB7B7C;
+    --clr-tertiary-2: #FFDC82;
+}
+
+body {
+    font-family: var(--font-basic);
+}
