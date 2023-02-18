@@ -192,6 +192,8 @@ Check if Errors are returned when passing the final version through the official
 
 ### Code
 
+- The code to filter the recipes by tag in the admin page is taken from [bradmontgomery](https://bradmontgomery.net/blog/django-admin-filters-arrayfields/)
+
 ### Content
 
 - The color palette was generated using [Color Space](https://mycolor.space/)
