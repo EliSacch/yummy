@@ -199,17 +199,21 @@ Check if Errors are returned when passing the final version through the official
 - The color palette was generated using [Color Space](https://mycolor.space/)
 - The recipe model was drawn using [Smart Draw](https://www.smartdraw.com/)
 
-- The icons were taken from [Font Awesome](https://fontawesome.com/)
+- The icons were taken from [Font Awesome](https://fontawesome.com/) and from [Google Fonts Icons](https://fonts.google.com/icons)
 
 - The following fonts, used for the project, are from [Google Fonts](https://fonts.google.com/):
   - Quicksand
   - Source Sans Pro
+
+- The background image is from [Mae Mu](https://unsplash.com/@picoftasty?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/_h-2jrL9cMU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  
 
 ## Technologies used
 
   - HTML
   - CSS
   - JavaScript and JQuery
+  - Python
   - Django
   - Materialize
   - PostgreSQL

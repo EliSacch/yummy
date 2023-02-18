@@ -1,28 +1,36 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 
 <head>
-    <title>Yummy - Recipe book</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Save your recipes and have them always with you.">
+    <meta name="keywords" content="recipe book cooking">
+    <meta name="author" content="Elisa Sacchelli">
 
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600&family=Source+Sans+Pro:ital,wght@0,200;0,400;0,600;0,700;1,200;1,300;1,600;1,700&display=swap" rel="stylesheet">
+    <!-- Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-    <!-- Materialize JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     
+    <title>Yummy - Recipe book</title>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 
 <body>
-<main class="">
+    <main>
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
@@ -32,6 +40,11 @@
     <footer class="">
         
     </footer>
+
+
+<!-- Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
 </body>
 
 </html>

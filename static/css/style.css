@@ -21,6 +21,66 @@
     --clr-tertiary-2: #FFDC82;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+}
 body {
     font-family: var(--font-basic);
+}
+
+#logo {
+    font-family: var(--font-headers);
+    font-size: 5rem;
+    font-weight: 400;
+}
+
+.subheading {
+    font-size: 3rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+.center {
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* ----------------------------------------------- Landing page before authentication */
+.landingpage {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--clr-primary-5)  url('../images/background.jpg') no-repeat center center/cover;
+    color: var(--clr-secondary);
+    isolation: isolate;
+}
+
+.landingpage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.384), black);
+    z-index: -1;
+}
+
+.action-btn {
+    width: 50%;
+    max-width: 300px;
+    margin: 10px;
+    border: 2px solid var(--clr-primary-4);
+    background-color: var(--clr-primary-4);
+    color: var(--clr-secondary);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.btn-invert {
+    background-color: transparent;
+    color: var(--clr-secondary);
+}
+
+.action-btn:hover {
+    background-color: var(--clr-primary-2);
+    color: var(--clr-primary-5);
 }
