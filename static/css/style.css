@@ -25,10 +25,23 @@
     padding: 0;
     margin: 0;
 }
+
 body {
     font-family: var(--font-basic);
 }
 
+h3 {
+    font-family: var(--font-headers)
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+a {
+    color: var(--clr-primary-3);
+    font-weight: 600;
+}
 #logo {
     font-family: var(--font-headers);
     font-size: 5rem;
@@ -42,9 +55,21 @@ body {
 }
 
 .center {
-    text-align: center;
     margin: 0 auto;
 }
+
+.primary-1 {
+    background-color: var(--clr-primary-1);
+}
+
+.light-text {
+    color: var(--clr-secondary);
+}
+
+.dark-text {
+    color: var(--clr-primary-5);
+}
+
 
 /* ----------------------------------------------- Landing page before authentication */
 .landingpage {
@@ -60,17 +85,21 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.384), black);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.415), 20%,  black);
     z-index: -1;
 }
 
+
 .action-btn {
     width: 50%;
+    height: fit-content;
     max-width: 300px;
     margin: 10px;
-    border: 2px solid var(--clr-primary-4);
+    padding: 10px;
+    border: 2px solid var(--clr-primary-6);
     background-color: var(--clr-primary-4);
     color: var(--clr-secondary);
+    line-height: normal;
     font-size: 1.5rem;
     font-weight: 600;
 }
@@ -83,4 +112,44 @@ body {
 .action-btn:hover {
     background-color: var(--clr-primary-2);
     color: var(--clr-primary-5);
+}
+
+.input-field>label {
+    color: var(--clr-primary-4);
+    font-size: 2.5rem;
+}
+
+/* ----------------------------------------------- Authentication Forms */
+.authentication-form {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    isolation: isolate;
+}
+
+.authentication-form form,
+.authentication-form .form-header {
+    max-width: 400px;
+}
+
+.form-header {
+    margin-bottom: 2em;
+}
+.authentication-form input {
+    background-color: transparent;
+    color: var(--clr-primary-4);
+    font-family: var(--font-headers);
+    font-size: 1.2em;
+}
+
+.authentication-form input + label {
+    font-size: 1.4em;
+}
+
+.input-field>input[type]:-webkit-autofill:not(.browser-default):not([type="search"])+label, .input-field>input[type=date]:not(.browser-default)+label, .input-field>input[type=time]:not(.browser-default)+label {
+    -webkit-transform: translateY(-20px) scale(0.8);
+    transform: translateY(-20px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    color: var(--clr-primary-4);
 }
