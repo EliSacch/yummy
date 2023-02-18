@@ -9,8 +9,10 @@
     <div class="row">
 
         <!-- Action buttons -->
-        <button class="btn">Login</button>
-        <button class="btn">Signup!</button>
+        <ul>
+            <li><a href="{% url 'account_login' %}">Login</a></li>
+            <li><a href="{% url 'account_signup' %}">Signup</a></li>
+        </ul>
     </div>
 
 </div>
