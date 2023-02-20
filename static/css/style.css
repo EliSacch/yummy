@@ -1,8 +1,8 @@
 /* ----------------------------------------------- Generic CSS */
 :root {
     /* Fonts */
-    --font-basic: 'Quicksand', sans-serif;
-    --font-headers: 'Source Sans Pro', sans-serif;
+    --font-basic: 'Source Sans Pro', sans-serif;
+    --font-headers: 'Quicksand', sans-serif;
 
     /* Primary Color Gradient */
     --clr-primary-0: #A0EAA7;
@@ -28,9 +28,14 @@
 
 body {
     font-family: var(--font-basic);
+    color: var(--clr-primary-5);
 }
 
-h3 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-family: var(--font-headers)
 }
 
@@ -58,8 +63,17 @@ a {
     margin: 0 auto;
 }
 
+.primary-0 {
+    background-color: var(--clr-primary-0);
+}
 .primary-1 {
     background-color: var(--clr-primary-1);
+}
+.primary-2 {
+    background-color: var(--clr-primary-2);
+}
+.primary-3 {
+    background-color: var(--clr-primary-3);
 }
 
 .light-text {
@@ -76,7 +90,7 @@ a {
     margin: 0;
     width: 100%;
     height: 100vh;
-    background: var(--clr-primary-5)  url('../images/background.jpg') no-repeat center center/cover;
+    background: var(--clr-primary-5)  url('https://res.cloudinary.com/dmmlypujq/image/upload/v1676907135/background_zhccmo.jpg') no-repeat center center/cover;
     color: var(--clr-secondary);
     isolation: isolate;
 }
@@ -110,8 +124,8 @@ a {
 }
 
 .action-btn:hover {
-    background-color: var(--clr-primary-1);
-    border: 2px solid var(--clr-primary-1);
+    background-color: var(--clr-primary-2);
+    border: 2px solid var(--clr-primary-2);
     color: var(--clr-primary-5);
 }
 

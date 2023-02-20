@@ -7,6 +7,11 @@
 {% block content %}
 <section class="authentication-form valign-wrapper dark-text">
     <div class="container">
+        <div class="go-back">
+            <button class="btn-floating primary-3 light-text">
+                <i class="lmedium material-icons">arrow_back</i>
+            </button>
+        </div>
         <div class="row form-header">
             <div class="col s12">
                 <h3>{% trans "Sign Up" %}</h3>
@@ -49,7 +54,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col s12">
                 <ul class="errorlist">
                     {% for key, value in form.errors.items %}
                         <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
