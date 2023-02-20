@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+<section class="authentication-form valign-wrapper dark-text">
+    <div class="container">
+        <div class="go-back">
+            <button class="btn-floating primary-3 light-text">
+                <i class="lmedium material-icons">arrow_back</i>
+            </button>
+        </div>
+        <div class="row form-header">
+            <div class="col s12">
+                <h3>{% trans "Sign Up" %}</h3>
+
+                <p>{% blocktrans %}Welcome to Yummy. Do you already have an account? Then please <a
+                        class="link" href="{{ login_url }}">log in</a> instead.{% endblocktrans %}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <form class="signup center" id="signup_form" method="post" action="{% url 'account_signup' %}">
+                    {% csrf_token %}
+
+                    <div class="input-field">
+                        <input type="text" name="username" autocomplete="username" minlenght="1" maxlenght="150" id="id_username" required />
+                        <label for="id_username">Username</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="email" name="email" autocomplete="email" id="id_email" required />
+                        <label for="id_email">Email</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="password" name="password1" autocomplete="new-password" id="id_password1" required />
+                        <label for="id_password1">Password</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="password" name="password2" autocomplete="new-password" id="id_password2" required />
+                        <label for="id_password2">Confirm Password</label>
+                    </div>
+
+
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                    <button class="btn action-btn center" type="submit">{% trans "Sign Up" %} &raquo;</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <ul class="errorlist">
+                    {% for key, value in form.errors.items %}
+                        <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

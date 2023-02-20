@@ -1,8 +1,8 @@
 /* ----------------------------------------------- Generic CSS */
 :root {
     /* Fonts */
-    --font-basic: 'Quicksand', sans-serif;
-    --font-headers: 'Source Sans Pro', sans-serif;
+    --font-basic: 'Source Sans Pro', sans-serif;
+    --font-headers: 'Quicksand', sans-serif;
 
     /* Primary Color Gradient */
     --clr-primary-0: #A0EAA7;
@@ -21,6 +21,154 @@
     --clr-tertiary-2: #FFDC82;
 }
 
+* {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     font-family: var(--font-basic);
+    color: var(--clr-primary-5);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: var(--font-headers)
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+a {
+    color: var(--clr-primary-3);
+    font-weight: 600;
+}
+#logo {
+    font-family: var(--font-headers);
+    font-size: 5rem;
+    font-weight: 400;
+}
+
+.subheading {
+    font-size: 3rem;
+    font-weight: 300;
+    margin: 0;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.primary-0 {
+    background-color: var(--clr-primary-0);
+}
+.primary-1 {
+    background-color: var(--clr-primary-1);
+}
+.primary-2 {
+    background-color: var(--clr-primary-2);
+}
+.primary-3 {
+    background-color: var(--clr-primary-3);
+}
+
+.light-text {
+    color: var(--clr-secondary);
+}
+
+.dark-text {
+    color: var(--clr-primary-5);
+}
+
+
+/* ----------------------------------------------- Landing page before authentication */
+.landingpage {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--clr-primary-5)  url('https://res.cloudinary.com/dmmlypujq/image/upload/v1676907135/background_zhccmo.jpg') no-repeat center center/cover;
+    color: var(--clr-secondary);
+    isolation: isolate;
+}
+
+.landingpage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.415), 20%,  black);
+    z-index: -1;
+}
+
+
+.action-btn {
+    width: 50%;
+    height: fit-content;
+    max-width: 300px;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid var(--clr-primary-3);
+    background-color: var(--clr-primary-3);
+    color: var(--clr-secondary);
+    line-height: normal;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.btn-invert {
+    background-color: transparent;
+    color: var(--clr-secondary);
+}
+
+.action-btn:hover {
+    background-color: var(--clr-primary-2);
+    border: 2px solid var(--clr-primary-2);
+    color: var(--clr-primary-5);
+}
+
+.input-field>label {
+    color: var(--clr-primary-4);
+    font-size: 2.5rem;
+}
+
+.errorlist {
+    color: var(--clr-tertiary-1);
+}
+
+/* ----------------------------------------------- Authentication Forms */
+.authentication-form {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    isolation: isolate;
+}
+
+.authentication-form form,
+.authentication-form .form-header {
+    max-width: 500px;
+}
+
+.form-header {
+    margin-bottom: 2em;
+}
+.authentication-form input {
+    background-color: transparent;
+    color: var(--clr-primary-4);
+    font-family: var(--font-headers);
+    font-size: 1.2em;
+}
+
+.authentication-form input + label {
+    font-size: 1.4em;
+}
+
+.input-field>input[type]:-webkit-autofill:not(.browser-default):not([type="search"])+label, .input-field>input[type=date]:not(.browser-default)+label, .input-field>input[type=time]:not(.browser-default)+label {
+    -webkit-transform: translateY(-20px) scale(0.8);
+    transform: translateY(-20px) scale(0.8);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    color: var(--clr-primary-4);
 }
