@@ -175,6 +175,16 @@ Check if Errors are returned when passing the final version through the official
     - Fix: After troubleshooting I could see that the issue was caused by the __DISABLE_COLLECTSTATIC__ Config Var, which I had not removed yet. After removing this Config Var the page loads correctly.
 
 
+- Error 500 when trying to reset password from Heroku:
+
+    - Issue: When trying to reset the password from the deployed website I received Server Error 500.
+
+![Coudinary Error](media/errors/reset-password-error.png)
+
+    - Fix: After troubleshooting I could see that the issue was caused by the Outlook SMTP credentials, and the issue was related not only to the reset password link, but to all SMTP functionalities. I decided to switch to Gmail SMTP which solved the issue.
+
+
+
 ### Unfixed Bugs
 
 
