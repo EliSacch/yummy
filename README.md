@@ -166,9 +166,13 @@ Check if Errors are returned when passing the final version through the official
 
 ### Fixed Bugs
 
-- Unable to load Cloudinary image from deployed website due to error:
+- Unable to load static files on Heroku:
+
+    - Issue: The deployed app is not loading static files correctly, because it seems to add a Cloudinary file path in the middle.
 
 ![Coudinary Error](media/errors/cloudinary-error.png)
+
+    - Fix: After troubleshooting I could see that the issue was caused by the __DISABLE_COLLECTSTATIC__ Config Var, which I had not removed yet. After removing this Config Var the page loads correctly.
 
 
 ### Unfixed Bugs
