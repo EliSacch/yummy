@@ -39,6 +39,15 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <ul class="errorlist">
+                    {% for key, value in form.errors.items %}
+                        <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+
+{% block head_title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>{% trans "Verify Your E-mail Address" %}</h1>
+            <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process.{% endblocktrans %}</p>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Action buttons -->
+        <ul class="col s12 center">
+            <li><a href="{% url 'home' %}" class="btn action-btn">Go Home</a></li>
+        </ul>
+    </div>
+
+</div>
+{% endblock %}
