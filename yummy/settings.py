@@ -63,7 +63,7 @@ if development:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.office365.com'
+    EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_HOST_USER = os.environ['SMTP_USERNAME']
     EMAIL_HOST_PASSWORD = os.environ['SMTP_PASSWORD']
     EMAIL_PORT = 587
