@@ -7,8 +7,18 @@
 
 {% block content %}
 <div class="container">
-    <h1>{% trans "Verify Your E-mail Address" %}</h1>
+    <div class="row">
+        <div class="col">
+            <h1>{% trans "Verify Your E-mail Address" %}</h1>
+            <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process.{% endblocktrans %}</p>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Action buttons -->
+        <ul class="col s12 center">
+            <li><a href="{% url 'home' %}" class="btn action-btn">Go Home</a></li>
+        </ul>
+    </div>
 
-    <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process.{% endblocktrans %}</p>
 </div>
 {% endblock %}
