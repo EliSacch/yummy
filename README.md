@@ -166,6 +166,10 @@ Check if Errors are returned when passing the final version through the official
 
 ### Fixed Bugs
 
+- Unable to load Cloudinary image from deployed website due to error:
+
+![Coudinary Error](media/errors/cloudinary-error.png)
+
 
 ### Unfixed Bugs
 
