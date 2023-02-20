@@ -50,9 +50,23 @@ INSTALLED_APPS = [
     'cloudinary',
     'recipebook',
 ]
-ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 SITE_ID = 1
+
+# Email SMTP settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.office365.com'
+EMAIL_HOST_USER = os.environ['SMTP_USERNAME']
+EMAIL_HOST_PASSWORD = os.environ['SMTP_PASSWORD']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# User email verification
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
