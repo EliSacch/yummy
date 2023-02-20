@@ -6,7 +6,15 @@
 
 <h1>Welcome</h1>
 
-<a href="{% url 'account_logout' %}" class="btn action-btn">Logout</a>
+  <!-- Modal Trigger -->
+  <a class="waves-effect waves-light btn modal-trigger" href="#logout-modal">Log Out</a>
+
+  <!-- Modal Structure -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+        {% include "account/logout.html" %}
+    </div>
+  </div>
 
 {% else %}
 
