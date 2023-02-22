@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
 {% block content %}
 
 {% if user.is_authenticated %}
 
 <h1 class="subheading">Welcome</h1>
 
-  <!-- Modal Trigger -->
-  <a class="waves-effect waves-light btn modal-trigger" href="#logout-modal">Log Out</a>
-
-  <!-- Modal Structure -->
+  <!-- Logout Modal -->
   <div id="logout-modal" class="modal">
     <div class="modal-content">
         {% include "account/logout.html" %}

@@ -45,6 +45,7 @@ h5 {
 
 p {
     font-size: 1.5rem;
+    font-weight: 400;
 }
 
 a {
@@ -181,6 +182,53 @@ a {
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
     color: var(--clr-primary-4);
+}
+
+/* ----------------------------------------------- Header */
+nav {
+    height: fit-content;
+    padding-top: 1em;
+}
+
+.user {
+    display: inline-block;
+}
+
+.user-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3em;
+    font-family: var(--font-headers);
+    font-size: 2rem;
+
+}
+
+.user-handle a {
+    display: inline-block;
+}
+
+.user-handle a > i {
+    font-size: 2em;
+}
+
+.main-nav li>a,
+.sidenav li>a {
+    color: var(--clr-primary-4);
+    font-size: 1.5rem;
+}
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+}
+
+.push-down {
+    margin-top: auto;
+}
+
+.push-up {
+    margin-bottom: auto;
 }
 
 /* ----------------------------------------------- Footer */
