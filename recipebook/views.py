@@ -7,4 +7,3 @@ class RecipeListView(generic.ListView):
     queryset = Recipe.objects.order_by('created_on')
     template_name = 'index.html'
     paginate_by = 12
-

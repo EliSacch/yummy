@@ -31,7 +31,7 @@ body {
     color: var(--clr-primary-5);
     min-height: 100vh;
     display: grid;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: auto 1fr auto;
 }
 
 h1,
@@ -188,7 +188,6 @@ a {
 footer {
     background-color: var(--clr-primary-5);
     color: var(--clr-secondary);
-    padding: 1em;
     text-align: center;
 }
 

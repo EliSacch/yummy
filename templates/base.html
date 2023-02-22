@@ -22,7 +22,11 @@
     <!-- Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     
-    <title>Yummy - Recipe book</title>
+    <title>
+        {% block title %}
+        Yummy - Recipe book
+        {% endblock title %}
+    </title>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -36,6 +40,12 @@
 </head>
 
 <body>
+    <header>
+        {% block header %}
+        <!-- Header Goes here -->
+        {% endblock header %}
+    </header>
+
     <main>
         {% block content %}
         <!-- Content Goes here -->
