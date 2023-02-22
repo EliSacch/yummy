@@ -1,14 +1,44 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {% include "header.html" %}
+    {% if user.is_authenticated %}
+        {% include "header.html" %}
+    {% else %}
+    {% endif %}
 {% endblock header %}
+
 
 {% block content %}
 
 {% if user.is_authenticated %}
 
-<h1 class="subheading">Welcome</h1>
+    <!-- Search bar here when ready-->
+
+    <!-- Categories -->
+
+    <!-- Suggestions -->
+    <section class="suggestions">
+        <div class="container">
+            <h2>Suggestions</h2>
+            {% for suggestion in suggestions %}
+            <p>{{ suggestion.title }}</p>
+            {% endfor %}
+
+            <div class="recipes-container horizontal-scroll">
+                {% for recipe in recipe_list %}
+
+                    {% if recipe.user == user %}
+                    <div class="recipe-card">
+                        <h3>{{ recipe.title }}</h3>
+                    </div>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </section>
 
   <!-- Logout Modal -->
   <div id="logout-modal" class="modal">
