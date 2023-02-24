@@ -35,4 +35,5 @@ class AddNewRecipeView(generic.CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.tags = self.request.POST.get('tags').strip("").split('#')
         return super(AddNewRecipeView, self).form_valid(form)

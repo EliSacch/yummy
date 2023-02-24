@@ -172,7 +172,7 @@ a {
 
 .authentication-form input + label,
 .recipe_form input + label,
-label.label-left {
+.label-left > label{
     color: var(--clr-primary-4);
     font-size: 1.4em;
 }
@@ -187,6 +187,9 @@ label.label-left {
 
 .input-field.small-input {
     width: 25%;
+}
+
+.label-left {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 1em;
@@ -196,6 +199,10 @@ label.label-left {
     position: relative;
 }
 
+label > span {
+    font-size: smaller;
+    color: rgb(94, 101, 99);
+}
 
 /* ----------------------------------------------- Header */
 nav {
