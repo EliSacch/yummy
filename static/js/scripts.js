@@ -3,6 +3,7 @@ $(document).ready(function(){
     /* Materialize CSS Inizialization */
     $('.sidenav').sidenav();
     $('.modal').modal();
+    $('select').formSelect();
 
 
     /* Custom JS */

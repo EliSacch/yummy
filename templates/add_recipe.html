@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Add Recipe{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<section class="valign-wrapper dark-text">
+    <div class="container">
+        <div class="go-back">
+            <button class="btn-floating primary-3 light-text">
+                <i class="lmedium material-icons">arrow_back</i>
+            </button>
+        </div>
+        <div class="row form-header">
+            <div class="col s12">
+                <h1 class="subheading">Add Recipe</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                <form class="center recipe_form" id="add_recipe_form" method="post" action="{% url 'add_recipe' %}">
+                    {% csrf_token %}
+
+                    <div class="input-field">
+                        <input type="text" name="title"  minlenght="1" maxlenght="150" id="title" required />
+                        <label for="title">Recipe Name</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="text" name="ingredients" id="ingredients" required />
+                        <label for="ingredients">Ingredients</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input type="text" name="procedure" id="procedure" required />
+                        <label for="procedure">Procedure</label>
+                    </div>
+
+                    <div class="input-field small-input">
+                        <label class="label-left">Servings</label>
+                        <select name="servings" id="servings">
+                            {% for i in servings_range %}
+                                <option value="{{ i }}">{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <button class="btn action-btn center" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% else %} 
+
+<h1>Please, <a href="{% url 'account_login' %}" class="btn action-btn">log in</a> to add new recipes.</h1>
+
+{% endif %}
+
+{% endblock %}

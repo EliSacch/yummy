@@ -179,10 +179,20 @@ Check if Errors are returned when passing the final version through the official
 
     - Issue: When trying to reset the password from the deployed website I received Server Error 500.
 
-![Coudinary Error](media/errors/reset-password-error.png)
+![SMTP Error](media/errors/reset-password-error.png)
 
     - Fix: After troubleshooting I could see that the issue was caused by the Outlook SMTP credentials, and the issue was related not only to the reset password link, but to all SMTP functionalities. I decided to switch to Gmail SMTP which solved the issue.
 
+
+- Select Field not displaying options in form:
+
+    - Issue: When adding the select field to the 'Add recipes' form, the options where not showing and I could only see the label.
+
+![Select Field Error](media/errors/options-field-not-displaying.png)
+
+    - Fix: The issue was caused by the Materialize CSS form, which requires for the select fields to be initialized via JS.
+
+![Select Field Fix](media/errors/options-field-not-displaying-fix.png)
 
 
 ### Unfixed Bugs
