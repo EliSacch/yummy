@@ -45,6 +45,7 @@ h5 {
 
 p {
     font-size: 1.5rem;
+    font-weight: 400;
 }
 
 a {
@@ -135,22 +136,18 @@ a {
     color: var(--clr-primary-5);
 }
 
-.input-field>label {
-    color: var(--clr-primary-4);
-    font-size: 2.5rem;
-}
-
 .errorlist {
     color: var(--clr-tertiary-1);
 }
 
-/* ----------------------------------------------- Authentication Forms */
+/* ----------------------------------------------- Forms */
 .go-back {
     margin:.5em 0 1.5em 0;
 
 }
 
-.authentication-form {
+.authentication-form,
+.recipe_form {
     width: 100%;
     position: relative;
     isolation: isolate;
@@ -164,14 +161,19 @@ a {
 .form-header {
     margin-bottom: 2em;
 }
-.authentication-form input {
+
+.authentication-form input,
+.recipe_form input {
     background-color: transparent;
     color: var(--clr-primary-4);
     font-family: var(--font-headers);
     font-size: 1.2em;
 }
 
-.authentication-form input + label {
+.authentication-form input + label,
+.recipe_form input + label,
+label.label-left {
+    color: var(--clr-primary-4);
     font-size: 1.4em;
 }
 
@@ -181,6 +183,65 @@ a {
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
     color: var(--clr-primary-4);
+}
+
+.input-field.small-input {
+    width: 25%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
+}
+
+.input-field.small-input > * {
+    position: relative;
+}
+
+
+/* ----------------------------------------------- Header */
+nav {
+    height: fit-content;
+    padding-top: 1em;
+}
+
+.user {
+    display: inline-block;
+}
+
+.user-handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3em;
+    font-family: var(--font-headers);
+    font-size: 2rem;
+
+}
+
+.user-handle a {
+    display: inline-block;
+}
+
+.user-handle a > i {
+    font-size: 2em;
+}
+
+.main-nav li>a,
+.sidenav li>a {
+    color: var(--clr-primary-4);
+    font-size: 1.5rem;
+}
+
+.sidenav {
+    display: flex;
+    flex-direction: column;
+}
+
+.push-down {
+    margin-top: auto;
+}
+
+.push-up {
+    margin-bottom: auto;
 }
 
 /* ----------------------------------------------- Footer */
