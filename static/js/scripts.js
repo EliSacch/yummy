@@ -60,17 +60,16 @@ $(document).ready(function () {
         });
     });
 
-
+    // Prevnt the user from entering certain characters in the tags field
+    preventCharInInput();
     /**
      * This functions takes the string entered in the tags field and splits it into an array.
      * The array is displayed underneath the tags field, to show the valid tags.
      */
-    preventCharInInput();
     $('#tags').on('keyup', function () {
         var tags = $('#tags').val();
         var tags_array = tags.split(/[ ,#]+/);
 
-        console.log(tags_array);
         $('#valid-tags').empty();
         for(tag of tags_array) {
             // We check if the tag is empty, if so we skip it
