@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block head_title %}Add Recipe{% endblock %}
+{% block title %}Add Recipe{% endblock %}
 
 {% block content %}
 
@@ -27,7 +27,7 @@
 
                     <div class="input-field">
                         <input type="text" name="title"  minlenght="1" maxlenght="150" id="title" required />
-                        <label for="title">Recipe Name</label>
+                        <label for="title">Recipe Name *</label>
                     </div>
 
                     <!-- Ingredients -->
@@ -36,7 +36,7 @@
 
                     <div class="input-field">
                         <input type="text" name="procedure" id="procedure" required />
-                        <label for="procedure">Procedure</label>
+                        <label for="procedure">Procedure *</label>
                     </div>
 
                     <!-- Select field for servings -->
@@ -51,7 +51,7 @@
 
                     <div class="input-field">
                         <input type="text" name="tags" id="tags" required />
-                        <label for="tags">Tags  <span>(Example: #easy #vegetarian)</span></label>
+                        <label for="tags">Tags * <span>(Example: #easy #vegetarian)</span></label>
                     </div>
 
                     <!-- Submit button -->

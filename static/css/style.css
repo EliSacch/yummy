@@ -248,6 +248,13 @@ fieldset > legend {
     margin-inline: 1em;
 }
 
+.ingredient-line {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .5em;
+    padding: .5em 0;
+}
+
 .btn-floating.remove-ingredient > i {
     color: var(--clr-tertiary-1);
 }

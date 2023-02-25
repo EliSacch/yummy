@@ -4,6 +4,7 @@ $(document).ready(function () {
     $('.sidenav').sidenav();
     $('.modal').modal();
     $('select').formSelect();
+    $('.tooltipped').tooltip();
 
 
     /* Custom JS */
@@ -50,18 +51,23 @@ function show_added_ingredients(ingredients) {
     // Then we loop through the ingredients array and append a div for each ingredient
     for (var i = 0; i < ingredients.length; i++) {
         var ingredient_line = `
-    <div class="ingredient-line row">
-        <div class="col s1">
-            <button type="button" class="remove-ingredient btn-floating" data-index="${i}">
-                <i class="small material-icons">remove</i>
-            </button>
+    <div class="ingredient-line">
+        <div>
+            <a class="tooltipped" data-position="bottom" data-tooltip="Remove Ingredient">
+                <button type="button" class="remove-ingredient btn-floating" data-index="${i}">
+                    <i class="small material-icons">remove</i>
+                </button>
+            </a>
         </div>
-        <div class="col s11">
+        <div>
             ${ingredients[i].name}: ${ingredients[i].amount} ${ingredients[i].unit} 
         </div>
     </div>`;
         $('#ingredients-list').append(ingredient_line);
     }
+
+    // We initialize the tooltips
+    $('.tooltipped').tooltip();
 
     // Finally we add the event listener to the remove-ingredient button
     $('.remove-ingredient').click(function () {
