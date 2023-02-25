@@ -7,6 +7,7 @@
 {% if user.is_authenticated %}
 <section class="valign-wrapper dark-text">
     <div class="container">
+        <!-- Go back button -->
         <div class="go-back">
             <button class="btn-floating primary-3 light-text">
                 <i class="lmedium material-icons">arrow_back</i>
@@ -17,6 +18,8 @@
                 <h1 class="subheading">Add Recipe</h1>
             </div>
         </div>
+
+        <!-- Add recipe form -->
         <div class="row">
             <div class="col s12">
                 <form class="center recipe_form" id="add_recipe_form" method="post" action="{% url 'add_recipe' %}">
@@ -27,18 +30,18 @@
                         <label for="title">Recipe Name</label>
                     </div>
 
-                    <div class="input-field">
-                        <input type="text" name="ingredients" id="ingredients" required />
-                        <label for="ingredients">Ingredients</label>
-                    </div>
+                    <!-- Ingredients -->
+                    {% include "ingredients.html" %}
+                    <!-- End of ingredients -->
 
                     <div class="input-field">
                         <input type="text" name="procedure" id="procedure" required />
                         <label for="procedure">Procedure</label>
                     </div>
 
-                    <div class="input-field small-input">
-                        <label class="label-left">Servings</label>
+                    <!-- Select field for servings -->
+                    <div class="input-field small-input label-left">
+                        <label>Servings</label>
                         <select name="servings" id="servings">
                             {% for i in servings_range %}
                                 <option value="{{ i }}">{{ i }}</option>
@@ -46,8 +49,23 @@
                         </select>
                     </div>
 
+                    <div class="input-field">
+                        <input type="text" name="tags" id="tags" required />
+                        <label for="tags">Tags  <span>(Example: #easy #vegetarian)</span></label>
+                    </div>
+
+                    <!-- Submit button -->
                     <button class="btn action-btn center" type="submit">Save</button>
                 </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="errorlist">
+                    {% for key, value in form.errors.items %}
+                        <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+                    {% endfor %}
+                    </ul>
             </div>
         </div>
     </div>

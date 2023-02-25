@@ -82,6 +82,10 @@ a {
     background-color: var(--clr-primary-3);
 }
 
+.background-error {
+    background-color: var(--clr-tertiary-1);
+}
+
 .light-text {
     color: var(--clr-secondary);
 }
@@ -172,7 +176,7 @@ a {
 
 .authentication-form input + label,
 .recipe_form input + label,
-label.label-left {
+.label-left > label{
     color: var(--clr-primary-4);
     font-size: 1.4em;
 }
@@ -187,6 +191,9 @@ label.label-left {
 
 .input-field.small-input {
     width: 25%;
+}
+
+.label-left {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 1em;
@@ -194,6 +201,63 @@ label.label-left {
 
 .input-field.small-input > * {
     position: relative;
+}
+
+label > span {
+    font-size: smaller;
+    color: rgb(94, 101, 99);
+}
+
+/* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
+
+#add-ingredients {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    padding: 0 .5em;
+}
+
+fieldset {
+    border-color: var(--clr-secondary);
+}
+
+fieldset > legend {
+    padding-inline: 1em;
+    color: var(--clr-primary-4);
+    font-size: 1.5em;
+    font-family: var(--font-headers);
+}
+
+.btn-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1em;
+}
+
+#ingredients-list {
+    text-align: left;
+    font-size: 1.5rem;
+    font-family: var(--font-headers);
+
+}
+
+.btn-floating.remove-ingredient {
+    background-color: transparent;
+    border: 1px solid var(--clr-tertiary-1);
+    margin-inline: 1em;
+}
+
+.btn-floating.remove-ingredient > i {
+    color: var(--clr-tertiary-1);
+}
+
+.btn-floating.remove-ingredient:hover {
+    background-color: var(--clr-tertiary-1);
+}
+
+.btn-floating.remove-ingredient:hover > i {
+    color: white;
 }
 
 

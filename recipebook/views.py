@@ -12,11 +12,12 @@ class RecipeListView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(RecipeListView, self).get_context_data(**kwargs)
-        all_recipes = Recipe.objects.filter(user=self.request.user)
-        random_recipes = all_recipes.order_by('?')[:2]
-        context = {
-            'suggestions' : random_recipes
-            }
+        if self.request.user.is_authenticated:
+            all_recipes = Recipe.objects.filter(user=self.request.user)
+            random_recipes = all_recipes.order_by('?')[:2]
+            context = {
+                'suggestions' : random_recipes
+                }
         return context
 
 
@@ -35,4 +36,5 @@ class AddNewRecipeView(generic.CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        form.instance.tags = self.request.POST.get('tags').strip("").split('#')
         return super(AddNewRecipeView, self).form_valid(form)

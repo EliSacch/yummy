@@ -1,0 +1,35 @@
+<!-- Section where added ingredients are displayed -->
+<div id="ingredients-list">
+
+</div>
+
+<!-- Hidden input submitted with form (data type must be JSON) -->
+<input type="hidden" id="ingredients" name="ingredients" value="">
+
+<!-- Fieldset to add ingredients -->
+<fieldset>
+    <legend>Add Ingredient</legend>
+    <div  id="add-ingredients"> 
+        <div>
+            <div class="row ">
+                <div class="input-field col s12 m6">
+                    <input type="text" name="ingredient-name" id="ingredient-name"/>
+                    <label for="ingredient-name">Ingredient name</label>
+                </div>
+
+                <div class="input-field col s6 m3">
+                    <input type="text" name="amount" id="amount"/>
+                    <label for="amount">Amount</label>
+                </div>
+
+                <div class="input-field col s6 m3">
+                    <input type="text" name="unit" id="unit"/>
+                    <label for="unit">Unit</label>
+                </div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button id="add-ingredient-btn" type="button" class="btn-floating primary-3 light-text"><i class="lmedium material-icons">add</i></button>
+        </div>
+    </div>
+</fieldset>
