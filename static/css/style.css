@@ -94,6 +94,28 @@ a {
     color: var(--clr-primary-5);
 }
 
+/* ----------------------------------------------- Override invalid input materialize color */
+input.invalid:not([type]), 
+input.invalid:not([type]):focus, 
+input.invalid[type=text]:not(.browser-default), 
+input.invalid[type=text]:not(.browser-default):focus, 
+input.invalid[type=password]:not(.browser-default), 
+input.invalid[type=password]:not(.browser-default):focus, 
+input.invalid[type=email]:not(.browser-default), 
+input.invalid[type=email]:not(.browser-default):focus, 
+input.invalid[type=url]:not(.browser-default), 
+input.invalid[type=url]:not(.browser-default):focus,  
+input.invalid[type=number]:not(.browser-default), 
+input.invalid[type=number]:not(.browser-default):focus, 
+textarea.materialize-textarea.invalid, 
+textarea.materialize-textarea.invalid:focus, 
+.select-wrapper.invalid>input.select-dropdown, 
+.select-wrapper.invalid>input.select-dropdown:focus {
+    border-bottom: 1px solid var(--clr-tertiary-1);
+    -webkit-box-shadow: 0 1px 0 0 var(--clr-tertiary-1);
+    box-shadow: 0 1px 0 0 var(--clr-tertiary-1);
+}
+
 
 /* ----------------------------------------------- Landing page before authentication */
 .landingpage {
@@ -208,6 +230,30 @@ label > span {
     color: rgb(94, 101, 99);
 }
 
+input.invalid {
+    border-bottom: 1px solid var(--clr-tertiary-1);
+    -webkit-box-shadow: 0 1px 0 0 var(--clr-tertiary-1);
+    box-shadow: 0 1px 0 0 var(--clr-tertiary-1);
+}
+
+.mandatory-fields {
+    display: block;
+    font-size: 1.1em;
+    text-align: left;
+    color: var(--clr-primary-2);
+    margin-block: 10px;
+    border-top: 1px dotted var(--clr-primary-2);
+}
+#valid-tags {
+    width: 100%;
+    text-align: left;
+}
+.hashtag {
+    background-color: var(--clr-primary-4);
+    color: var(--clr-secondary);
+    padding: .3em .5em;
+    margin-inline: 0.5em;
+}
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
 #add-ingredients {
@@ -239,7 +285,14 @@ fieldset > legend {
     text-align: left;
     font-size: 1.5rem;
     font-family: var(--font-headers);
+}
 
+#ingredients-list:has(div):before {
+    content: "Ingredients";
+    display: block;
+    color: var(--clr-primary-4);
+    font-size: 1.3em;
+    font-family: var(--font-headers);
 }
 
 .btn-floating.remove-ingredient {

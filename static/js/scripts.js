@@ -25,15 +25,62 @@ $(document).ready(function () {
         const amount = $('#amount').val();
         const unit = $('#unit').val();
 
-        // Then we add the ingredient to the ingredients array
-        ingredients.push({ 'name': ingredient_name, 'amount': amount, 'unit': unit });
-        show_added_ingredients(ingredients);
+        // Then we check if the input fields are empty. The unit is not mandatory.
+        if (ingredient_name == '') {
+            $('#ingredient-name').addClass('invalid');
+            $('#ingredient-name').focus();
+        } else if (amount == '') {
+            $('#amount').addClass('invalid');
+            $('#amount').focus();
+        } else {
+            // If the input fields are not empty, we remove the invalid class and the active class from the label
+            $('#ingredient-name').removeClass('invalid');
+            $('#ingredient-name').next().removeClass('active');
+            $('#amount').removeClass('invalid');
+            $('#amount').next().removeClass('active');
+            $('#unit').next().removeClass('active');
 
-        // Finally we clear the input fields
-        $('#ingredient-name').val('');
-        $('#amount').val('');
-        $('#unit').val('');
+            // Then we add the ingredient to the ingredients array
+            ingredients.push({ 'name': ingredient_name, 'amount': amount, 'unit': unit });
+            show_added_ingredients(ingredients);
 
+            // Finally we clear the input fields
+            $('#ingredient-name').val('');
+            $('#amount').val('');
+            $('#unit').val('');
+        }
+
+        // We add the event listeners to the input fields, so that when the user changes the value, the invalid class is removed
+        $('#ingredient-name').change(function() {
+            $('#ingredient-name').removeClass('invalid');
+        });
+
+        $('#amount').change(function() {
+            $('#amount').removeClass('invalid');
+        });
+    });
+
+
+    /**
+     * This functions takes the string entered in the tags field and splits it into an array.
+     * The array is displayed underneath the tags field, to show the valid tags.
+     */
+    preventCharInInput();
+    $('#tags').on('keyup', function () {
+        var tags = $('#tags').val();
+        var tags_array = tags.split(/[ ,#]+/);
+
+        console.log(tags_array);
+        $('#valid-tags').empty();
+        for(tag of tags_array) {
+            // We check if the tag is empty, if so we skip it
+            if(tag == '') {
+                continue;
+            } else {
+                $('#valid-tags').append(`<span class="hashtag">#${tag}</span>`);
+            }
+        }
+        
     });
 
 });
@@ -93,3 +140,37 @@ function remove_ingredient(ingredients, index) {
     ingredients.splice(index, 1);
     show_added_ingredients(ingredients);
 }
+
+
+/**
+ * This function prevents from entering certain characters in the tags field.
+ */
+function preventCharInInput() {
+        const inputNumber = $('#tags');
+        for(let inputs of inputNumber) {
+            inputs.addEventListener("keypress", function (evt) {
+                const invalidChars = [
+                    "+",
+                    "|",
+                    "/",
+                    "\\",
+                    "*",
+                    ".",
+                    ",",
+                    ":",
+                    ";",
+                    "?",
+                    "!",
+                    "~",
+                    "`",
+                    "<",
+                    ">",
+                    "\"",
+                    "'",
+                  ];
+                  if (invalidChars.includes(evt.key)) {
+                    evt.preventDefault();
+                  }
+            });
+        }
+    }
