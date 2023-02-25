@@ -156,43 +156,72 @@ The recipes table will contain the following columns:
 Check if Errors are returned when passing the final version through the official [JsHint validator](https://jshint.com/), but only 4 warnings.
 
 
- <details>
+<details>
   <summary>JsHint - JS validation screenshot</summary>
 
   ![Image]()
 
-  </details>
+</details>
 
 
 ### Fixed Bugs
 
-- Unable to load static files on Heroku:
+<details>
+  <summary> Unable to load static files on Heroku:</summary>
 
-    - Issue: The deployed app is not loading static files correctly, because it seems to add a Cloudinary file path in the middle.
+  - Issue: The deployed app is not loading static files correctly, because it seems to add a Cloudinary file path in the middle.
 
 ![Coudinary Error](media/errors/cloudinary-error.png)
 
-    - Fix: After troubleshooting I could see that the issue was caused by the __DISABLE_COLLECTSTATIC__ Config Var, which I had not removed yet. After removing this Config Var the page loads correctly.
+  - Fix: After troubleshooting I could see that the issue was caused by the __DISABLE_COLLECTSTATIC__ Config Var, which I had not removed yet. After removing this Config Var the page loads correctly.
 
+</details>
 
-- Error 500 when trying to reset password from Heroku:
+    
+<details>
+  <summary>Error 500 when trying to reset password from Heroku</summary>
 
-    - Issue: When trying to reset the password from the deployed website I received Server Error 500.
+  - Issue: When trying to reset the password from the deployed website I received Server Error 500.
 
 ![SMTP Error](media/errors/reset-password-error.png)
 
-    - Fix: After troubleshooting I could see that the issue was caused by the Outlook SMTP credentials, and the issue was related not only to the reset password link, but to all SMTP functionalities. I decided to switch to Gmail SMTP which solved the issue.
+  - Fix: After troubleshooting I could see that the issue was caused by the Outlook SMTP credentials, and the issue was related not only to the reset password link, but to all SMTP functionalities. I decided to switch to Gmail SMTP which solved the issue.
+
+</details>
 
 
-- Select Field not displaying options in form:
+<details>
+  <summary>Select Field not displaying options in form</summary>
 
-    - Issue: When adding the select field to the 'Add recipes' form, the options where not showing and I could only see the label.
+  - Issue: When adding the select field to the 'Add recipes' form, the options where not showing and I could only see the label.
 
 ![Select Field Error](media/errors/options-field-not-displaying.png)
 
-    - Fix: The issue was caused by the Materialize CSS form, which requires for the select fields to be initialized via JS.
+  - Fix: The issue was caused by the Materialize CSS form, which requires for the select fields to be initialized via JS.
 
 ![Select Field Fix](media/errors/options-field-not-displaying-fix.png)
+
+</details>
+
+<details>
+  <summary>Index page broke after adding function to provide suggested recipes</summary>
+
+  - Issue: To provide the recipes suggestion, the function was filtering the results based on the user ID, so that users can see only their recipes. When I first implemented this option I was logged in as admin. After logging out I received this error.
+
+![Anonymous User Error](media/errors/anonymous-user-error.png)
+
+  - Fix: The issue was caused by the Materialize CSS form, which requires for the select fields to be initialized via JS.
+
+![Anonymous User Fix](media/errors/anonymous-user-fix.png)
+
+</details>
+
+
+<details>
+  <summary> </summary>
+
+
+</details>
 
 
 ### Unfixed Bugs
