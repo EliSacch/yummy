@@ -244,7 +244,16 @@ input.invalid {
     margin-block: 10px;
     border-top: 1px dotted var(--clr-primary-2);
 }
-
+#valid-tags {
+    width: 100%;
+    text-align: left;
+}
+.hashtag {
+    background-color: var(--clr-primary-4);
+    color: var(--clr-secondary);
+    padding: .3em .5em;
+    margin-inline: 0.5em;
+}
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
 #add-ingredients {
