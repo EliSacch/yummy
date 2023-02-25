@@ -25,17 +25,40 @@ $(document).ready(function () {
         const amount = $('#amount').val();
         const unit = $('#unit').val();
 
-        // Then we add the ingredient to the ingredients array
-        ingredients.push({ 'name': ingredient_name, 'amount': amount, 'unit': unit });
-        show_added_ingredients(ingredients);
+        // Then we check if the input fields are empty. The unit is not mandatory.
+        if (ingredient_name == '') {
+            $('#ingredient-name').addClass('invalid');
+            $('#ingredient-name').focus();
+        } else if (amount == '') {
+            $('#amount').addClass('invalid');
+            $('#amount').focus();
+        } else {
+            // If the input fields are not empty, we remove the invalid class and the active class from the label
+            $('#ingredient-name').removeClass('invalid');
+            $('#ingredient-name').next().removeClass('active');
+            $('#amount').removeClass('invalid');
+            $('#amount').next().removeClass('active');
+            $('#unit').next().removeClass('active');
 
-        // Finally we clear the input fields
-        $('#ingredient-name').val('');
-        $('#amount').val('');
-        $('#unit').val('');
+            // Then we add the ingredient to the ingredients array
+            ingredients.push({ 'name': ingredient_name, 'amount': amount, 'unit': unit });
+            show_added_ingredients(ingredients);
 
+            // Finally we clear the input fields
+            $('#ingredient-name').val('');
+            $('#amount').val('');
+            $('#unit').val('');
+        }
+
+        // We add the event listeners to the input fields, so that when the user changes the value, the invalid class is removed
+        $('#ingredient-name').change(function() {
+            $('#ingredient-name').removeClass('invalid');
+        });
+
+        $('#amount').change(function() {
+            $('#amount').removeClass('invalid');
+        });
     });
-
 });
 
 
