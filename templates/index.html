@@ -24,22 +24,30 @@
     <!-- Suggestions -->
     <section class="suggestions">
         <div class="container">
-            <h2>Suggestions</h2>
-            <div class="recipes-container horizontal-scroll">
-                {% for suggestion in suggestions %}
-            
-                    <div class="recipe-card">
-                        {% if "placeholder" in suggestion.image.url %}
-                            <img src="https://res.cloudinary.com/dmmlypujq/image/upload/v1677435591/yummy/card-placeholder_zquyvl.jpg" alt="Plaseholder Image - bunch of vegetables">
-                        {% endif %}
-
-                        <h3>{{ suggestion.title }}</h3>
-                        <p>Easy | 30 min</p>
-                    </div>
-
-                {% endfor %}
+            <div class="section-header">
+                <h2>Suggestions</h2>
+                <a href="{% url 'my_recipes' %}" class="side-link">
+                    <p>See All Recipes</p>
+                </a>
             </div>
+        
+    
+        <div class="horizontal-scroll">
+            {% for suggestion in suggestions %}
+                
+                <div class="recipe-card">
+                    {% if "placeholder" in suggestion.image.url %}
+                        <img src="https://res.cloudinary.com/dmmlypujq/image/upload/v1677435591/yummy/card-placeholder_zquyvl.jpg" alt="Plaseholder Image - bunch of vegetables">
+                    {% endif %}
+
+                    <h3>{{ suggestion.title }}</h3>
+                    <p>Easy | 30 min</p>
+                </div>
+
+            {% endfor %}
         </div>
+    </div>
+    
     </section>
 
   <!-- Logout Modal -->

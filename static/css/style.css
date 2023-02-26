@@ -36,6 +36,10 @@ body {
     grid-template-rows: auto 1fr auto;
 }
 
+main {
+    overflow-x: hidden;
+}
+
 h1,
 h2,
 h3,
@@ -59,6 +63,43 @@ p {
 a {
     color: var(--clr-primary-3);
     font-weight: 600;
+}
+
+nav ul a::after,
+.sidenav li>a::after,
+.side-link::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--clr-primary-3);
+    transition: width .3s;
+}
+
+nav ul a:hover,
+.sidenav li>a:hover {
+    background-color: inherit;
+}
+
+nav ul a:hover::after,
+.sidenav li>a:hover::after,
+.side-link:hover::after {
+    width: 100%;
+    transition: width .3s; 
+}
+
+section {
+    margin-block: 5vw;
+}
+
+.section-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.side-link {
+    margin: 3rem 0 1rem 0;
+    align-self: self-end;
 }
 
 #logo {
@@ -101,6 +142,7 @@ a {
 .dark-text {
     color: var(--clr-primary-5);
 }
+
 
 /* ----------------------------------------------- Override input Materialize CSS style */
 input.invalid:not([type]), 
@@ -379,16 +421,20 @@ nav {
 /* ----------------------------------------------- Recipes View */
 
 .recipes-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1em;
-    padding-inline: 2em;
 }
 
 .horizontal-scroll {
-    overflow-x: scroll;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(250px, 31%);
+    gap: .5em;
+    overflow-x: auto;
     overscroll-behavior-inline: contain;
-    scroll-snap-type: inline mandatory;
-    scroll-padding-inline: 1em;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 ::-webkit-scrollbar {
@@ -405,24 +451,22 @@ nav {
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    min-width: 250px;
-    width: 30%;
     height: 300px;
     padding: 1.5em .7em;
     margin-bottom: 1em;
+    overflow: hidden;
     background-color: var(--clr-primary-5);
     color: var(--clr-secondary);
     isolation: isolate;
     transition: .2s ease-in;
-    overflow: hidden;
-    filter: grayscale(80%);
+    filter: grayscale(90%);	
 }
 
 .recipe-card > img {
     position: absolute;
     width: 100%;
+    object-fit: cover;
     z-index: -2;
-
 }
 
 .recipe-card::before {

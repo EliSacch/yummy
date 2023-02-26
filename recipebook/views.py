@@ -3,7 +3,7 @@ from django.views import generic
 from .models import Recipe
 
 # General view for the home page
-class RecipeListView(generic.ListView):
+class HomeView(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.order_by('created_on')
     template_name = 'index.html'
@@ -11,13 +11,30 @@ class RecipeListView(generic.ListView):
     
 
     def get_context_data(self, **kwargs):
-        context = super(RecipeListView, self).get_context_data(**kwargs)
+        context = super(HomeView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             all_recipes = Recipe.objects.filter(user=self.request.user)
             random_recipes = all_recipes.order_by('?')[:5]
             context = {
                 'all_recipes' : all_recipes,
                 'suggestions' : random_recipes
+                }
+        return context
+    
+
+class RecipeListView(generic.ListView):
+    model = Recipe
+    queryset = Recipe.objects.order_by('created_on')
+    template_name = 'my_recipes.html'
+    paginate_by = 12
+    
+
+    def get_context_data(self, **kwargs):
+        context = super(RecipeListView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            all_recipes = Recipe.objects.filter(user=self.request.user)
+            context = {
+                'all_recipes' : all_recipes
                 }
         return context
 

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {% if user.is_authenticated %}
+        {% include "header.html" %}
+    {% else %}
+    {% endif %}
+{% endblock header %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+    <!-- All Recipes -->
+    <section class="suggestions">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Recipes</h2>
+            </div>
+        
+    
+        <div class="recipes-container">
+            {% for recipe in all_recipes %}
+                
+                <div class="recipe-card">
+                    {% if "placeholder" in recipe.image.url %}
+                        <img src="https://res.cloudinary.com/dmmlypujq/image/upload/v1677435591/yummy/card-placeholder_zquyvl.jpg" alt="Plaseholder Image - bunch of vegetables">
+                    {% endif %}
+
+                    <h3>{{ recipe.title }}</h3>
+                    <p>Easy | 30 min</p>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    
+    </section>
+
+  <!-- Logout Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+        {% include "account/logout.html" %}
+    </div>
+  </div>
+
+{% else %}
+
+<p>go home</p>
+
+{% endif %}
+
+{%endblock%}
