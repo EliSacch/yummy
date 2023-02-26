@@ -16,6 +16,7 @@ class RecipeListView(generic.ListView):
             all_recipes = Recipe.objects.filter(user=self.request.user)
             random_recipes = all_recipes.order_by('?')[:2]
             context = {
+                'all_recipes' : all_recipes,
                 'suggestions' : random_recipes
                 }
         return context

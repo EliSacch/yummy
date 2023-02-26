@@ -122,8 +122,8 @@ function show_added_ingredients(ingredients) {
     });
 
     // We also add the ingredients array to the hidden input field
-    ingredients_JSON = JSON.stringify(ingredients.join(','));
-    $('#ingredients').val(ingredients_JSON);
+    ingredients_string = JSON.stringify(ingredients)
+    $('#ingredients').val(ingredients_string);
 }
 
 

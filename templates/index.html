@@ -15,6 +15,11 @@
     <!-- Search bar here when ready-->
 
     <!-- Categories -->
+    <section class="categoriess">
+        <div class="container">
+            <h2>Categories</h2>
+        </div>
+    </section>
 
     <!-- Suggestions -->
     <section class="suggestions">
@@ -25,19 +30,26 @@
             {% endfor %}
 
             <div class="recipes-container horizontal-scroll">
-                {% for recipe in recipe_list %}
+                {% for recipe in all_recipes %}
 
-                    {% if recipe.user == user %}
+                   
                     <div class="recipe-card">
                         <h3>{{ recipe.title }}</h3>
+                        <p>{{ recipe.servings }} servings</p>
+                        <p>{{ recipe.procedure }}</p>
+                        {% for ingredient in recipe.ingredients %}
+                            <p>{{ ingredient.name }}, {{ ingredient.amount }}{{ ingredient.unit }}</p>
+                        {% endfor %}
+                        {% for tag in recipe.tags %}
+                            <p>{{ tag }}</p>
+                        {% endfor %}
+
                     </div>
-                    {% endif %}
+                   
 
                 {% endfor %}
             </div>
         </div>
-
-
     </section>
 
   <!-- Logout Modal -->

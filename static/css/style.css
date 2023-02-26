@@ -31,6 +31,7 @@ body {
     font-family: var(--font-basic);
     color: var(--clr-primary-5);
     min-height: 100vh;
+    min-height: 100dvh;
     display: grid;
     grid-template-rows: auto 1fr auto;
 }
@@ -180,13 +181,11 @@ textarea.materialize-textarea.invalid:focus,
 /* ----------------------------------------------- Forms */
 .go-back {
     margin:.5em 0 1.5em 0;
-
 }
 
 form {
     max-width: 500px;
     position: relative;
-    isolation: isolate;
 }
 
 .form-header {
@@ -215,6 +214,11 @@ input {
 .input-field.small-input {
     max-width: 300px;
 }
+
+.select-wrapper {
+    width: 60px;
+}
+
 .input-field.small-input > * {
     position: relative;
 }
@@ -362,6 +366,29 @@ nav {
 
 .push-up {
     margin-bottom: auto;
+}
+
+
+/* ----------------------------------------------- Recipes View */
+
+.recipes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1em;
+    padding: 1em;
+    font-size: .5em;
+}
+
+.horizontal-scroll {
+
+}
+
+/* change this css later */
+.recipe-card,
+.recipe-card > p,
+.recipe-card > h3 {
+    background-color: #E3E4D4;
+    font-size: 1rem;
 }
 
 /* ----------------------------------------------- Footer */
