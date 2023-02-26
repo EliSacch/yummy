@@ -58,10 +58,12 @@ $(document).ready(function () {
         $('#amount').change(function() {
             $('#amount').removeClass('invalid');
         });
+
+        // then we add the ingredients array to the hidden input field
+        ingredients_string = JSON.stringify(ingredients);
+        $('#ingredients').val(ingredients_string);
     });
 
-    // Prevnt the user from entering certain characters in the tags field
-    preventCharInInput();
     /**
      * This functions takes the string entered in the tags field and splits it into an array.
      * The array is displayed underneath the tags field, to show the valid tags.
@@ -119,11 +121,10 @@ function show_added_ingredients(ingredients) {
     $('.remove-ingredient').click(function () {
         index = $(this).data('index');
         remove_ingredient(ingredients, index);
+        // then we add the ingredients array to the hidden input field
+        ingredients_string = JSON.stringify(ingredients);
+        $('#ingredients').val(ingredients_string);
     });
-
-    // We also add the ingredients array to the hidden input field
-    ingredients_string = JSON.stringify(ingredients)
-    $('#ingredients').val(ingredients_string);
 }
 
 
@@ -139,37 +140,3 @@ function remove_ingredient(ingredients, index) {
     ingredients.splice(index, 1);
     show_added_ingredients(ingredients);
 }
-
-
-/**
- * This function prevents from entering certain characters in the tags field.
- */
-function preventCharInInput() {
-        const inputNumber = $('#tags');
-        for(let inputs of inputNumber) {
-            inputs.addEventListener("keypress", function (evt) {
-                const invalidChars = [
-                    "+",
-                    "|",
-                    "/",
-                    "\\",
-                    "*",
-                    ".",
-                    ",",
-                    ":",
-                    ";",
-                    "?",
-                    "!",
-                    "~",
-                    "`",
-                    "<",
-                    ">",
-                    "\"",
-                    "'",
-                  ];
-                  if (invalidChars.includes(evt.key)) {
-                    evt.preventDefault();
-                  }
-            });
-        }
-    }

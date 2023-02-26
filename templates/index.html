@@ -25,27 +25,17 @@
     <section class="suggestions">
         <div class="container">
             <h2>Suggestions</h2>
-            {% for suggestion in suggestions %}
-            <p>{{ suggestion.title }}</p>
-            {% endfor %}
-
             <div class="recipes-container horizontal-scroll">
-                {% for recipe in all_recipes %}
-
-                   
+                {% for suggestion in suggestions %}
+            
                     <div class="recipe-card">
-                        <h3>{{ recipe.title }}</h3>
-                        <p>{{ recipe.servings }} servings</p>
-                        <p>{{ recipe.procedure }}</p>
-                        {% for ingredient in recipe.ingredients %}
-                            <p>{{ ingredient.name }}, {{ ingredient.amount }}{{ ingredient.unit }}</p>
-                        {% endfor %}
-                        {% for tag in recipe.tags %}
-                            <p>{{ tag }}</p>
-                        {% endfor %}
+                        {% if "placeholder" in suggestion.image.url %}
+                            <img src="https://res.cloudinary.com/dmmlypujq/image/upload/v1677435591/yummy/card-placeholder_zquyvl.jpg" alt="Plaseholder Image - bunch of vegetables">
+                        {% endif %}
 
+                        <h3>{{ suggestion.title }}</h3>
+                        <p>Easy | 30 min</p>
                     </div>
-                   
 
                 {% endfor %}
             </div>

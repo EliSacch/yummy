@@ -45,6 +45,12 @@ h5 {
     font-size: 2.5rem;
 }
 
+h3,
+h4,
+h5 {
+    font-size: 2rem;
+}
+
 p {
     font-size: 1.5rem;
     font-weight: 400;
@@ -253,6 +259,7 @@ input.invalid {
     padding: .3em .5em;
     margin: .3em .5em;
     border-radius: 3px;
+    text-transform: lowercase;
 }
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
@@ -372,24 +379,83 @@ nav {
 /* ----------------------------------------------- Recipes View */
 
 .recipes-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
     gap: 1em;
-    padding: 1em;
-    font-size: .5em;
+    padding-inline: 2em;
 }
 
 .horizontal-scroll {
+    overflow-x: scroll;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scroll-padding-inline: 1em;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+.horizontal-scroll > * {
+    scroll-snap-align: start;
+}
+
+.recipe-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 250px;
+    width: 30%;
+    height: 300px;
+    padding: 1.5em .7em;
+    margin-bottom: 1em;
+    background-color: var(--clr-primary-5);
+    color: var(--clr-secondary);
+    isolation: isolate;
+    transition: .2s ease-in;
+    overflow: hidden;
+    filter: grayscale(80%);
+}
+
+.recipe-card > img {
+    position: absolute;
+    width: 100%;
+    z-index: -2;
 
 }
 
-/* change this css later */
-.recipe-card,
-.recipe-card > p,
-.recipe-card > h3 {
-    background-color: #E3E4D4;
-    font-size: 1rem;
+.recipe-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0), 50%,  black);
+    z-index: -1;
 }
+
+.recipe-card:hover {
+    transform: scale(1.0125);
+    filter: grayscale(20%);
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: var(--clr-secondary);
+    opacity: .5;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: var(--clr-primary-5);
+    border-radius: 10px;
+
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-primary-4); 
+  }
 
 /* ----------------------------------------------- Footer */
 
