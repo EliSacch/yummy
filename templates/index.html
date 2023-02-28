@@ -15,7 +15,7 @@
     <!-- Search bar here when ready-->
 
     <!-- Categories -->
-    <section class="categoriess">
+    <section class="categories">
         <div class="container">
             <h2>Categories</h2>
         </div>
@@ -34,7 +34,8 @@
     
         <div class="horizontal-scroll">
             {% for suggestion in suggestions %}
-                
+            
+            <a href="{% url 'recipe_detail' suggestion.pk %}" class="clickable-div">
                 <div class="recipe-card">
                     {% if "placeholder" in suggestion.image.url %}
                         <img src="https://res.cloudinary.com/dmmlypujq/image/upload/v1677435591/yummy/card-placeholder_zquyvl.jpg" alt="Plaseholder Image - bunch of vegetables">
@@ -43,6 +44,7 @@
                     <h3>{{ suggestion.title }}</h3>
                     <p>Easy | 30 min</p>
                 </div>
+            </a>
 
             {% endfor %}
         </div>

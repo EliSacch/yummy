@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Yummy - Recipe Detail{% endblock %}
+
+{% if user.is_authenticated %}
+
+    <!-- If the user currently logged in is the creator of this recipe, they are authorized to view it -->
+    {% if user == recipe.user %}
+        {% block content %}
+
+        <header class="recipe-detail-header">
+            <div class="go-home">
+                <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
+                    <a href="{% url 'home' %}">
+                    <button class="btn-floating primary-3 light-text">
+                        <i class="lmedium material-icons">arrow_back</i>
+                    </button>
+                    </a>
+                </a>
+            </div>
+        </header>
+        
+        <section class="recipe-detail">
+
+            <div class="recipe-detail-container recipe-detail-title">
+                <h1>{{ recipe.title }}</h1>
+                <p>30min | Easy</p>
+            </div>
+
+            <hr class="recipe-detail-separator">
+
+            <div class="container recipe-detail-container">
+                <h2>Ingredients</h2>
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                        <li class="row ingredient-line">
+                            <p>{{ ingredient.name }}</p>
+                            <p class="ingredient-quantity">{{ ingredient.amount }}{{ ingredient.unit }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <hr class="recipe-detail-separator">
+
+            <div class="container recipe-detail-container">
+                <h2>Procedure</h2>
+                <ul class="step-counter">
+                    {% for step in recipe.procedure %}
+                        <li class="row">
+                            <span><p class="step">{{ step }}</p></span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </section>
+
+
+        <!-- Logout Modal -->
+        <div id="logout-modal" class="modal">
+            <div class="modal-content">
+                {% include "account/logout.html" %}
+            </div>
+        </div>
+        {% endblock %}
+    
+    <!-- If the user currently logged in is not the creator of this recipe, they are not authorized to view it -->
+    {% else %}
+        <p>Recipe not found in your account.</p>
+    {% endif %}
+
+<!-- If the user is not logged in, they cannot see this page at all, and they need to log in or sign up -->
+{% else %}
+        <p>go home</p>
+{% endif %}

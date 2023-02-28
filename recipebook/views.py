@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from django.views import generic
+from django.shortcuts import render, get_object_or_404
+from django.views import generic, View
+from django.urls import reverse
 from .models import Recipe
+
 
 # General view for the home page
 class HomeView(generic.ListView):
@@ -20,8 +22,9 @@ class HomeView(generic.ListView):
                 'suggestions' : random_recipes
                 }
         return context
-    
 
+
+# View for the my recipes page that displays all the reciepes created by the user
 class RecipeListView(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.order_by('created_on')
@@ -39,12 +42,32 @@ class RecipeListView(generic.ListView):
         return context
 
 
+# View for the recipe detail page
+class RecipeDetailView(View):
+    
+    def get(self, request, pk, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            queryset = Recipe.objects.filter(user=self.request.user)
+            recipe = get_object_or_404(queryset, pk=pk)
+
+            return render(
+                request,
+                'recipe_detail.html',
+                {
+                    'recipe' : recipe
+                }
+            )
+
+
 # View for the recipe creation page
 class AddNewRecipeView(generic.CreateView):
     model = Recipe
     fields = ['title', 'ingredients', 'procedure', 'servings', 'preparation_time', 'tags', 'notes']
     template_name = 'add_recipe.html'
-    success_url = '/'
+
+    #success_url = '/recipe/<int:pk>/'
+    def get_success_url(self):
+        return reverse("recipe_detail", args=[self.object.pk])
 
     def get_context_data(self, **kwargs):
         context = super(AddNewRecipeView, self).get_context_data(**kwargs)
@@ -53,6 +76,7 @@ class AddNewRecipeView(generic.CreateView):
             'servings_range' : range(1,25)
             }
         return context
+    
 
     def form_valid(self, form):
         form.instance.user = self.request.user

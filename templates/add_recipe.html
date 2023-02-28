@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Recipe{% endblock %}
+{% block title %}Yummy - Add Recipe{% endblock %}
 
 {% block content %}
 
@@ -77,7 +77,14 @@
 </section>
 {% else %} 
 
-<h1>Please, <a href="{% url 'account_login' %}" class="btn action-btn">log in</a> to add new recipes.</h1>
+<section>
+    <div class="container">
+        <h1>Please, <a href="{% url 'account_login' %}">log in</a> to add new recipes.</h1>
+
+        <p><a href="{% url 'home' %}">Go home</a></p>
+        
+    </div>
+</section>
 
 {% endif %}
 

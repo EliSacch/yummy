@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Yummy - My Recipes{% endblock %}
+
 {% block header %}
     {% if user.is_authenticated %}
         {% include "header.html" %}
@@ -24,6 +26,7 @@
         <div class="recipes-container">
             {% for recipe in all_recipes %}
                 
+            <a href="{% url 'recipe_detail' recipe.pk %}" class="clickable-div">
                 <div class="recipe-card">
                     {% if "placeholder" in recipe.image.url %}
                         <img src="https://res.cloudinary.com/dmmlypujq/image/upload/v1677435591/yummy/card-placeholder_zquyvl.jpg" alt="Plaseholder Image - bunch of vegetables">
@@ -31,7 +34,9 @@
 
                     <h3>{{ recipe.title }}</h3>
                     <p>Easy | 30 min</p>
+                    
                 </div>
+            </a>
 
             {% endfor %}
         </div>
@@ -46,10 +51,17 @@
     </div>
   </div>
 
-{% else %}
+  {% else %} 
 
-<p>go home</p>
-
-{% endif %}
+  <section>
+      <div class="container">
+          <h1>Please, <a href="{% url 'account_login' %}">log in</a> to view your recipes.</h1>
+  
+          <p><a href="{% url 'home' %}">Go home</a></p>
+          
+      </div>
+  </section>
+  
+  {% endif %}
 
 {%endblock%}
