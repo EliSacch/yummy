@@ -7,51 +7,65 @@
     <!-- If the user currently logged in is the creator of this recipe, they are authorized to view it -->
     {% if user == recipe.user %}
         {% block content %}
+        <section class="recipe-detail-section">
 
-        <header class="recipe-detail-header">
-            <div class="go-home">
-                <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
-                    <a href="{% url 'home' %}">
-                    <button class="btn-floating primary-3 light-text">
-                        <i class="lmedium material-icons">arrow_back</i>
-                    </button>
+            <header class="recipe-detail-background hide-on-large-only">
+                <div class="go-home">
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
+                        <a href="{% url 'home' %}">
+                        <button class="btn-floating primary-3 light-text">
+                            <i class="lmedium material-icons">arrow_back</i>
+                        </button>
+                        </a>
                     </a>
-                </a>
-            </div>
-        </header>
-        
-        <section class="recipe-detail">
+                </div>
+            </header>
 
-            <div class="recipe-detail-container recipe-detail-title">
-                <h1>{{ recipe.title }}</h1>
-                <p>30min | Easy</p>
-            </div>
+            <div class="recipe-detail">
 
-            <hr class="recipe-detail-separator">
+                <div class="recipe-detail-header">
+                    <div class="recipe-image hide-on-med-and-down">
+                            
+                    </div>
+                    <div class="container recipe-detail-title">
+                        <h1>{{ recipe.title }}</h1>
+                        <p>30min | Easy</p>
+                    </div>
+                    
+                </div>
 
-            <div class="container recipe-detail-container">
-                <h2>Ingredients</h2>
-                <ul>
-                    {% for ingredient in recipe.ingredients %}
-                        <li class="row ingredient-line">
-                            <p>{{ ingredient.name }}</p>
-                            <p class="ingredient-quantity">{{ ingredient.amount }}{{ ingredient.unit }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
+                <hr class="recipe-detail-separator hide-on-large-only">
 
-            <hr class="recipe-detail-separator">
-
-            <div class="container recipe-detail-container">
-                <h2>Procedure</h2>
-                <ul class="step-counter">
-                    {% for step in recipe.procedure %}
-                        <li class="row">
-                            <span><p class="step">{{ step }}</p></span>
-                        </li>
-                    {% endfor %}
-                </ul>
+                <div class="recipe-detail-body">
+                    <div class="container recipe-detail-container">
+                        <div class="row">
+                            <h2 class="left">Ingredients</h2>
+                            <p class="right">Servings: {{ recipe.servings}}</p>
+                        </div>
+                        
+                        <ul>
+                            {% for ingredient in recipe.ingredients %}
+                                <li class="row ingredient-line">
+                                    <p>{{ ingredient.name }}</p>
+                                    <p class="ingredient-quantity">{{ ingredient.amount }}{{ ingredient.unit }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+    
+                    <hr class="recipe-detail-separator hide-on-large-only">
+    
+                    <div class="container recipe-detail-container">
+                        <h2>Procedure</h2>
+                        <ul class="step-counter">
+                            {% for step in recipe.procedure %}
+                                <li class="row">
+                                    <span><p class="step">{{ step }}</p></span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
 
         </section>
