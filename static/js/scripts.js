@@ -84,6 +84,8 @@ $(document).ready(function () {
         
     });
 
+    random_icon();
+
 });
 
 
@@ -139,4 +141,30 @@ function show_added_ingredients(ingredients) {
 function remove_ingredient(ingredients, index) {
     ingredients.splice(index, 1);
     show_added_ingredients(ingredients);
+}
+
+
+/**
+ * Impage placeholder animation.
+ * This function is used to create random food icons and spread them around our image placeholder.
+ */
+const icons_names = ['restaurant', 'cake', 'local_pizza', 'egg',
+    'bakery_dining', 'icecream', 'local_cafe', 'local_bar', 'nutrition', 'ramen_dining'];
+function random_icon() {
+    for (let i = 0; i < 10; i++) {
+        var random_icon = icons_names[Math.floor(Math.random() * icons_names.length)];
+        const icon_html = `<i class="material-icons food-icon">${random_icon}</i>`;
+        $('.food-icons-container').append(icon_html);
+    } 
+    random_position();
+}
+
+function random_position() {
+    const icons = $('.food-icon');
+    for (let icon in icons) {
+        var top = Math.floor(Math.random() * 110);
+        var left = Math.floor(Math.random() * 110);
+        icons[icon].style.top = `${top}%`;
+        icons[icon].style.left = `${left}%`;
+    }
 }

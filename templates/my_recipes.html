@@ -29,8 +29,12 @@
             <a href="{% url 'recipe_detail' recipe.pk %}" class="clickable-div">
                 <div class="recipe-card">
                     {% if "placeholder" in recipe.image.url %}
-                        <img src="https://res.cloudinary.com/dmmlypujq/image/upload/v1677435591/yummy/card-placeholder_zquyvl.jpg" alt="Plaseholder Image - bunch of vegetables">
-                    {% endif %}
+                <div class="image-placeholder-container">
+                    <div class="food-icons-container">
+                        <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                    </div>
+                </div>
+                {% endif %}
 
                     <h3>{{ recipe.title }}</h3>
                     <p>Easy | 30 min</p>

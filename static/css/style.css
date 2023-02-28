@@ -227,9 +227,13 @@ textarea.materialize-textarea.invalid:focus,
 }
 
 /* ----------------------------------------------- Forms */
-.go-back,
-.go-home {
+.go-back {
     margin:.5em 0 1.5em 0;
+}
+.go-home {
+    position: absolute;
+    top: 10px;
+    z-index: 10;
 }
 
 form {
@@ -460,13 +464,19 @@ nav {
     color: var(--clr-secondary);
     isolation: isolate;
     transition: .2s ease-in;
-    filter: grayscale(90%);	
+    filter: grayscale(60%);	
 }
 
-.recipe-card > img {
+.recipe-card > img,
+.recipe-image > img,
+.recipe-detail-background > img,
+.image-placeholder-container {
     position: absolute;
     width: 100%;
     object-fit: cover;
+}
+
+.recipe-card > img {
     z-index: -2;
 }
 
@@ -474,13 +484,13 @@ nav {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(0, 0, 0, 0), 50%,  black);
+    background-image: linear-gradient(transparent, 60%, black);
     z-index: -1;
 }
 
 .recipe-card:hover {
     transform: scale(1.0125);
-    filter: grayscale(20%);
+    filter: grayscale(0);
 }
 
 ::-webkit-scrollbar {
@@ -512,14 +522,17 @@ section.recipe-detail-section {
 }
 
 .recipe-detail-background {
-    height: calc(100vh - 150px);
-    height: calc(100dvh - 150px);
+    height: 500px;
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
     background-color: var(--clr-primary-5);
-    z-index: -1;
+    z-index: 0;
+}
+
+.recipe-detail-background > img {
+    min-height: 500px;
 }
 
 .recipe-detail-header {
@@ -615,7 +628,7 @@ footer {
     text-align: center;
 }
 
-footer p {
+image-placefooter p {
     font-size: 1em;
     margin: .8em;
 }
@@ -631,6 +644,25 @@ footer a {
 
 footer a:hover {
     color: var(--clr-tertiary-0);
+}
+
+/* ----------------------------------------------- Custom image placeholder css animation */
+
+.image-placeholder-container {
+    height: 100%;
+}
+
+.food-icons-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.food-icon {
+    position: absolute;
+    color: var(--clr-primary-0);
+    font-size: 5em;
+    opacity: .5;
 }
 
 
