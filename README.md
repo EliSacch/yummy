@@ -239,6 +239,37 @@ Check if Errors are returned when passing the final version through the official
 
 
 <details>
+  <summary>Update form creates new instance instead of updating the existing one</summary>
+
+  - Issue numer 1: After creating the UpdateView for my recipes, the view was showing the correct template and pre-populating the fields with the selected recipe to be updated.
+  Although when clicking on "Save", the form was crating a new instance, instead of updating the existing one.
+
+  After investigation I could determine that the issue was created by the action url in the form, that was pointing to the add_recipe ursl, instead of edit_recipe url:
+    ![Original code](media/errors/update-view-form-original-code.png)
+
+  - Fix: to solve this issue I changed the action url so that it could point to the correct url:
+  ![Update form fix 1](media/errors/update-view-fix-1.png)
+
+
+  - Issue numer 2: After changing this url although I received a second error, since the edit_url requires an argument (the primary key of the recipe):
+    ![Missing argument error](media/errors/update-view-reverse-match-error.png)
+
+  - Fix: To solve this issue I had to add 'pk' as argument for the link, and I had to pass the pk also in the context.
+
+  ![Update form fix 2](media/errors/update-view-fix-2.png)
+  ![Update form fix 3](media/errors/update-view-fix-3.png)
+
+
+
+
+
+</details>
+
+
+</details>
+
+
+<details>
   <summary> </summary>
 
 
