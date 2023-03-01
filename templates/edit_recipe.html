@@ -34,8 +34,18 @@
                             <div class="input-field small-input label-left">
                                 <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
                                 {{ field }}
-                                
                             </div>
+                            {{ field.errors }}
+                        </div>
+                            
+                        {% elif field.name == "tags" %}
+                        <div class="row">
+                            <div class="input-field">
+                                {{ field }}
+                                <label for="tags">Tags * <span>(Example: #easy #vegetarian)</span></label>
+                                <span id="valid-tags"></span>
+                            </div>
+                            {{ field.errors }}
                         </div>
 
                         {% else %}
@@ -44,9 +54,11 @@
                                 {{ field }}
                                 <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
                             </div>
+                            {{ field.errors }}
                         </div>
 
                         {% endif %}
+                        
  
                     {% endfor %}
 

@@ -72,8 +72,8 @@ $(document).ready(function () {
      * This functions takes the string entered in the tags field and splits it into an array.
      * The array is displayed underneath the tags field, to show the valid tags.
      */
-    $('#tags').on('keyup', function () {
-        var tags = $('#tags').val();
+    $('#id_tags').on('keyup', function () {
+        var tags = $('#id_tags').val();
         var tags_array = tags.split(/[ ,#]+/);
 
         $('#valid-tags').empty();

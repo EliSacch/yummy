@@ -8,7 +8,6 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
-    ingredients = models.JSONField()
     procedure = ArrayField(models.TextField(max_length=200))
     servings = models.IntegerField()
     preparation_time = models.JSONField(blank=True, null=True)
@@ -29,3 +28,16 @@ class Recipe(models.Model):
         tags = self.tags.join(', ')
         return tags
 
+
+class Ingredient(models.Model):
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    amount = models.CharField(max_length=200)
+    unit = models.CharField(max_length=200)
+    updated_on = models.DateTimeField(auto_now= True)
+    
+    class Meta:
+        ordering = ['-updated_on']
+
+    def __str__(self):
+        return self.name

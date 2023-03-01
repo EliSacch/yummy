@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
-from django .views.generic.edit import UpdateView, DeleteView, FormView
+from django .views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse
 from .models import Recipe
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientsForm
 
 
 # General view for the home page
@@ -64,7 +64,7 @@ class RecipeDetailView(View):
 # View for the recipe creation page
 class AddNewRecipeView(generic.CreateView):
     model = Recipe
-    fields = ['title', 'ingredients', 'procedure', 'servings', 'preparation_time', 'tags', 'notes']
+    fields = ['title', 'procedure', 'servings', 'preparation_time', 'tags', 'notes']
     template_name = 'add_recipe.html'
 
     def get_context_data(self, **kwargs):
@@ -93,10 +93,11 @@ class EditRecipeView(UpdateView):
     form_class = RecipeForm
     success_url = '/thanks/'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, request, **kwargs):
         context = super(EditRecipeView, self).get_context_data(**kwargs)
         context = {
-            'form' : RecipeForm(instance=self.object)
+            'form' : RecipeForm(instance=self.object),
+            'form2': IngredientsForm(request.POST or None),
             }
         return context
     
