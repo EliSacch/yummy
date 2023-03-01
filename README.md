@@ -218,6 +218,27 @@ Check if Errors are returned when passing the final version through the official
 
 
 <details>
+  <summary>Randomize icons JS error</summary>
+
+  - Issue: I have created a custom image placehoder to display when the user does not upload an image for the recipe. The functions creates random food icons and assign a random position.
+
+  The function was working and displaying the icons in random positions, although it was giving an error in the console.
+
+  ![Random icons console error](media/errors/random-icons-error.png)
+
+  This is the original code:
+
+  ![Random icons original code](media/errors/random-icons-error-code.png)
+
+  - Fix: To fix this issue I changed the code as follow:
+
+  ![Random icons final code](media/errors/random-icons-fix.png)
+
+
+</details>
+
+
+<details>
   <summary> </summary>
 
 
