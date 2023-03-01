@@ -7,6 +7,16 @@
     <!-- If the user currently logged in is the creator of this recipe, they are authorized to view it -->
     {% if user == recipe.user %}
         {% block content %}
+        <section class="messages">
+            <ul class="messages-list">
+                {% for message in messages %}
+                    <li>
+                        <p>{{ message }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        
         <section class="recipe-detail-section">
 
             <header class="recipe-detail-background hide-on-large-only">

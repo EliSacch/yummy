@@ -29,7 +29,7 @@ class Recipe(models.Model):
 
 
 class Ingredient(models.Model):
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    recipe = models.ForeignKey('Recipe', blank=False, null=False, on_delete=models.CASCADE, related_name='ingredients')
     name = models.CharField(max_length=200)
     amount = models.CharField(max_length=50)
     unit = models.CharField(max_length=50, blank=True, null=True)

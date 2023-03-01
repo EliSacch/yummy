@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from django .views.generic.edit import UpdateView, DeleteView
 
 from django.urls import reverse
+from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+
 from .models import Recipe, Ingredient
 from .forms import RecipeForm, IngredientsForm, RecipeMultiForm
 
@@ -63,31 +65,6 @@ class RecipeDetailView(View):
 
 
 # View for the recipe creation page
-"""
-class AddNewRecipeView(generic.CreateView):
-    model = Recipe
-    fields = ['title', 'procedure', 'servings', 'preparation_time', 'tags', 'notes']
-    template_name = 'add_recipe.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(AddNewRecipeView, self).get_context_data(**kwargs)
-        context = {
-            # Here we pass the range of values for the servings field to the comtext(1-24)
-            'servings_range' : range(1,25)
-            }
-        return context
-    
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        # Here we split the tags string into a list and remove any empty strings
-        raw_tags = self.request.POST.get('tags').lower().replace(" ", "#").split('#')
-        form.instance.tags = [x.strip() for x in raw_tags if x.strip() != '']
-        return super(AddNewRecipeView, self).form_valid(form)
-    
-    def get_success_url(self):
-        return reverse("recipe_detail", args=[self.object.pk])
-"""
-
 class AddNewRecipeView(generic.CreateView):
     model = Recipe
     form_class = RecipeForm
@@ -107,17 +84,16 @@ class AddNewRecipeView(generic.CreateView):
         # Here we split the tags string into a list and remove any empty strings
         raw_tags = self.request.POST.get('tags').lower().replace(" ", "#").split('#')
         form.instance.tags = [x.strip() for x in raw_tags if x.strip() != '']
-        return super(AddNewRecipeView, self).form_valid(form)
 
-    def ingredients_form_valid(self, ingredients_form):
-        ingredients_form.instance.recipe = self.object
-        return super(AddNewRecipeView, self).form_valid(ingredients_form)
+        messages.add_message(self.request, messages.SUCCESS, 'Recipe added successfully')
+
+        return super(AddNewRecipeView, self).form_valid(form)
 
     def get_success_url(self):
         return reverse("recipe_detail", args=[self.object.pk])
 
 
-# View for the recipe creation page
+# View for the recipe update page
 class EditRecipeView(UpdateView):
     model = Recipe
     form_class = RecipeForm
