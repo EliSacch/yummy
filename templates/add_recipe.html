@@ -5,6 +5,15 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+<section class="messages">
+    <ul class="messages-list">
+        {% for message in messages %}
+            <li>
+                <p>{{ message }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
 <section class="valign-wrapper dark-text">
     <div class="container">
         <!-- Go back button -->

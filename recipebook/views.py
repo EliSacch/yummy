@@ -1,12 +1,13 @@
 from django.views import generic, View
 from django .views.generic.edit import UpdateView, DeleteView
+from django .views.generic.detail import SingleObjectMixin
 
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 
 from .models import Recipe, Ingredient
-from .forms import RecipeForm, IngredientsForm, RecipeMultiForm
+from .forms import RecipeForm, IngredientsForm
 
 
 # General view for the home page
@@ -65,7 +66,7 @@ class RecipeDetailView(View):
 
 
 # View for the recipe creation page
-class AddNewRecipeView(generic.CreateView):
+class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
     ingredients_form_class = IngredientsForm
@@ -78,23 +79,40 @@ class AddNewRecipeView(generic.CreateView):
             'ingredients_form': IngredientsForm(instance=self.object)
         }
         return context
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(None)
+        ingredients_form = self.ingredients_form_class(None)
+        return render(request, self.template_name, {'form': form, 'ingredients_form': ingredients_form})
+    
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        ingredients_form = self.ingredients_form_class(request.POST)
+        if form.is_valid() and ingredients_form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.user = self.request.user
+            # Here we split the tags string into a list and remove any empty strings
+            raw_tags = self.request.POST.get('tags').lower().replace(" ", "#").split('#')
+            form.instance.tags = [x.strip() for x in raw_tags if x.strip() != '']
+            recipe.save()
+            ingredients = ingredients_form.save(commit=False)
+            ingredients.recipe = recipe
+            ingredients.save()
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        # Here we split the tags string into a list and remove any empty strings
-        raw_tags = self.request.POST.get('tags').lower().replace(" ", "#").split('#')
-        form.instance.tags = [x.strip() for x in raw_tags if x.strip() != '']
+            messages.add_message(self.request, messages.SUCCESS, 'Recipe added successfully')
 
-        messages.add_message(self.request, messages.SUCCESS, 'Recipe added successfully')
+            return super(AddNewRecipeView, self).form_valid(form)
 
-        return super(AddNewRecipeView, self).form_valid(form)
+        else:
+            messages.add_message(self.request, messages.ERROR, 'There was an error adding your recipe. Please try again.')
+            return render(request, self.template_name, {'form': form, 'ingredients_form': ingredients_form})
 
     def get_success_url(self):
         return reverse("recipe_detail", args=[self.object.pk])
 
 
 # View for the recipe update page
-class EditRecipeView(UpdateView):
+class EditRecipeView(UpdateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
     ingredients_form_class = IngredientsForm

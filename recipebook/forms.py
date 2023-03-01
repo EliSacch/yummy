@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import MultiWidget, TextInput
+from django.forms.models import inlineformset_factory
 from betterforms.multiform import MultiModelForm
 from .models import Recipe, Ingredient
 
@@ -22,6 +23,4 @@ class IngredientsForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
 
-class RecipeMultiForm(MultiModelForm):
-    form_classes = {'recipe': RecipeForm,
-                    'ingredient': RecipeForm}
+#RecipeIngredientsFormset = inlineformset_factory(Recipe, Ingredient, fields=('name', 'amount', 'unit'), extra=1, can_delete=True)

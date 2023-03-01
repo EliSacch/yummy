@@ -16,7 +16,7 @@
                 {% endfor %}
             </ul>
         </section>
-        
+
         <section class="recipe-detail-section">
 
             <header class="recipe-detail-background hide-on-large-only">
@@ -78,7 +78,7 @@
                         </div>
                         
                         <ul>
-                            {% for ingredient in recipe.ingredients %}
+                            {% for ingredient in recipe.ingredients.all %}
                                 <li class="row ingredient-line">
                                     <p>{{ ingredient.name }}</p>
                                     <p class="ingredient-quantity">{{ ingredient.amount }}{{ ingredient.unit }}</p>
