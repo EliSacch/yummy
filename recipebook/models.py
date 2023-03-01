@@ -6,7 +6,6 @@ from cloudinary.models import CloudinaryField
 
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
     procedure = ArrayField(models.TextField(max_length=200))
     servings = models.IntegerField()
@@ -32,8 +31,8 @@ class Recipe(models.Model):
 class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
-    amount = models.CharField(max_length=200)
-    unit = models.CharField(max_length=200)
+    amount = models.CharField(max_length=50)
+    unit = models.CharField(max_length=50, blank=True, null=True)
     updated_on = models.DateTimeField(auto_now= True)
     
     class Meta:

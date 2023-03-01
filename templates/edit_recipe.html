@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Yummy - Add Recipe{% endblock %}
+{% block title %}Yummy - Edit Recipe{% endblock %}
 
 {% block content %}
 
@@ -17,14 +17,14 @@
         </div>
         <div class="row form-header">
             <div class="col s12">
-                <h1 class="subheading">Add Recipe</h1>
+                <h1 class="subheading">Edit Recipe</h1>
             </div>
         </div>
 
         <!-- Add recipe form -->
         <div class="row">
             <div class="col s12">
-                <form class="center recipe_form" id="add_recipe_form" method="post" action="{% url 'add_recipe' %}">
+                <form class="center recipe_form" id="edit_recipe_form" method="post" action="{% url 'edit_recipe' pk %}">
                     {% csrf_token %}
 
                     {% for field in form %}
@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="input-field">
                                 {{ field }}
-                                <label for="tags">Tags * <span>(Example: #easy #vegetarian)</span></label>
+                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}<span>(Example: #easy #vegetarian)</span></label>
                                 <span id="valid-tags"></span>
                             </div>
                             {{ field.errors }}
@@ -61,6 +61,10 @@
                         
  
                     {% endfor %}
+
+                    {% include 'add_ingredients.html' %}
+
+    
 
                     <p class="mandatory-fields">* Mandatory fields</p>
 
@@ -84,7 +88,7 @@
 
 <section>
     <div class="container">
-        <h1>Please, <a href="{% url 'account_login' %}">log in</a> to add new recipes.</h1>
+        <h1>Please, <a href="{% url 'account_login' %}">log in</a> to log in to edit recipes.</h1>
 
         <p><a href="{% url 'home' %}">Go home</a></p>
         

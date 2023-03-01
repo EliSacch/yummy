@@ -302,6 +302,10 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
   - Materialize
   - PostgreSQL
 
+  Django libraries
+  - Allauth
+  - betetrforms
+
 ## Acknowledgements
 
 A special thank to my mentor __Dick Vlaanderen__ for his precious feedback on this project.

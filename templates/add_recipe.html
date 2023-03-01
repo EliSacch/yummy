@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Yummy - Add Recipe{% endblock %}
+{% block title %}Yummy - Edit Recipe{% endblock %}
 
 {% block content %}
 
@@ -27,37 +27,44 @@
                 <form class="center recipe_form" id="add_recipe_form" method="post" action="{% url 'add_recipe' %}">
                     {% csrf_token %}
 
-                    {{ form.non_field_errors }}
+                    {% for field in form %}
 
-                    <div class="input-field">
-                        {{ form.title }}
-                        <label for="title">Recipe Name *</label>
-                    </div>
+                        {% if field.name == "servings" %}
+                        <div class="row">
+                            <div class="input-field small-input label-left">
+                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+                                {{ field }}
+                            </div>
+                            {{ field.errors }}
+                        </div>
+                            
+                        {% elif field.name == "tags" %}
+                        <div class="row">
+                            <div class="input-field">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}<span>(Example: #easy #vegetarian)</span></label>
+                                <span id="valid-tags"></span>
+                            </div>
+                            {{ field.errors }}
+                        </div>
 
-                    <!-- Ingredients -->
-                    {% include "ingredients.html" %}
-                    <!-- End of ingredients -->
+                        {% else %}
+                        <div class="row">
+                            <div class="input-field col s12">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+                            </div>
+                            {{ field.errors }}
+                        </div>
 
-                    <div class="input-field">
-                        <input type="text" name="procedure" id="procedure" required />
-                        <label for="procedure">Procedure *</label>
-                    </div>
+                        {% endif %}
+                        
+ 
+                    {% endfor %}
 
-                    <!-- Select field for servings -->
-                    <div class="input-field small-input label-left">
-                        <label for="servings">Servings</label>
-                        <select name="servings" id="servings">
-                            {% for i in servings_range %}
-                                <option value="{{ i }}">{{ i }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                    {% include 'add_ingredients.html' %}
 
-                    <div class="input-field">
-                        <input type="text" name="tags" id="tags" required />
-                        <label for="tags">Tags * <span>(Example: #easy #vegetarian)</span></label>
-                        <span id="valid-tags"></span>
-                    </div>
+    
 
                     <p class="mandatory-fields">* Mandatory fields</p>
 
