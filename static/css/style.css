@@ -30,7 +30,9 @@
 body {
     font-family: var(--font-basic);
     color: var(--clr-primary-5);
+    /* backup height for browsers that don't support dvh */
     min-height: 100vh;
+    /* height for browsers that do support dvh */
     min-height: 100dvh;
     display: grid;
     grid-template-rows: auto 1fr auto;
@@ -484,7 +486,7 @@ nav {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(transparent, 60%, black);
+    background-image: linear-gradient(transparent 30%, var(--clr-primary-5) 70%);
     z-index: -1;
 }
 
@@ -628,7 +630,7 @@ footer {
     text-align: center;
 }
 
-image-placefooter p {
+footer p {
     font-size: 1em;
     margin: .8em;
 }
@@ -661,11 +663,16 @@ footer a:hover {
 .food-icon {
     position: absolute;
     color: var(--clr-primary-0);
-    font-size: 5em;
-    opacity: .5;
+    opacity: .3;
 }
 
+.food-icon i.material-icons {
+    /* Backup for browsers that don't support container queries */
+    font-size: 5rem;
+    /* font-size for browser that support container queries */
+    font-size: 15cqw;
 
+}
 /* ----------------------------------------------- Media Queries */
 @media only screen and (min-width: 992px) {
     section.recipe-detail-section {

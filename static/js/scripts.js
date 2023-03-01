@@ -12,6 +12,10 @@ $(document).ready(function () {
         window.history.back();
     });
 
+    $('.go-home').click(function () {
+        window.location.href = "/";
+    });
+
 
     /**
      * This function is used to add a new ingredient to the recipe.
@@ -126,6 +130,7 @@ function show_added_ingredients(ingredients) {
         // then we add the ingredients array to the hidden input field
         ingredients_string = JSON.stringify(ingredients);
         $('#ingredients').val(ingredients_string);
+
     });
 }
 
@@ -153,7 +158,7 @@ const icons_names = ['restaurant', 'cake', 'local_pizza', 'egg',
 function random_icon() {
     for (let i = 0; i < 10; i++) {
         var random_icon = icons_names[Math.floor(Math.random() * icons_names.length)];
-        const icon_html = `<i class="material-icons food-icon">${random_icon}</i>`;
+        const icon_html = `<span class="food-icon"><i class="material-icons">${random_icon}</i></span>`;
         $('.food-icons-container').append(icon_html);
     } 
     random_position();
@@ -161,10 +166,10 @@ function random_icon() {
 
 function random_position() {
     const icons = $('.food-icon');
-    for (let icon in icons) {
+    for (let i = 0; i < icons.length; i++) {
         var top = Math.floor(Math.random() * 110);
         var left = Math.floor(Math.random() * 110);
-        icons[icon].style.top = `${top}%`;
-        icons[icon].style.left = `${left}%`;
+        icons[i].style.top = `${top}%`;
+        icons[i].style.left = `${left}%`;
     }
 }
