@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Yummy - My Recipes{% endblock %}
+
+{% block header %}
+    {% if user.is_authenticated %}
+        {% include "header.html" %}
+    {% else %}
+    {% endif %}
+{% endblock header %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+    <!-- All Recipes -->
+    <section class="suggestions">
+        <div class="container">
+            <div class="section-header">
+                <h2>My Recipes</h2>
+            </div>
+        
+    
+        <div class="recipes-container">
+            {% for recipe in all_recipes %}
+                
+            <a href="{% url 'recipe_detail' recipe.pk %}" class="clickable-div">
+                <div class="recipe-card">
+                    {% if "placeholder" in recipe.image.url %}
+                <div class="image-placeholder-container">
+                    <div class="food-icons-container">
+                        <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                    </div>
+                </div>
+                {% endif %}
+
+                    <h3>{{ recipe.title }}</h3>
+                    <p>Easy | 30 min</p>
+                    
+                </div>
+            </a>
+
+            {% endfor %}
+        </div>
+    </div>
+    
+    </section>
+
+  <!-- Logout Modal -->
+  <div id="logout-modal" class="modal">
+    <div class="modal-content">
+        {% include "account/logout.html" %}
+    </div>
+  </div>
+
+  {% else %} 
+
+  <section>
+      <div class="container">
+          <h1>Please, <a href="{% url 'account_login' %}">log in</a> to view your recipes.</h1>
+  
+          <p><a href="{% url 'home' %}">Go home</a></p>
+          
+      </div>
+  </section>
+  
+  {% endif %}
+
+{%endblock%}

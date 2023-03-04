@@ -218,6 +218,58 @@ Check if Errors are returned when passing the final version through the official
 
 
 <details>
+  <summary>Randomize icons JS error</summary>
+
+  - Issue: I have created a custom image placehoder to display when the user does not upload an image for the recipe. The functions creates random food icons and assign a random position.
+
+  The function was working and displaying the icons in random positions, although it was giving an error in the console.
+
+  ![Random icons console error](media/errors/random-icons-error.png)
+
+  This is the original code:
+
+  ![Random icons original code](media/errors/random-icons-error-code.png)
+
+  - Fix: To fix this issue I changed the code as follow:
+
+  ![Random icons final code](media/errors/random-icons-fix.png)
+
+
+</details>
+
+
+<details>
+  <summary>Update form creates new instance instead of updating the existing one</summary>
+
+  - Issue numer 1: After creating the UpdateView for my recipes, the view was showing the correct template and pre-populating the fields with the selected recipe to be updated.
+  Although when clicking on "Save", the form was crating a new instance, instead of updating the existing one.
+
+  After investigation I could determine that the issue was created by the action url in the form, that was pointing to the add_recipe ursl, instead of edit_recipe url:
+    ![Original code](media/errors/update-view-form-original-code.png)
+
+  - Fix: to solve this issue I changed the action url so that it could point to the correct url:
+  ![Update form fix 1](media/errors/update-view-fix-1.png)
+
+
+  - Issue numer 2: After changing this url although I received a second error, since the edit_url requires an argument (the primary key of the recipe):
+    ![Missing argument error](media/errors/update-view-reverse-match-error.png)
+
+  - Fix: To solve this issue I had to add 'pk' as argument for the link, and I had to pass the pk also in the context.
+
+  ![Update form fix 2](media/errors/update-view-fix-2.png)
+  ![Update form fix 3](media/errors/update-view-fix-3.png)
+
+
+
+
+
+</details>
+
+
+</details>
+
+
+<details>
   <summary> </summary>
 
 
@@ -262,7 +314,13 @@ Check if Errors are returned when passing the final version through the official
   - Quicksand
   - Source Sans Pro
 
-- The background image is from [Mae Mu](https://unsplash.com/@picoftasty?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/_h-2jrL9cMU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2jrL9cMU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+
+- Background image is from [Mae Mu](https://unsplash.com/@picoftasty?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 
+
+- Card placeholder image is from [Marisol Benitez](https://unsplash.com/@marisolbenitez?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  
   
 
 ## Technologies used
@@ -274,6 +332,10 @@ Check if Errors are returned when passing the final version through the official
   - Django
   - Materialize
   - PostgreSQL
+
+  Django libraries
+  - Allauth
+  - betetrforms
 
 ## Acknowledgements
 

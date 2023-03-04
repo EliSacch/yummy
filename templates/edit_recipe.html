@@ -26,14 +26,19 @@
         </div>
         <div class="row form-header">
             <div class="col s12">
-                <h1 class="subheading">Add Recipe</h1>
+                <h1 class="subheading">Edit Recipe</h1>
             </div>
         </div>
 
         <!-- Add recipe form -->
         <div class="row">
             <div class="col s12">
-                <form class="center recipe_form" enctype="multipart/form-data" id="add_recipe_form" method="post" action="{% url 'add_recipe' %}">
+                <form class="center recipe_form" enctype="multipart/form-data" id="edit_recipe_form" method="post" action="{% url 'edit_recipe' pk=form.instance.pk %}">
+                    
+
+                    {{ form.non_field_errors }}
+                    {{ form.hidden_fields }}
+
                     {% csrf_token %}
 
                     {% for field in form %}
@@ -73,11 +78,9 @@
 
                     {% include 'add_ingredients.html' %}
 
-                    {{ formset.management_form }}
-
     
 
-                    <p class="mandatory-fields row">* Mandatory fields</p>
+                    <p class="mandatory-fields">* Mandatory fields</p>
 
                     <!-- Submit button -->
                     <button class="btn action-btn center" type="submit">Save</button>
@@ -90,7 +93,7 @@
 
 <section>
     <div class="container">
-        <h1>Please, <a href="{% url 'account_login' %}">log in</a> to add new recipes.</h1>
+        <h1>Please, <a href="{% url 'account_login' %}">log in</a> to log in to edit recipes.</h1>
 
         <p><a href="{% url 'home' %}">Go home</a></p>
         

@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Yummy - Recipe Detail{% endblock %}
+
+{% if user.is_authenticated %}
+
+    <!-- If the user currently logged in is the creator of this recipe, they are authorized to view it -->
+    {% if user == recipe.user %}
+        {% block content %}
+        <section class="messages">
+            <ul class="messages-list">
+                {% for message in messages %}
+                    <li>
+                        <p>{{ message }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="recipe-detail-section">
+
+            <header class="recipe-detail-background hide-on-large-only">
+                <div class="go-home">
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
+                        <button class="btn-floating primary-3 light-text">
+                            <i class="material-icons">arrow_back</i>
+                        </button>
+                    </a>
+                </div>
+
+                {% if "placeholder" in recipe.image.url %}
+                <div class="image-placeholder-container">
+                    <div class="food-icons-container">
+                        <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                    </div>
+                </div>
+                {% endif %}
+
+                
+            </header>
+
+            <div class="recipe-detail">
+                <div class="go-home hide-on-med-and-down">
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
+                        
+                        <button class="btn-floating primary-3 light-text">
+                            <i class="material-icons">arrow_back</i>
+                        </button>
+                        
+                    </a>
+                </div>
+
+                <div class="">
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Edit">
+                        <a href="{% url 'edit_recipe' recipe.pk %}">
+                        <button class="btn-floating yellow light-text">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        </a>
+                        
+                    </a>
+                </div>
+
+                <div class="recipe-detail-header">
+                    <div class="recipe-image hide-on-med-and-down">
+                        {% if "placeholder" in recipe.image.url %}
+                <div class="image-placeholder-container">
+                    <div class="food-icons-container">
+                        <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                    </div>
+                </div>
+                {% endif %}
+                            
+                    </div>
+                    <div class="container recipe-detail-title">
+                        <h1>{{ recipe.title }}</h1>
+                        <p>30min | Easy</p>
+                    </div>
+                    
+                </div>
+
+                <hr class="recipe-detail-separator hide-on-large-only">
+
+                <div class="recipe-detail-body">
+                    <div class="container recipe-detail-container">
+                        <div class="row">
+                            <h2 class="left">Ingredients</h2>
+                            <p class="right">Servings: {{ recipe.servings}}</p>
+                        </div>
+                        
+                        <ul>
+                            {% for ingredient in recipe.ingredients.all %}
+                                <li class="row ingredient-line">
+                                    <p>{{ ingredient.name }}</p>
+                                    <p class="ingredient-quantity">{{ ingredient.amount }}{{ ingredient.unit }}</p>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+    
+                    <hr class="recipe-detail-separator hide-on-large-only">
+    
+                    <div class="container recipe-detail-container">
+                        <h2>Procedure</h2>
+                        <ul class="step-counter">
+                            {% for step in recipe.procedure %}
+                                <li class="row">
+                                    <span><p class="step">{{ step }}</p></span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Logout Modal -->
+        <div id="logout-modal" class="modal">
+            <div class="modal-content">
+                {% include "account/logout.html" %}
+            </div>
+        </div>
+        {% endblock %}
+    
+    <!-- If the user currently logged in is not the creator of this recipe, they are not authorized to view it -->
+    {% else %}
+        <p>Recipe not found in your account.</p>
+    {% endif %}
+
+<!-- If the user is not logged in, they cannot see this page at all, and they need to log in or sign up -->
+{% else %}
+        <p>go home</p>
+{% endif %}

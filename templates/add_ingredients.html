@@ -1,0 +1,40 @@
+{% if formset %}
+<p>Ingredients</p>
+    
+    {% for form in formset %}
+    <div id="add-ingredients">
+        <div class="">
+            <div class="row ingredient-formset">
+            {% for field in form.visible_fields %}
+                
+                {% if field.name == 'name' %} 
+                <div class="input-field col s10 m5">
+                    {{ field }}
+                    <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+                </div>
+                {{ field.errors }}
+
+                {% else %}
+
+                <div class="input-field col s5 m3">
+                    {{ field }}
+                    <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+                </div>
+                {{ field.errors }}
+
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+        <div class="btn-container">
+            <a class="tooltipped" data-position="bottom" data-tooltip="Add Ingredient">
+                <!--<button id="add-ingredient-btn" type="button" class="btn-floating primary-3 light-text">
+                    <i class="material-icons">add</i>
+                </button>-->
+            </a>
+        </div>
+    </div> 
+    {% endfor %}
+    
+
+{% endif %}

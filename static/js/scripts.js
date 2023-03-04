@@ -12,6 +12,10 @@ $(document).ready(function () {
         window.history.back();
     });
 
+    $('.go-home').click(function () {
+        window.location.href = "/";
+    });
+
 
     /**
      * This function is used to add a new ingredient to the recipe.
@@ -58,16 +62,18 @@ $(document).ready(function () {
         $('#amount').change(function() {
             $('#amount').removeClass('invalid');
         });
+
+        // then we add the ingredients array to the hidden input field
+        ingredients_string = JSON.stringify(ingredients);
+        $('#ingredients').val(ingredients_string);
     });
 
-    // Prevnt the user from entering certain characters in the tags field
-    preventCharInInput();
     /**
      * This functions takes the string entered in the tags field and splits it into an array.
      * The array is displayed underneath the tags field, to show the valid tags.
      */
-    $('#tags').on('keyup', function () {
-        var tags = $('#tags').val();
+    $('#id_tags').on('keyup', function () {
+        var tags = $('#id_tags').val();
         var tags_array = tags.split(/[ ,#]+/);
 
         $('#valid-tags').empty();
@@ -81,6 +87,8 @@ $(document).ready(function () {
         }
         
     });
+
+    random_icon();
 
 });
 
@@ -119,11 +127,11 @@ function show_added_ingredients(ingredients) {
     $('.remove-ingredient').click(function () {
         index = $(this).data('index');
         remove_ingredient(ingredients, index);
-    });
+        // then we add the ingredients array to the hidden input field
+        ingredients_string = JSON.stringify(ingredients);
+        $('#ingredients').val(ingredients_string);
 
-    // We also add the ingredients array to the hidden input field
-    ingredients_JSON = JSON.stringify(ingredients.join(','));
-    $('#ingredients').val(ingredients_JSON);
+    });
 }
 
 
@@ -142,34 +150,26 @@ function remove_ingredient(ingredients, index) {
 
 
 /**
- * This function prevents from entering certain characters in the tags field.
+ * Impage placeholder animation.
+ * This function is used to create random food icons and spread them around our image placeholder.
  */
-function preventCharInInput() {
-        const inputNumber = $('#tags');
-        for(let inputs of inputNumber) {
-            inputs.addEventListener("keypress", function (evt) {
-                const invalidChars = [
-                    "+",
-                    "|",
-                    "/",
-                    "\\",
-                    "*",
-                    ".",
-                    ",",
-                    ":",
-                    ";",
-                    "?",
-                    "!",
-                    "~",
-                    "`",
-                    "<",
-                    ">",
-                    "\"",
-                    "'",
-                  ];
-                  if (invalidChars.includes(evt.key)) {
-                    evt.preventDefault();
-                  }
-            });
-        }
+const icons_names = ['restaurant', 'cake', 'local_pizza', 'egg',
+    'bakery_dining', 'icecream', 'local_cafe', 'local_bar', 'nutrition', 'ramen_dining'];
+function random_icon() {
+    for (let i = 0; i < 10; i++) {
+        var random_icon = icons_names[Math.floor(Math.random() * icons_names.length)];
+        const icon_html = `<span class="food-icon"><i class="material-icons">${random_icon}</i></span>`;
+        $('.food-icons-container').append(icon_html);
+    } 
+    random_position();
+}
+
+function random_position() {
+    const icons = $('.food-icon');
+    for (let i = 0; i < icons.length; i++) {
+        var top = Math.floor(Math.random() * 100);
+        var left = Math.floor(Math.random() * 100);
+        icons[i].style.top = `${top}%`;
+        icons[i].style.left = `${left}%`;
     }
+}
