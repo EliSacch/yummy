@@ -1,12 +1,14 @@
-<fieldset>
-    <legend>Add Ingredient</legend>
-    <div id="add-ingredients"> 
-        <div>
-            <div class="row">
-            {% for field in ingredients_form %}
+{% if formset %}
+<p>Ingredients</p>
+    
+    {% for form in formset %}
+    <div id="add-ingredients">
+        <div class="">
+            <div class="row ingredient-formset">
+            {% for field in form.visible_fields %}
                 
                 {% if field.name == 'name' %} 
-                <div class="input-field col s12 m6">
+                <div class="input-field col s10 m5">
                     {{ field }}
                     <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
                 </div>
@@ -14,22 +16,25 @@
 
                 {% else %}
 
-                <div class="input-field col s12 m3">
+                <div class="input-field col s5 m3">
                     {{ field }}
                     <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
                 </div>
                 {{ field.errors }}
 
-                {%endif %}
+                {% endif %}
             {% endfor %}
             </div>
         </div>
         <div class="btn-container">
             <a class="tooltipped" data-position="bottom" data-tooltip="Add Ingredient">
-                <button id="add-ingredient-btn" type="button" class="btn-floating primary-3 light-text">
+                <!--<button id="add-ingredient-btn" type="button" class="btn-floating primary-3 light-text">
                     <i class="material-icons">add</i>
-                </button>
+                </button>-->
             </a>
         </div>
-    </div>
-</fieldset>
+    </div> 
+    {% endfor %}
+    
+
+{% endif %}

@@ -167,8 +167,8 @@ function random_icon() {
 function random_position() {
     const icons = $('.food-icon');
     for (let i = 0; i < icons.length; i++) {
-        var top = Math.floor(Math.random() * 110);
-        var left = Math.floor(Math.random() * 110);
+        var top = Math.floor(Math.random() * 100);
+        var left = Math.floor(Math.random() * 100);
         icons[i].style.top = `${top}%`;
         icons[i].style.left = `${left}%`;
     }
