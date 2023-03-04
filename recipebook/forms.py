@@ -22,4 +22,4 @@ class IngredientsForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
 
-IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','amount', 'unit'), extra=2)
+IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','amount', 'unit'), extra=2, can_delete=False)
