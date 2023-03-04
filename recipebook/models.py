@@ -1,6 +1,7 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from cloudinary.models import CloudinaryField
 
 
@@ -26,10 +27,13 @@ class Recipe(models.Model):
     def recipe_tags(self):
         tags = self.tags.join(', ')
         return tags
+    
+    def get_absolute_url(self):
+        return reverse('recipe_detail', kwargs={'pk': self.pk})
 
 
 class Ingredient(models.Model):
-    recipe = models.ForeignKey('Recipe', blank=False, null=False, on_delete=models.CASCADE, related_name='ingredients')
+    recipe = models.ForeignKey(Recipe, blank=False, null=False, on_delete=models.CASCADE, related_name='ingredients')
     name = models.CharField(max_length=200)
     amount = models.CharField(max_length=50)
     unit = models.CharField(max_length=50, blank=True, null=True)

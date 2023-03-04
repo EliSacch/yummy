@@ -5,6 +5,15 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+<section class="messages">
+    <ul class="messages-list">
+        {% for message in messages %}
+            <li>
+                <p>{{ message }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</section>
 <section class="valign-wrapper dark-text">
     <div class="container">
         <!-- Go back button -->
@@ -24,7 +33,12 @@
         <!-- Add recipe form -->
         <div class="row">
             <div class="col s12">
-                <form class="center recipe_form" id="edit_recipe_form" method="post" action="{% url 'edit_recipe' pk %}">
+                <form class="center recipe_form" enctype="multipart/form-data" id="edit_recipe_form" method="post" action="{% url 'edit_recipe' pk=form.instance.pk %}">
+                    
+
+                    {{ form.non_field_errors }}
+                    {{ form.hidden_fields }}
+
                     {% csrf_token %}
 
                     {% for field in form %}
@@ -71,15 +85,6 @@
                     <!-- Submit button -->
                     <button class="btn action-btn center" type="submit">Save</button>
                 </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <ul class="errorlist">
-                    {% for key, value in form.errors.items %}
-                        <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
-                    {% endfor %}
-                    </ul>
             </div>
         </div>
     </div>

@@ -1,5 +1,6 @@
 from django.views import generic, View
-from django .views.generic.edit import UpdateView, DeleteView
+from django .views.generic.edit import FormView, UpdateView, DeleteView
+from django.views.generic.detail import SingleObjectMixin # to select 1 item from db
 
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -66,70 +67,123 @@ class RecipeDetailView(View):
 
 
 # View for the recipe creation page
-class AddNewRecipeView(generic.CreateView):
+class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
-    formset = IngredientFormSet(queryset=Ingredient.objects.none())
     template_name = 'add_recipe.html'
 
     def get_context_data(self, **kwargs):
         context = super(AddNewRecipeView, self).get_context_data(**kwargs)
-        context['formset'] = IngredientFormSet(queryset=Ingredient.objects.none())
+        context = {
+            'form': RecipeForm(instance=self.object or None),
+            'formset' : IngredientFormSet(queryset=Ingredient.objects.none())
+        }
         return context
+    
+    def post(self, request, *args, **kwargs):
+        form = RecipeForm(self.request.POST)
+        recipe = form.save(commit=False)
+        recipe.user = self.request.user
+        recipe.save()
+        formset = IngredientFormSet(self.request.POST, instance=recipe)
 
-    """def post(self, request, *args, **kwargs):
-        form = RecipeForm(request.POST)
-        #formset = IngredientFormSet(request.POST)
-        #if form.is_valid() and formset.is_valid():
-        if form.is_valid():
-            recipe = form.save(commit=False)
-            recipe.user = self.request.user
-            recipe.save()
-            
-            ingredients = formset.save(commit=False)
-            
-            for ingredient in ingredients:
+        if formset.is_valid():
+            formset.save(commit=False)
+            for ingredient in formset:
                 ingredient.recipe = recipe
-                ingredient.save()
-                
-            messages.success(self.request, 'Ingredient added successfully!')
-        
+            formset.save()
+            
+            messages.success(self.request, 'Recipe updated successfully!')
+            return super().form_valid(form)
         else:
-            messages.error(self.request, 'Error adding recipe')
-            form = RecipeForm()
-            #formset = IngredientFormSet(queryset=Ingredient.objects.none())
-
-        return form.is_valid()"""
+            for error in formset.errors:
+                messages.error(self.request, error)
+            return self.form_invalid(form)
+    
     
     def form_valid(self, form):
         recipe = form.save(commit=False)
         recipe.user = self.request.user
-        recipe.save()
-        messages.success(self.request, 'Ingredient added successfully!')
-        
-        return super().form_valid(form)
-    
 
+        formset = IngredientFormSet(self.request.POST, instance=recipe)
+        if formset.is_valid():
+            formset.save(commit=False)
+            for ingredient in formset:
+                ingredient.recipe = recipe
+                ingredient.save()
+            recipe.save()
+        messages.success(self.request, 'Recipe updated successfully!')
+        
+        return HttpResponseRedirect(self.get_success_url())
+    
     def get_success_url(self):
-        return reverse("recipe_detail", args=[self.object.pk])
+        return reverse('recipe_detail', kwargs={'pk': self.object.pk})
+
 
 
 # View for the recipe update page
-class EditRecipeView(UpdateView):
+class EditRecipeView(SingleObjectMixin, FormView):
     model = Recipe
-    form_class = RecipeForm
-    ingredients_form_class = IngredientsForm
     template_name = 'edit_recipe.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset = Recipe.objects.all())
+        return super().get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(EditRecipeView, self).get_context_data(**kwargs)
         context = {
             'form': RecipeForm(instance=self.object),
+            'formset' : IngredientFormSet(instance=self.object),
             'recipe' : self.object,
             'pk' : self.object.pk
         }
         return context
     
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset = Recipe.objects.all())
+        # added
+        form = RecipeForm(self.request.POST)
+        recipe = form.save(commit=False)
+        recipe.user = self.request.user
+        recipe.save()
+        formset = IngredientFormSet(self.request.POST, instance=recipe)
+
+        if formset.is_valid():
+            formset.save(commit=False)
+            for ingredient in formset:
+                ingredient.recipe = recipe
+            formset.save()
+            
+            messages.success(self.request, 'Recipe updated successfully!')
+            return super().form_valid(form)
+        else:
+            for error in formset.errors:
+                messages.error(self.request, error)
+            return self.form_invalid(form)
+        
+    
+    def get_form(self, form_class=None):
+        #return RecipeForm(**self.get_form_kwargs(), instance=self.object)
+        form = RecipeForm(**self.get_form_kwargs(), instance=self.object)
+        formset = IngredientFormSet(**self.get_form_kwargs(), instance=self.object)
+        return form, formset
+    
+    def form_valid(self, form):
+        recipe = form.save(commit=False)
+        recipe.user = self.request.user
+
+        formset = IngredientFormSet(self.request.POST, instance=recipe)
+        if formset.is_valid():
+            formset.save(commit=False)
+            for ingredient in formset:
+                ingredient.recipe = recipe
+                ingredient.save()
+            recipe.save()
+        messages.success(self.request, 'Recipe updated successfully!')
+        
+        return HttpResponseRedirect(self.get_success_url())
+    
     def get_success_url(self):
-        return reverse("recipe_detail", args=[self.object.pk])
+        return reverse('recipe_detail', kwargs={'pk': self.object.pk})
     

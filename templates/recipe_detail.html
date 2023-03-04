@@ -50,6 +50,17 @@
                     </a>
                 </div>
 
+                <div class="">
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Edit">
+                        <a href="{% url 'edit_recipe' recipe.pk %}">
+                        <button class="btn-floating yellow light-text">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        </a>
+                        
+                    </a>
+                </div>
+
                 <div class="recipe-detail-header">
                     <div class="recipe-image hide-on-med-and-down">
                         {% if "placeholder" in recipe.image.url %}
