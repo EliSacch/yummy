@@ -71,7 +71,7 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
     template_name = 'add_recipe.html'
-
+    
     def get_context_data(self, **kwargs):
         context = super(AddNewRecipeView, self).get_context_data(**kwargs)
         context = {
@@ -79,6 +79,11 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
             'formset' : IngredientFormSet(queryset=Ingredient.objects.none())
         }
         return context
+    
+    def get(self, request, *args, **kwargs):
+        form = RecipeForm()
+        formset = IngredientFormSet(queryset=Ingredient.objects.none())
+        return render(request, 'add_recipe.html', {'form': form, 'formset': formset})
     
     def post(self, request, *args, **kwargs):
         form = RecipeForm(self.request.POST)
@@ -115,52 +120,13 @@ class EditRecipeView(generic.UpdateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
     template_name = 'edit_recipe.html'
-  
+
     def get_context_data(self, **kwargs):
         context = super(EditRecipeView, self).get_context_data(**kwargs)
         context = {
             'form': RecipeForm(instance=self.object or None),
-            'formset' : IngredientFormSet(instance=self.object)
+            'formset' : IngredientFormSet(queryset=self.object.ingredients.all())
         }
         return context
-    """
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset = Recipe.objects.all())
-        return super().get(request, *args, **kwargs)"""
-    
-    def post(self, request, *args, **kwargs):
-        # Here we initilize the form and formset with the data from the request
-        self.object = self.get_object(queryset = Recipe.objects.all())
-        # added
-        form = RecipeForm(self.request.POST)
-        recipe = form.save(commit=False)
-        recipe.user = self.request.user
-        recipe.save()
-        formset = IngredientFormSet(self.request.POST, instance=recipe)
 
-        if formset.is_valid():
-            formset.save(commit=False)
-            for ingredient in formset:
-                ingredient.recipe = recipe
-            formset.save()
-            
-            messages.success(self.request, 'Recipe updated successfully!')
-            return super().form_valid(form)
-        else:
-            for error in formset.errors:
-                messages.error(self.request, error)
-            return self.form_invalid(form)
-
-    def get_form(self, form_class=None):
-        #return RecipeForm(**self.get_form_kwargs(), instance=self.object)
-        form = RecipeForm(**self.get_form_kwargs(), instance=self.object)
-        formset = IngredientFormSet(**self.get_form_kwargs(), instance=self.object)
-        return form, formset
-    
-    def form_valid(self, form):
-        messages.success(self.request, 'Recipe updated successfully!')  
-        return HttpResponseRedirect(self.get_success_url())
-    
-    def get_success_url(self):
-        return reverse('recipe_detail', kwargs={'pk': self.object.pk})
     

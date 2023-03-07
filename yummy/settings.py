@@ -34,7 +34,7 @@ DEBUG = development
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-ALLOWED_HOSTS = ['Yummy-recipe-book.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['Yummy-recipe-book.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
