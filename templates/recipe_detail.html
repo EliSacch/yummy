@@ -92,7 +92,14 @@
                             {% for ingredient in recipe.ingredients.all %}
                                 <li class="row ingredient-line">
                                     <p>{{ ingredient.name }}</p>
-                                    <p class="ingredient-quantity">{{ ingredient.amount }}{{ ingredient.unit }}</p>
+                                    <p class="ingredient-quantity">
+                                        {% if ingredient.amount != None %}
+                                            {{ ingredient.amount }}
+                                        {% endif %}
+                                        {% if ingredient.unit != None %}
+                                            {{ ingredient.unit }}
+                                        {% endif %}
+                                    </p>
                                 </li>
                             {% endfor %}
                         </ul>

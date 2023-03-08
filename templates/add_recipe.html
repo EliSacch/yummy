@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Yummy - Edit Recipe{% endblock %}
+{% block title %}Yummy - Add Recipe{% endblock %}
 
 {% block content %}
 
@@ -33,7 +33,11 @@
         <!-- Add recipe form -->
         <div class="row">
             <div class="col s12">
-                <form class="center recipe_form" enctype="multipart/form-data" id="add_recipe_form" method="post" action="{% url 'add_recipe' %}">
+                <form class="center recipe_form" 
+                enctype="multipart/form-data" 
+                id="add_recipe_form" 
+                method="post" 
+                action="{% url 'add_recipe' %}">
                     {% csrf_token %}
 
                     {% for field in form %}
@@ -70,12 +74,8 @@
                         
  
                     {% endfor %}
-
+                    
                     {% include 'add_ingredients.html' %}
-
-                    {{ formset.management_form }}
-
-    
 
                     <p class="mandatory-fields row">* Mandatory fields</p>
 

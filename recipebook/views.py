@@ -95,15 +95,20 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
         if formset.is_valid():
             formset.save(commit=False)
             for ingredient in formset:
-                ingredient.recipe = recipe
-            formset.save()
+                if ingredient.cleaned_data.get('name') is not None:
+                    ingredient.instance.recipe = recipe
+                    ingredient.save()
+                    print(ingredient.cleaned_data.get('name') + ' added to recipe')
+                else:
+                    continue
             
             messages.success(self.request, 'Recipe added successfully!')
+            print(request.POST)
             return super().form_valid(form)
         else:
             for error in formset.errors:
                 messages.error(self.request, error)
-            return self.form_invalid(form)
+            return super().form_invalid(form)
     
     
     def form_valid(self, form):
@@ -125,7 +130,7 @@ class EditRecipeView(generic.UpdateView, SingleObjectMixin):
         context = super(EditRecipeView, self).get_context_data(**kwargs)
         context = {
             'form': RecipeForm(instance=self.object or None),
-            'formset' : IngredientFormSet(queryset=self.object.ingredients.all())
+            'formset' : IngredientFormSet(instance=self.object or None)
         }
         return context
 

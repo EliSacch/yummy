@@ -145,6 +145,9 @@ section {
     color: var(--clr-primary-5);
 }
 
+.hidden {
+    display: none;
+}
 
 /* ----------------------------------------------- Override input Materialize CSS style */
 input.invalid:not([type]), 
@@ -312,9 +315,9 @@ input.invalid {
 }
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
-#add-ingredients {
+.ingredient-form {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto 1fr;
     padding: 0 1em;
     background-color: #f0f0f0;
 }

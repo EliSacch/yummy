@@ -303,6 +303,8 @@ Check if Errors are returned when passing the final version through the official
 
 - The code to filter the recipes by tag in the admin page is taken from [bradmontgomery](https://bradmontgomery.net/blog/django-admin-filters-arrayfields/)
 
+- The code to dynamically add ne forms is taken from [CodingEnterpreneur tutorial](https://www.youtube.com/watch?v=s3T-w2jhDHE&t=1293s)
+
 ### Content
 
 - The color palette was generated using [Color Space](https://mycolor.space/)
@@ -335,8 +337,11 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
 
   Django libraries
   - Allauth
-  - betetrforms
+  - inline forms
+  
 
 ## Acknowledgements
 
 A special thank to my mentor __Dick Vlaanderen__ for his precious feedback on this project.
+
+Tutor Ed
