@@ -30,60 +30,11 @@
             </div>
         </div>
 
-        <!-- Add recipe form -->
+        <!-- Edit recipe form -->
         <div class="row">
             <div class="col s12">
-                <form class="center recipe_form" enctype="multipart/form-data" id="edit_recipe_form" method="post" action="{% url 'edit_recipe' pk=form.instance.pk %}">
-                    
-
-                    {{ form.non_field_errors }}
-                    {{ form.hidden_fields }}
-
-                    {% csrf_token %}
-
-                    {% for field in form %}
-
-                        {% if field.name == "servings" %}
-                        <div class="row">
-                            <div class="input-field small-input label-left">
-                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
-                                {{ field }}
-                            </div>
-                            {{ field.errors }}
-                        </div>
-                            
-                        {% elif field.name == "tags" %}
-                        <div class="row">
-                            <div class="input-field">
-                                {{ field }}
-                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}<span>(Example: #easy #vegetarian)</span></label>
-                                <span id="valid-tags"></span>
-                            </div>
-                            {{ field.errors }}
-                        </div>
-
-                        {% else %}
-                        <div class="row">
-                            <div class="input-field col s12">
-                                {{ field }}
-                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
-                            </div>
-                            {{ field.errors }}
-                        </div>
-
-                        {% endif %}
-                        
- 
-                    {% endfor %}
-
-                    {% include 'add_ingredients.html' %}
-
-    
-
-                    <p class="mandatory-fields">* Mandatory fields</p>
-
-                    <!-- Submit button -->
-                    <button class="btn action-btn center" type="submit">Save</button>
+                <form class="center recipe_form" enctype="multipart/form-data" id="edit_recipe_form" method="post" action="{% url 'edit_recipe' pk=form.instance.pk %}"> 
+                    {% include 'recipe-form.html' %}
                 </form>
             </div>
         </div>

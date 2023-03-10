@@ -5,6 +5,9 @@
 {{ formset.management_form }}
     
     {% for form in formset %}
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
     <div class="ingredient-form">
         <div class="btn-container">
             <a class="tooltipped" data-position="bottom" data-tooltip="Remove Ingredient">
@@ -22,6 +25,12 @@
                 <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
             </div>
             {{ field.errors }}
+
+            {% elif field.name == 'DELETE' %} 
+            <div class="hidden">
+                {{ field }}
+                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+            </div>
 
             {% else %}
 
@@ -57,6 +66,12 @@
                     <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
                 </div>
                 {{ field.errors }}
+
+                {% elif field.name == 'DELETE' %} 
+                <div class="delete-checkbox">
+                    {{ field }}
+                    <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+                </div>
 
                 {% else %}
 

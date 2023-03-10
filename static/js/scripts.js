@@ -90,11 +90,15 @@ function add_ingredient_form() {
  * It is called when the user clicks on the remove-ingredient button.
  */
 function remove_ingredient_form() {
-    parentDiv = $(this).parents('.ingredient-form');
-    const totalForms = $('#id_ingredients-TOTAL_FORMS');
-    const formCount = $('.ingredient-form').length;
-    parentDiv.remove();
-    totalForms.val(formCount);
+    const allForms = $('.ingredient-form');
+    const parentDiv = $(this).parents('.ingredient-form');
+    const index = allForms.index(parentDiv);
+    const deleteForm = $(`#id_ingredients-${index}-DELETE`);
+    if (allForms.length > 1) {
+        deleteForm.val('on');
+        deleteForm.prop('checked', true);
+        parentDiv.hide();
+    }
 }
 
 

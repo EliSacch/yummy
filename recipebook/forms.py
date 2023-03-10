@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import MultiWidget, TextInput
+from django.forms import MultiWidget, TextInput, BaseModelFormSet
 from django.forms.models import inlineformset_factory
 from .models import Recipe, Ingredient
 
@@ -9,17 +9,11 @@ class RecipeForm(forms.ModelForm):
         model = Recipe
         fields = ['title', 'procedure', 'servings', 'tags']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
 
 class IngredientsForm(forms.ModelForm):
     class Meta:
         model = Ingredient
         fields = ['name', 'amount', 'unit']
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
 
-
-IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','amount', 'unit'), extra=0, can_delete=False)
+IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','amount', 'unit'), extra=0, can_delete=True)
