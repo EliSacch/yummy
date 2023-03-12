@@ -188,3 +188,15 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
     
     def get_success_url(self):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
+    
+
+class DeleteRecipeView(DeleteView):
+    model = Recipe
+    success_url = '/'
+    
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'Recipe deleted successfully!')
+        return super().delete(request, *args, **kwargs)

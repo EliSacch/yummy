@@ -7,25 +7,51 @@
     <!-- If the user currently logged in is the creator of this recipe, they are authorized to view it -->
     {% if user == recipe.user %}
         {% block content %}
+        <!-- Messages -->
         <section class="messages">
-            <ul class="messages-list">
-                {% for message in messages %}
-                    <li>
-                        <p>{{ message }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
+            <div class="container">
+                <ul class="messages-list">
+                    {% for message in messages %}
+                        <li>
+                            <p>{{ message }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </section>
 
         <section class="recipe-detail-section">
 
             <header class="recipe-detail-background hide-on-large-only">
+                <!-- Go home button for small screens -->
                 <div class="go-home">
                     <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
                         <button class="btn-floating primary-3 light-text">
                             <i class="material-icons">arrow_back</i>
                         </button>
                     </a>
+                </div>
+
+                <div class="recipe-action-buttons hide-on-large-only">
+
+                    <!-- Edit recipe button -->
+                    <div class=" edit">
+                        <a href="{% url 'edit_recipe' recipe.pk %}" class="tooltipped" data-position="bottom" data-tooltip="Edit">
+                            <button class="btn-floating background-alert light-text">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </a>
+                    </div>
+
+                    <!-- Delete recipe button -->
+                    <div class="delete">
+                        <a href="#delete-recipe-confirmation-modal" class="tooltipped modal-trigger" data-position="bottom" data-tooltip="Delete">
+                            <button class="btn-floating background-error light-text">
+                                    <i class="material-icons">delete</i>
+                            </button>
+                        </a>
+                    </div>
+
                 </div>
 
                 {% if "placeholder" in recipe.image.url %}
@@ -40,25 +66,35 @@
             </header>
 
             <div class="recipe-detail">
+                <!-- Go home button for large screens-->
                 <div class="go-home hide-on-med-and-down">
-                    <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
-                        
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Go home">        
                         <button class="btn-floating primary-3 light-text">
                             <i class="material-icons">arrow_back</i>
-                        </button>
-                        
+                        </button> 
                     </a>
                 </div>
 
-                <div class="right">
-                    <a class="tooltipped" data-position="bottom" data-tooltip="Edit">
-                        <a href="{% url 'edit_recipe' recipe.pk %}">
-                        <button class="btn-floating yellow light-text">
-                            <i class="material-icons">edit</i>
-                        </button>
+                <div class="recipe-action-buttons hide-on-med-and-down">
+
+                    <!-- Edit recipe button -->
+                    <div class=" edit">
+                        <a href="{% url 'edit_recipe' recipe.pk %}" class="tooltipped" data-position="bottom" data-tooltip="Edit">
+                            <button class="btn-floating background-alert light-text">
+                                <i class="material-icons">edit</i>
+                            </button>
                         </a>
-                        
-                    </a>
+                    </div>
+
+                    <!-- Delete recipe button -->
+                    <div class="delete">
+                        <a href="#delete-recipe-confirmation-modal" class="tooltipped modal-trigger" data-position="bottom" data-tooltip="Delete">
+                            <button class="btn-floating background-error light-text">
+                                    <i class="material-icons">delete</i>
+                            </button>
+                        </a>
+                    </div>
+
                 </div>
 
                 <div class="recipe-detail-header">
@@ -123,10 +159,26 @@
         </section>
 
 
-        <!-- Logout Modal -->
-        <div id="logout-modal" class="modal">
+        <!-- Delete recipe modal -->
+        <div id="delete-recipe-confirmation-modal" class="modal">
             <div class="modal-content">
-                {% include "account/logout.html" %}
+                <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="">
+                                <h1 class="subheading">Delete Recipe</h1>
+                    
+                                <p>Are you sure you want to delete this recipe?</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="">
+                                <a href="{% url 'delete_recipe' recipe.pk %}" class="btn background-error light-text">Delete</a>
+                                <a href="#!" class="modal-close btn background-primary light-text">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
         {% endblock %}

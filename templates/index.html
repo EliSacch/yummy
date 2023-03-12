@@ -11,6 +11,18 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+    <!-- Messages -->
+    <section class="messages">
+        <div class="container">
+            <ul class="messages-list">
+                {% for message in messages %}
+                    <li>
+                        <p>{{ message }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
 
     <!-- Search bar here when ready-->
 

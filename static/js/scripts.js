@@ -109,7 +109,7 @@ function remove_ingredient_form() {
 const iconsNames = ['restaurant', 'cake', 'local_pizza', 'egg',
     'bakery_dining', 'icecream', 'local_cafe', 'local_bar', 'nutrition', 'ramen_dining'];
 function random_icon() {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 6; i++) {
         var randomIcon = iconsNames[Math.floor(Math.random() * iconsNames.length)];
         const iconHtml = `<span class="food-icon"><i class="material-icons">${randomIcon}</i></span>`;
         $('.food-icons-container').append(iconHtml);
@@ -120,8 +120,8 @@ function random_icon() {
 function random_position() {
     const icons = $('.food-icon');
     for (let i = 0; i < icons.length; i++) {
-        var top = Math.floor(Math.random() * 100);
-        var left = Math.floor(Math.random() * 100);
+        var top = Math.floor(Math.random() * 90);
+        var left = Math.floor(Math.random() * 90);
         icons[i].style.top = `${top}%`;
         icons[i].style.left = `${left}%`;
     }

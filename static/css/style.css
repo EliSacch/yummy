@@ -94,6 +94,10 @@ section {
     margin-block: 5vw;
 }
 
+#messages {
+    display: none;
+}
+
 .section-header {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -133,6 +137,10 @@ section {
     background-color: var(--clr-primary-3);
 }
 
+.background-alert {
+    background-color: var(--clr-tertiary-2);
+}
+
 .background-error {
     background-color: var(--clr-tertiary-1);
 }
@@ -148,6 +156,24 @@ section {
 .hidden {
     display: none;
 }
+
+.go-back {
+    margin:.5em 0 1.5em 0;
+}
+
+.go-home,
+.recipe-action-buttons {
+    position: absolute;
+    top: 10px;
+    z-index: 10;
+}
+
+.recipe-action-buttons {
+    right: 10px;
+    display: flex;
+    gap: 1em;
+}
+
 
 /* ----------------------------------------------- Override input Materialize CSS style */
 input.invalid:not([type]), 
@@ -232,14 +258,6 @@ textarea.materialize-textarea.invalid:focus,
 }
 
 /* ----------------------------------------------- Forms */
-.go-back {
-    margin:.5em 0 1.5em 0;
-}
-.go-home {
-    position: absolute;
-    top: 10px;
-    z-index: 10;
-}
 
 form {
     max-width: 500px;
