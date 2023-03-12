@@ -25,24 +25,16 @@ $(document).ready(function () {
 
 
     /**
-     * This functions takes the string entered in the tags field and splits it into an array.
-     * The array is displayed underneath the tags field, to show the valid tags.
+     * We add an event listener to the tags field.
      */
-    $('#id_tags').on('keyup', function () {
-        var tags = $('#id_tags').val();
-        var tagsArray = tags.split(/[ ,#]+/);
+    $('#id_tags').on('keyup', display_tags);
 
-        $('#valid-tags').empty();
-        for(let tag of tagsArray) {
-            // We check if the tag is empty, if so we skip it
-            if(tag == '') {
-                continue;
-            } else {
-                $('#valid-tags').append(`<span class="hashtag">#${tag}</span>`);
-            }
-        }
-        
-    });
+
+    /**
+     * We add an event listener to hours and minutes field.
+     */
+    $('#hours').on('input', set_prepration_time);
+    $('#minutes').on('input', set_prepration_time);
 
     /* We call the random_icon function to create random food icons */
     random_icon();
@@ -54,6 +46,10 @@ $(document).ready(function () {
 
     /* Call the display message function to display any error/success message */
     display_message();
+
+    $('.difficulty-choices li > label').click(function () {
+        $(this).prev().prop('checked', true);
+    });
 
 });
 
@@ -103,6 +99,48 @@ function remove_ingredient_form() {
         parentDiv.hide();
     }
 }
+
+
+/**
+     * This functions takes the string entered in the tags field and splits it into an array.
+     * The array is displayed underneath the tags field, to show the valid tags.
+     */
+function display_tags() {
+    var tags = $('#id_tags').val();
+    var tagsArray = tags.split(/[ ,#]+/);
+
+    $('#valid-tags').empty();
+    for(let tag of tagsArray) {
+        // We check if the tag is empty, if so we skip it
+        if(tag == '') {
+            continue;
+        } else {
+            $('#valid-tags').append(`<span class="hashtag">#${tag}</span>`);
+        }
+    }
+    
+}
+
+    function set_prepration_time() {
+        const preparationTime = $('#id_preparation_time');
+        const minutes = $('#minutes').val();
+        const hours = $('#hours').val()
+
+        let totalHours = 0 + Math.floor(minutes / 60);
+
+        if (parseInt(hours) > 0) {
+            totalHours = parseInt(hours);
+        } 
+
+        + Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
+        let time = {
+            'hours': totalHours,
+            'minutes': remainingMinutes
+        };
+
+        preparationTime.val(JSON.stringify(time));
+    }
 
 
 /**

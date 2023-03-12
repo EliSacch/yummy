@@ -110,7 +110,31 @@
                     </div>
                     <div class="container recipe-detail-title">
                         <h1>{{ recipe.title }}</h1>
-                        <p>30min | Easy</p>
+                        {% if recipe.preparation_time != None and recipe.difficulty != None %}
+                            <!-- If the recipe has both a preparation time and a difficulty, display both -->
+                            <p>{% if recipe.preparation_time.hours != 0 %}
+                                    <!-- We display the hours just if not 0 -->
+                                    {{ recipe.preparation_time.hours }}h
+                                {% endif %}
+                                {{ recipe.preparation_time.minutes }}m | {% for difficulty in difficulty_choices %}
+
+                                {% if difficulty.0 == recipe.difficulty %}
+                                    {{ difficulty.1 }}
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                        <!-- If there is a preparation time, but not a difficulty, we display the time only -->
+                        {% elif recipe.preparation_time != None %}
+                            <p>{{ recipe.preparation_time.hours }}h {{ recipe.preparation_time.minutes }}m</p>
+                        <!-- If there is a difficulty, but not a preparation time, we display the difficulty ony -->
+                        {% elif recipe.difficulty != None %}
+                            {% for difficulty in difficulty_choices %}
+                                {% if difficulty.0 == recipe.difficulty %}
+                                    <p>{{ difficulty.1 }}</p>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        <!-- If there is no preparation time and no difficulty we don't display anything -->
                     </div>
                     
                 </div>

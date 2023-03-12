@@ -17,7 +17,6 @@ class HomeView(generic.ListView):
     queryset = Recipe.objects.order_by('created_on')
     template_name = 'index.html'
     paginate_by = 12
-    
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
@@ -26,7 +25,9 @@ class HomeView(generic.ListView):
             random_recipes = all_recipes.order_by('?')[:5]
             context = {
                 'all_recipes' : all_recipes,
-                'suggestions' : random_recipes
+                'suggestions' : random_recipes,
+                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')]
+
                 }
         return context
 
@@ -37,14 +38,14 @@ class RecipeListView(generic.ListView):
     queryset = Recipe.objects.order_by('created_on')
     template_name = 'my_recipes.html'
     paginate_by = 12
-    
 
     def get_context_data(self, **kwargs):
         context = super(RecipeListView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             all_recipes = Recipe.objects.filter(user=self.request.user)
             context = {
-                'all_recipes' : all_recipes
+                'all_recipes' : all_recipes,
+                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')]
                 }
         return context
 
@@ -56,12 +57,14 @@ class RecipeDetailView(View):
         if self.request.user.is_authenticated:
             queryset = Recipe.objects.filter(user=self.request.user)
             recipe = get_object_or_404(queryset, pk=pk)
+            difficulty_choices = [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')]
 
             return render(
                 request,
                 'recipe_detail.html',
                 {
-                    'recipe' : recipe
+                    'recipe' : recipe,
+                    'difficulty_choices' : difficulty_choices
                 }
             )
 
@@ -89,11 +92,9 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
         form = RecipeForm(self.request.POST)
         
         if form.is_valid():
-            print('form is valid')
             recipe = form.save(commit=False)
             formset = IngredientFormSet(self.request.POST, instance=recipe)
             if formset.is_valid():
-                print('formset is valid')
                 recipe.user = self.request.user
                 recipe.save()
 
@@ -102,7 +103,6 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                     if ingredient.cleaned_data.get('name') is not None:
                         ingredient.recipe = recipe
                         ingredient.save()
-                        print(ingredient.cleaned_data.get('name') + ' added to recipe')
                     else:
                         pass
             else:
@@ -146,14 +146,16 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = RecipeForm(self.request.POST, instance=self.object) 
+        form = RecipeForm(self.request.POST, instance=self.object)
         
         if form.is_valid():
-            print('form is valid')
             recipe = form.save(commit=False)
             formset = IngredientFormSet(self.request.POST, instance=recipe)
+
+            preparation_time = form.cleaned_data.get('preparation_time')
+            print(preparation_time)
+
             if formset.is_valid():
-                print('formset is valid')
                 recipe.user = self.request.user
                 recipe.save()
 

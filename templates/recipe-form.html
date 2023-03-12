@@ -1,13 +1,61 @@
 {% csrf_token %}
 
+
 {% for field in form %}
 
-    {% if field.name == "servings" %}
+    {% if field.name == "image" %}
+    <div class="row">
+        <div class="input-field small-input label-left">
+            <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+        </br>
+            {{ field }}
+        </div>
+        {{ field.errors }}
+    </div>
+
+    {% include 'add_ingredients.html' %}
+
+    {% elif field.name == "servings" %}
     <div class="row">
         <div class="input-field small-input label-left">
             <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
             {{ field }}
         </div>
+        {{ field.errors }}
+    </div>
+
+    {% elif field.name == "preparation_time" %}
+    <div class="row">
+        <div class="input-field small-input label-left">
+            <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+            {{ field }}
+            <div class="row">
+                <div class="col s6">
+                    <label for="hours">Hours</label>
+                <input type="number" id="hours" name="hours" min="0">
+ 
+                </div>
+                <div class="col s6">
+                    <label for="minutes">Minutes</label>
+                    <input type="number" id="minutes" name="minutes" min="0">
+                </div>
+            </div>
+        </div>
+        
+        {{ field.errors }}
+    </div>
+
+    {% elif field.name == "difficulty" %}
+    <div class="row">    
+        <label for="{{ field.id_for_label }}" class="left fixed-label">{{ field.label }}</label>
+        <ul class="input-field difficulty-choices">
+        {% for radio in field %}
+            <li>
+                {{ radio.tag }}
+                <label for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+            </li>
+        {% endfor %}
+        </ul>
         {{ field.errors }}
     </div>
         
@@ -17,6 +65,15 @@
             {{ field }}
             <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}<span>(Example: #easy #vegetarian)</span></label>
             <span id="valid-tags"></span>
+        </div>
+        {{ field.errors }}
+    </div>
+
+    {% elif field.name == "notes" %}
+    <div class="row">
+        <label for="{{ field.id_for_label }}" class="fixed-label">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+        <div class="input-field">
+            {{ field }}
         </div>
         {{ field.errors }}
     </div>
@@ -34,8 +91,6 @@
     
 
 {% endfor %}
-
-{% include 'add_ingredients.html' %}
 
 <p class="mandatory-fields row">* Mandatory fields</p>
 
