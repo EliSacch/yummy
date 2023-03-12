@@ -52,6 +52,9 @@ $(document).ready(function () {
         $('.remove-ingredient').click(remove_ingredient_form);
     }
 
+    /* Call the display message function to display any error/success message */
+    display_message();
+
 });
 
 
@@ -124,5 +127,22 @@ function random_position() {
         var left = Math.floor(Math.random() * 90);
         icons[i].style.top = `${top}%`;
         icons[i].style.left = `${left}%`;
+    }
+}
+
+
+/**
+ * This function is used to display the message content when there is any.
+ */
+function display_message() {
+    const messageSection = $('#messages');
+    const messageList = $('.messages-list');
+    const isThereMessage = messageList.children().length > 0;
+
+    if (isThereMessage) {
+        messageSection.fadeIn('slow');
+        setTimeout(function () {
+            messageSection.fadeOut('slow');
+        }, 5000);
     }
 }

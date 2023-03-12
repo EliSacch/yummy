@@ -8,7 +8,7 @@
     {% if user == recipe.user %}
         {% block content %}
         <!-- Messages -->
-        <section class="messages">
+        <section id="messages">
             <div class="container">
                 <ul class="messages-list">
                     {% for message in messages %}
