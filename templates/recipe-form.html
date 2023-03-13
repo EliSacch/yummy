@@ -32,12 +32,12 @@
             <div class="row">
                 <div class="col s6">
                     <label for="hours">Hours</label>
-                <input type="number" id="hours" name="hours" min="0">
+                <input type="number" id="hours" name="hours" min="0" {% if preparation_time is not None %} value="{{ preparation_time.hours }}" {% endif %}>
  
                 </div>
                 <div class="col s6">
                     <label for="minutes">Minutes</label>
-                    <input type="number" id="minutes" name="minutes" min="0">
+                    <input type="number" id="minutes" name="minutes" min="0" {% if preparation_time is not None %} value="{{ preparation_time.minutes }}" {% endif %}>
                 </div>
             </div>
         </div>

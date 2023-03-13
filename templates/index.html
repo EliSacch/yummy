@@ -50,12 +50,16 @@
             <a href="{% url 'recipe_detail' suggestion.pk %}" class="clickable-div">
                 <div class="recipe-card">
                     {% if "placeholder" in suggestion.image.url %}
-                <div class="image-placeholder-container">
-                    <div class="food-icons-container">
-                        <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
-                    </div>
-                </div>
-                {% endif %}
+                        <div class="image-placeholder-container">
+                            <div class="food-icons-container">
+                                <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="recipe-detail-image-container">
+                            <img src="{{ suggestion.image.url }}" alt="{{ recipe.name }}" class="recipe-detail-image">
+                        </div>
+                    {% endif %}
 
                     <h3>{{ suggestion.title }}</h3>
                     {% if suggestion.preparation_time != None and suggestion.difficulty != None %}

@@ -140,20 +140,18 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
         context = super(EditRecipeView, self).get_context_data(**kwargs)
         context = {
             'form': RecipeForm(instance=self.object),
+            'preparation_time' : self.object.preparation_time if self.object else None,
             'formset' : IngredientFormSet(instance=self.object),
         }
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = RecipeForm(self.request.POST, instance=self.object)
+        form = RecipeForm(self.request.POST, request.FILES, instance=self.object)
         
         if form.is_valid():
             recipe = form.save(commit=False)
-            formset = IngredientFormSet(self.request.POST, instance=recipe)
-
-            preparation_time = form.cleaned_data.get('preparation_time')
-            print(preparation_time)
+            formset = IngredientFormSet(self.request.POST, self.request.FILES, instance=recipe)
 
             if formset.is_valid():
                 recipe.user = self.request.user

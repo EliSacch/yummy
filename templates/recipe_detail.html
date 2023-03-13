@@ -60,6 +60,12 @@
                         <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
                     </div>
                 </div>
+                {% else %}
+
+                <div class="recipe-detail-image-container">
+                    <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="recipe-detail-image">
+                </div>
+
                 {% endif %}
 
                 
@@ -100,12 +106,17 @@
                 <div class="recipe-detail-header">
                     <div class="recipe-image hide-on-med-and-down">
                         {% if "placeholder" in recipe.image.url %}
-                <div class="image-placeholder-container">
-                    <div class="food-icons-container">
-                        <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
-                    </div>
-                </div>
-                {% endif %}
+                        <div class="image-placeholder-container">
+                            <div class="food-icons-container">
+                                <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                            </div>
+                        </div>
+                        {% else %}
+
+                        <div class="recipe-detail-image-container">
+                            <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" class="recipe-detail-image">
+                        </div>
+                        {% endif %}
                             
                     </div>
                     <div class="container recipe-detail-title">

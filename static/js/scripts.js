@@ -121,26 +121,36 @@ function display_tags() {
     
 }
 
-    function set_prepration_time() {
-        const preparationTime = $('#id_preparation_time');
-        const minutes = $('#minutes').val();
-        const hours = $('#hours').val()
 
-        let totalHours = 0 + Math.floor(minutes / 60);
+/**
+ * This function is used to set the value of the preparation time field.
+ * It is called when the user changes the value of the hours or minutes field.
+ * The value of the preparation time field is a JSON string.
+ */
+function set_prepration_time() {
+    const preparationTime = $('#id_preparation_time');
+    const minutes = $('#minutes').val();
+    const hours = $('#hours').val()
 
-        if (parseInt(hours) > 0) {
-            totalHours = parseInt(hours);
-        } 
+    let totalHours = 0 + Math.floor(minutes / 60);
 
-        + Math.floor(minutes / 60);
-        const remainingMinutes = minutes % 60;
-        let time = {
-            'hours': totalHours,
-            'minutes': remainingMinutes
-        };
+    if (parseInt(hours) > 0) {
+        totalHours = parseInt(hours);
+    } 
 
-        preparationTime.val(JSON.stringify(time));
-    }
+    const remainingMinutes = minutes % 60;
+    let time = null;
+    if (totalHours == 0 && remainingMinutes == 0) {
+        time = null 
+    } else {
+        time = {
+        'hours': totalHours,
+        'minutes': remainingMinutes
+        }
+    };
+
+    preparationTime.val(JSON.stringify(time));
+}
 
 
 /**
