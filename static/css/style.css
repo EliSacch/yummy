@@ -490,7 +490,8 @@ nav {
     gap: 1em;
 }
 
-.horizontal-scroll {
+.horizontal-scroll,
+.horizontal-scroll-small-columns {
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: minmax(250px, 31%);
@@ -499,6 +500,10 @@ nav {
     overscroll-behavior-inline: contain;
     scrollbar-width: none;
     -ms-overflow-style: none;
+}
+
+.horizontal-scroll-small-columns {
+    grid-auto-columns: max-content;
 }
 
 ::-webkit-scrollbar {
@@ -575,7 +580,6 @@ nav {
   }
 
   .recipe-detail-image-container {
-    background-color: red;
     position: absolute;
     inset: 0;
     z-index: -1;
@@ -585,6 +589,20 @@ nav {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.tag-span {
+    width: fit-content;
+    padding: .5em 1em;
+    margin-bottom: 1em;
+    border: 3px solid var(--clr-primary-4);
+    border-radius: 10000px;
+}
+
+.tag-span:hover,
+.tag-span:focus {
+    background-color: var(--clr-primary-4);
+    color: var(--clr-secondary);
 }
 
 /* ----------------------------------------------- Recipe Detail */

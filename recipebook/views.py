@@ -23,13 +23,28 @@ class HomeView(generic.ListView):
         if self.request.user.is_authenticated:
             all_recipes = Recipe.objects.filter(user=self.request.user)
             random_recipes = all_recipes.order_by('?')[:5]
+
             context = {
                 'all_recipes' : all_recipes,
                 'suggestions' : random_recipes,
-                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')]
-
+                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
+                'tags' : self.get_tags()
                 }
         return context
+    
+    def get_tags(self):
+        all_tags = Recipe.objects.values_list('tags', flat=True).distinct()
+
+        tags = []
+        for tag in all_tags:
+            split_tags = tag[0].split(' ')
+            for t in split_tags:
+                if t not in tags:
+                    tags.append(t)
+                else:
+                    pass
+    
+        return tags
 
 
 # View for the my recipes page that displays all the reciepes created by the user

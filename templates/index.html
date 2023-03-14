@@ -30,6 +30,13 @@
     <section class="categories">
         <div class="container">
             <h2>Categories</h2>
+
+            <div class="horizontal-scroll-small-columns">
+                {% for tag in tags %}
+                <p class="tag-span">{{ tag }}</p>
+                {% endfor %}
+            </div>
+            
         </div>
     </section>
 
