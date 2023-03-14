@@ -153,7 +153,7 @@
                 <hr class="recipe-detail-separator hide-on-large-only">
 
                 <div class="recipe-detail-body">
-                    <div class="container recipe-detail-container">
+                    <div class="recipe-detail-container ingrediens">
                         <div class="row">
                             <h2 class="left">Ingredients</h2>
                             <p class="right">Servings: {{ recipe.servings}}</p>
@@ -178,15 +178,23 @@
     
                     <hr class="recipe-detail-separator hide-on-large-only">
     
-                    <div class="container recipe-detail-container">
+                    <div class="recipe-detail-container procedure">
                         <h2>Procedure</h2>
-                        <ul class="step-counter">
+                        <ol>
                             {% for step in recipe.procedure %}
                                 <li class="row">
                                     <span><p class="step">{{ step }}</p></span>
                                 </li>
                             {% endfor %}
-                        </ul>
+                        </ol>
+                    </div>
+
+                    <hr class="recipe-detail-separator hide-on-large-only">
+    
+                    <div class="recipe-detail-container notes">
+                        <h2>Notes</h2>
+                        <p>{{ recipe.notes }}</p>
+                        
                     </div>
                 </div>
             </div>
