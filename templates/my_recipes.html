@@ -26,8 +26,26 @@
         </div>
     </section>
 
+    <section class="filters">
+        <div class="container">
+            <form method="get">
+                {{ form.as_p }}
+                <input type="submit" />
+            </form>
+        </div>
+        {% for obj in self.filterset.qs %}
+            {{ obj.title }}<br />
+        {% endfor %}
+        {% for obj in filterset.qs %}
+            {{ obj.title }}<br />
+        {% endfor %}
+        {% for obj in all_recipes %}
+            {{ obj.title }}<br />
+        {% endfor %}
+    </section>
+
     <!-- All Recipes -->
-    <section class="suggestions">
+    <section class="recipes-list">
         <div class="container">
             <div class="section-header">
                 <h2>My Recipes</h2>
