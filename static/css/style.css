@@ -434,6 +434,35 @@ input.invalid {
     color: white;
 }
 
+
+/* ----------------------------------------------- Filter form */
+
+form#filter-form {
+    max-width: 100%;
+    display: grid;
+    grid-auto-columns: 1fr;
+    column-gap: 1em;
+}
+
+#filter-form > .fields-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1em;
+}
+
+#filter-form > .fields-container .select-wrapper {
+    min-width: 100px;
+}
+
+.filter-btn-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+}
+
+
 /* ----------------------------------------------- Header */
 nav {
     height: fit-content;
@@ -757,7 +786,7 @@ footer a:hover {
     opacity: .3;
     /* Backup for browsers that don't support container queries */
     font-size: 5rem;
-    /* font-size for browser that support container queries */
+    /* Font-size for browser that support container queries */
     font-size: 30cqw;
 }
 
@@ -784,5 +813,15 @@ footer a:hover {
     .recipe-detail-body {
         display: flex;
         gap: 3em;
+    }
+  }
+
+@media only screen and (min-width: 600px) {
+    #filter-form {
+        grid-template-columns: 1fr auto;
+    }
+
+    #filter-form > .fields-container {
+        grid-template-columns: 1fr 1fr auto;
     }
   }

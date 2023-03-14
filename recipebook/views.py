@@ -118,6 +118,10 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
             formset = IngredientFormSet(self.request.POST, instance=recipe)
             if formset.is_valid():
                 recipe.user = self.request.user
+                tags = form.cleaned_data.get('tags')[0].split(' ')
+                tags_array = [tag for tag in tags]
+                recipe.tags = tags_array
+                
                 recipe.save()
 
                 formset.save(commit=False)
@@ -134,7 +138,6 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                 return super().form_invalid(form)
             
             messages.success(self.request, 'Recipe added successfully!')
-            print(request.POST)
             return super().form_valid(form)
         else:
             for error in form.errors:
@@ -177,6 +180,8 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
 
             if formset.is_valid():
                 recipe.user = self.request.user
+                tags = form.cleaned_data.get('tags')[0].split(' ')
+                recipe.tags = tags
                 recipe.save()
 
                 formset.save(commit=False)
@@ -191,8 +196,6 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
             else:
                 print('formset is invalid')
                 for error in formset.errors:
-                    print(error)
-                    print('error')
                     messages.error(self.request, error)
                 return super().form_invalid(form)
             
