@@ -15,6 +15,7 @@
     /* Secondary color */
     --clr-secondary: #E3E4D4;
     --clr-secondary-1: #5e6563;
+    --clr-secondary-transparent: #e3e4d43b;
 
     /* Tertiary colors */
     --clr-tertiary-0: #00B1FF;
@@ -69,6 +70,7 @@ a {
 
 .sidenav li {
     width: fit-content;
+    transition: .2s ease-in-out;
 }
 
 nav ul a::after,
@@ -92,10 +94,6 @@ nav ul a:hover::after,
 .side-link:hover::after {
     width: 100%;
     transition: width .3s; 
-}
-
-section {
-    margin-block: 5vw;
 }
 
 #messages {
@@ -383,7 +381,7 @@ input.invalid {
     display: grid;
     grid-template-columns: auto 1fr;
     padding: 0 1em;
-    background-color: #f0f0f0;
+    background-color: var(--clr-secondary-transparent);
 }
 
 .ingredient-formset {
@@ -434,10 +432,40 @@ input.invalid {
     color: white;
 }
 
+
+/* ----------------------------------------------- Filter form */
+
+form#filter-form {
+    max-width: 100%;
+    display: grid;
+    grid-auto-columns: 1fr;
+    column-gap: 1em;
+}
+
+#filter-form > .fields-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1em;
+}
+
+#filter-form > .fields-container .select-wrapper {
+    min-width: 100px;
+}
+
+.filter-btn-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+}
+
+
 /* ----------------------------------------------- Header */
 nav {
     height: fit-content;
     padding-top: 1em;
+    margin-bottom: 1em;
 }
 
 .user {
@@ -597,6 +625,7 @@ nav {
     margin-bottom: 1em;
     border: 3px solid var(--clr-primary-4);
     border-radius: 10000px;
+    transition: .5s ease-in-out;
 }
 
 .tag-span:hover,
@@ -669,6 +698,8 @@ section.recipe-detail-section {
 
 .recipe-detail-container {
     padding: 2em;
+    max-width: 90%;
+    margin: 0 auto;
 }
 
 .recipe-detail-title {
@@ -696,20 +727,24 @@ section.recipe-detail-section {
     margin-left: auto;
 }
 
-.step-counter > li > span {
-    display: flex;
+.recipe-detail-container > ol li::marker {
+    color: var(--clr-primary-4);
+    font-size: 1.5em;
 }
 
-.step-counter {
-    counter-reset: li;
+.recipe-detail-container.notes  {
+    padding-top: 0;
 }
 
-.step-counter span::before {
-    counter-increment: li;
-    content: counter(li) ". ";
-    margin-right: .5em;
-    font-size: 1.4em;
+.recipe-detail-container.notes > h2 {
+    font-size: 1.7em;
+    margin-bottom: .5em;
 }
+
+.recipe-detail-container.notes > p {
+    font-size: 1.3em;
+}
+
 
 /* ----------------------------------------------- Footer */
 
@@ -717,6 +752,7 @@ footer {
     background-color: var(--clr-primary-5);
     color: var(--clr-secondary);
     text-align: center;
+    margin-top: 1em;
 }
 
 footer p {
@@ -731,6 +767,7 @@ footer ul > li{
 
 footer a {
     color: var(--clr-primary-0);
+    transition: .2s ease-in-out;
 }
 
 footer a:hover {
@@ -757,7 +794,7 @@ footer a:hover {
     opacity: .3;
     /* Backup for browsers that don't support container queries */
     font-size: 5rem;
-    /* font-size for browser that support container queries */
+    /* Font-size for browser that support container queries */
     font-size: 30cqw;
 }
 
@@ -777,12 +814,50 @@ footer a:hover {
         border-radius: 0;
     }
 
+    .recipe-detail-container {
+        max-width: 600px;
+    }
+
+    .recipe-detail-container.notes  {
+        margin-top: 1em;
+        margin-bottom: 2em;
+        width: 90%;
+        background-color:  var(--clr-secondary-transparent);
+    }
+
     .recipe-detail::before {
         display: none;
     }
 
     .recipe-detail-body {
-        display: flex;
-        gap: 3em;
+        display: grid;
+        grid-template-areas:
+            "ingredient procedure"
+            "notes notes";
+        column-gap: 3em;
+    }
+
+    .recipe-detail-body > .ingredients {
+        grid-area: ingredient;
+    }
+
+    .recipe-detail-body > .procedure {
+        grid-area: procedure;
+    }
+
+    .recipe-detail-body > .notes {
+        grid-area: notes;
+    }
+
+
+  }
+
+@media only screen and (min-width: 600px) {
+    #filter-form {
+        grid-template-columns: 1fr auto;
+    }
+
+    #filter-form > .fields-container {
+        grid-template-columns: 1fr 1fr auto;
     }
   }

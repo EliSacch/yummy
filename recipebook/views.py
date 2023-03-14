@@ -8,7 +8,8 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 
 from .models import Recipe, Ingredient
-from .forms import RecipeForm, IngredientsForm, IngredientFormSet
+from .forms import RecipeForm, IngredientFormSet
+from .filters import RecipeFilter
 
 
 # General view for the home page
@@ -33,7 +34,7 @@ class HomeView(generic.ListView):
         return context
     
     def get_tags(self):
-        all_tags = Recipe.objects.values_list('tags', flat=True).distinct()
+        all_tags = Recipe.objects.filter(user=self.request.user).values_list('tags', flat=True).distinct()
 
         tags = []
         for tag in all_tags:
@@ -50,17 +51,23 @@ class HomeView(generic.ListView):
 # View for the my recipes page that displays all the reciepes created by the user
 class RecipeListView(generic.ListView):
     model = Recipe
-    queryset = Recipe.objects.order_by('created_on')
+    queryset = Recipe.objects.all()
     template_name = 'my_recipes.html'
+    context_object_name = 'all_recipes'
     paginate_by = 12
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(user=self.request.user)
+        self.filterset = RecipeFilter(self.request.GET, queryset=queryset)
+        return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super(RecipeListView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
-            all_recipes = Recipe.objects.filter(user=self.request.user)
             context = {
-                'all_recipes' : all_recipes,
-                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')]
+                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
+                'form' : self.filterset.form,
+                'all_recipes' : self.filterset.qs,
                 }
         return context
 
@@ -111,6 +118,10 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
             formset = IngredientFormSet(self.request.POST, instance=recipe)
             if formset.is_valid():
                 recipe.user = self.request.user
+                tags = form.cleaned_data.get('tags')[0].split(' ')
+                tags_array = [tag for tag in tags]
+                recipe.tags = tags_array
+                
                 recipe.save()
 
                 formset.save(commit=False)
@@ -127,7 +138,6 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                 return super().form_invalid(form)
             
             messages.success(self.request, 'Recipe added successfully!')
-            print(request.POST)
             return super().form_valid(form)
         else:
             for error in form.errors:
@@ -170,6 +180,8 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
 
             if formset.is_valid():
                 recipe.user = self.request.user
+                tags = form.cleaned_data.get('tags')[0].split(' ')
+                recipe.tags = tags
                 recipe.save()
 
                 formset.save(commit=False)
@@ -184,8 +196,6 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
             else:
                 print('formset is invalid')
                 for error in formset.errors:
-                    print(error)
-                    print('error')
                     messages.error(self.request, error)
                 return super().form_invalid(form)
             

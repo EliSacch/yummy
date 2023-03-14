@@ -13,6 +13,7 @@
 {% block content %}
 
 {% if user.is_authenticated %}
+<h1 class="center subheading">My Recipes</h1>
     <!-- Messages -->
     <section id="messages">
         <div class="container">
@@ -26,11 +27,40 @@
         </div>
     </section>
 
-    <!-- All Recipes -->
-    <section class="suggestions">
+    <section class="filters">
         <div class="container">
             <div class="section-header">
-                <h2>My Recipes</h2>
+                <h2>Filters</h2>
+            </div>
+            <form method="get" id="filter-form">
+
+                <div class="fields-container">
+                    {% for field in form %}
+                        <div class="filter-input">
+                            <label for="{{ field.id_for_label }}"><p>{{ field.label }}</p></label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <span class="help">{{ field.help_text }}</span>
+                            {% endif %}
+                            
+                            {{ field.errors }}
+                        </div>
+                        
+                    {% endfor %}
+                </div>
+                <div class="filter-btn-container">
+                    <input type="submit" class="btn-small center" value="Filter"/>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+    <!-- All Recipes -->
+    <section class="recipes-list">
+        <div class="container">
+            <div class="section-header">
+                <h2>Results</h2>
             </div>
         
     

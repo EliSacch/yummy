@@ -338,6 +338,7 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
   Django libraries
   - Allauth
   - inline forms
+  - django-filters
   
 
 ## Acknowledgements

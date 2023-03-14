@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'recipebook',
+    'django_filters',
 ]
 
 SITE_ID = 1
