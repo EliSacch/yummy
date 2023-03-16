@@ -21,6 +21,7 @@
     --clr-tertiary-0: #00B1FF;
     --clr-tertiary-1: #FB7B7C;
     --clr-tertiary-2: #FFDC82;
+    --clr-tertiary-3: #fac491;
 }
 
 * {
@@ -52,6 +53,7 @@ h5 {
     font-size: 2.5rem;
 }
 
+h2,
 h3,
 h4,
 h5 {
@@ -182,10 +184,19 @@ nav ul a:hover::after,
     z-index: 10;
 }
 
+.go-home {
+    left: 10px;
+}
+
 .recipe-action-buttons {
     right: 10px;
     display: flex;
     gap: 1em;
+}
+
+.recipe-action-buttons .btn-floating:hover,
+.recipe-action-buttons .btn-floating:focus {
+    background-color: var(--clr-tertiary-3);
 }
 
 
@@ -752,7 +763,6 @@ footer {
     background-color: var(--clr-primary-5);
     color: var(--clr-secondary);
     text-align: center;
-    margin-top: 1em;
 }
 
 footer p {
