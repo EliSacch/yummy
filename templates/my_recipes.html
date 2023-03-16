@@ -65,7 +65,10 @@
         
     
         <div class="recipes-container">
+        {% if all_recipes  %}
+
             {% for recipe in all_recipes %}
+
                 
             <a href="{% url 'recipe_detail' recipe.pk %}" class="clickable-div">
                 <div class="recipe-card">
@@ -112,6 +115,9 @@
             </a>
 
             {% endfor %}
+        {% else %} 
+            <p>Sorry, there are no recipes to display!</p>
+        {% endif %}
         </div>
     </div>
     

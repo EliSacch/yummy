@@ -38,8 +38,7 @@ class HomeView(generic.ListView):
 
         tags = []
         for tag in all_tags:
-            split_tags = tag[0].split(' ')
-            for t in split_tags:
+            for t in tag:
                 if t not in tags:
                     tags.append(t)
                 else:

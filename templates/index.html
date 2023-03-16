@@ -27,82 +27,92 @@
 
     <!-- Search bar here when ready-->
 
-    <!-- Categories -->
-    <section class="categories">
-        <div class="container">
-            <h2>Categories</h2>
+    {% if all_recipes %}
+        <!-- Categories -->
+        <section class="categories">
+            <div class="container">
+                <h2>Categories</h2>
 
-            <div class="horizontal-scroll-small-columns">
-                {% for tag in tags %}
-                <p class="tag-span">{{ tag }}</p>
+                <div class="horizontal-scroll-small-columns">
+                    {% for tag in tags %}
+                    <a class="tag-span" href="{% url 'my_recipes' %}?title=&tags={{tag}}&difficulty=">{{ tag }}</a>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Suggestions -->
+        <section class="suggestions">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Suggestions</h2>
+                    <a href="{% url 'my_recipes' %}" class="side-link">
+                        <p>See All Recipes</p>
+                    </a>
+                </div>
+            
+        
+            <div class="horizontal-scroll">
+                {% for suggestion in suggestions %}
+                
+                <a href="{% url 'recipe_detail' suggestion.pk %}" class="clickable-div">
+                    <div class="recipe-card">
+                        {% if "placeholder" in suggestion.image.url %}
+                            <div class="image-placeholder-container">
+                                <div class="food-icons-container">
+                                    <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="recipe-detail-image-container">
+                                <img src="{{ suggestion.image.url }}" alt="{{ recipe.name }}" class="recipe-detail-image">
+                            </div>
+                        {% endif %}
+
+                        <h3>{{ suggestion.title }}</h3>
+                        {% if suggestion.preparation_time != None and suggestion.difficulty != None %}
+                                <!-- If the recipe has both a preparation time and a difficulty, display both -->
+                                <p>{% if suggestion.preparation_time.hours != 0 %}
+                                        <!-- We display the hours just if not 0 -->
+                                        {{ suggestion.preparation_time.hours }}h
+                                    {% endif %}
+                                    {{ suggestion.preparation_time.minutes }}m | {% for difficulty in difficulty_choices %}
+
+                                    {% if difficulty.0 == suggestion.difficulty %}
+                                        {{ difficulty.1 }}
+                                    {% endif %}
+                                {% endfor %}
+                            </p>
+                            <!-- If there is a preparation time, but not a difficulty, we display the time only -->
+                            {% elif suggestion.preparation_time != None %}
+                                <p>{{ suggestion.preparation_time.hours }}h {{ suggestion.preparation_time.minutes }}m</p>
+                            <!-- If there is a difficulty, but not a preparation time, we display the difficulty ony -->
+                            {% elif suggestion.difficulty != None %}
+                                {% for difficulty in difficulty_choices %}
+                                    {% if difficulty.0 == suggestion.difficulty %}
+                                        <p>{{ difficulty.1 }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <!-- If there is no preparation time and no difficulty we don't display anything -->
+                    </div>
+                </a>
+
                 {% endfor %}
             </div>
-            
         </div>
-    </section>
-
-    <!-- Suggestions -->
-    <section class="suggestions">
-        <div class="container">
-            <div class="section-header">
-                <h2>Suggestions</h2>
-                <a href="{% url 'my_recipes' %}" class="side-link">
-                    <p>See All Recipes</p>
-                </a>
-            </div>
         
-    
-        <div class="horizontal-scroll">
-            {% for suggestion in suggestions %}
-            
-            <a href="{% url 'recipe_detail' suggestion.pk %}" class="clickable-div">
-                <div class="recipe-card">
-                    {% if "placeholder" in suggestion.image.url %}
-                        <div class="image-placeholder-container">
-                            <div class="food-icons-container">
-                                <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
-                            </div>
-                        </div>
-                    {% else %}
-                        <div class="recipe-detail-image-container">
-                            <img src="{{ suggestion.image.url }}" alt="{{ recipe.name }}" class="recipe-detail-image">
-                        </div>
-                    {% endif %}
+        </section>
+    {% else %}
 
-                    <h3>{{ suggestion.title }}</h3>
-                    {% if suggestion.preparation_time != None and suggestion.difficulty != None %}
-                            <!-- If the recipe has both a preparation time and a difficulty, display both -->
-                            <p>{% if suggestion.preparation_time.hours != 0 %}
-                                    <!-- We display the hours just if not 0 -->
-                                    {{ suggestion.preparation_time.hours }}h
-                                {% endif %}
-                                {{ suggestion.preparation_time.minutes }}m | {% for difficulty in difficulty_choices %}
-
-                                {% if difficulty.0 == suggestion.difficulty %}
-                                    {{ difficulty.1 }}
-                                {% endif %}
-                            {% endfor %}
-                        </p>
-                        <!-- If there is a preparation time, but not a difficulty, we display the time only -->
-                        {% elif suggestion.preparation_time != None %}
-                            <p>{{ suggestion.preparation_time.hours }}h {{ suggestion.preparation_time.minutes }}m</p>
-                        <!-- If there is a difficulty, but not a preparation time, we display the difficulty ony -->
-                        {% elif suggestion.difficulty != None %}
-                            {% for difficulty in difficulty_choices %}
-                                {% if difficulty.0 == suggestion.difficulty %}
-                                    <p>{{ difficulty.1 }}</p>
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
-                        <!-- If there is no preparation time and no difficulty we don't display anything -->
-                </div>
-            </a>
-
-            {% endfor %}
+    <section id="no-recipes-section">
+        <div class="container">
+            <p>Sorry, there are no recipes to display!</p>
+            <p><a href="{% url 'add_recipe' %}">Add a recipe</a> to start.</p>
         </div>
-    </div>
-    
     </section>
+    {% endif %}
 
   <!-- Logout Modal -->
   <div id="logout-modal" class="modal">
