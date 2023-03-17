@@ -127,6 +127,10 @@ nav ul a:hover::after,
     margin-top: 2em;
 }
 
+section.search-bar .container > * {
+    margin: 1em auto;
+}
+
 .side-link {
     margin: 3rem 0 1rem 0;
     align-self: self-end;
@@ -394,6 +398,22 @@ input.invalid {
     border-radius: 3px;
     text-transform: lowercase;
 }
+
+#id_search {
+    border: 1px solid var(--clr-primary-2);
+    border-radius: 10000px;
+    margin: 1em auto;
+    padding-inline: 1em;
+    max-width: 90%;
+}
+
+
+#id_search:hover,
+#id_search:focus {
+    outline: 1px solid var(--clr-primary-2);
+}
+
+
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
 .ingredient-form {
@@ -643,13 +663,23 @@ nav {
     width: fit-content;
     padding: .5em 1em;
     margin-bottom: 1em;
-    border: 3px solid var(--clr-primary-4);
+    border: 2px solid var(--clr-primary-3);
     border-radius: 10000px;
     transition: .5s ease-in-out;
 }
 
 .tag-span:hover,
 .tag-span:focus {
+    background-color: var(--clr-primary-3);
+    color: var(--clr-secondary);
+}
+
+.paginator {
+    grid-column: 1 / -1;
+    padding: 1.5em 0 3em 0;
+}
+
+.pagination li.active a {
     background-color: var(--clr-primary-4);
     color: var(--clr-secondary);
 }

@@ -23,3 +23,8 @@ class IngredientsForm(forms.ModelForm):
 
 
 IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','amount', 'unit'), extra=0, can_delete=True)
+
+
+class RecipeSearchFrom(forms.Form):
+    search = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search recipe...', 'data-toggle' : 'drop-down' }), required=False)
+

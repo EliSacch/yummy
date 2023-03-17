@@ -3,12 +3,14 @@ from django .views.generic.edit import FormView, UpdateView, DeleteView
 from django.views.generic.detail import SingleObjectMixin # to select 1 item from db
 
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+from django.core import serializers
+from django.core.paginator import Paginator
 
 from .models import Recipe, Ingredient
-from .forms import RecipeForm, IngredientFormSet
+from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom
 from .filters import RecipeFilter
 
 
@@ -17,10 +19,10 @@ class HomeView(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.order_by('created_on')
     template_name = 'index.html'
-    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
+        search_form = RecipeSearchFrom()
         if self.request.user.is_authenticated:
             all_recipes = Recipe.objects.filter(user=self.request.user)
             random_recipes = all_recipes.order_by('?')[:5]
@@ -29,7 +31,8 @@ class HomeView(generic.ListView):
                 'all_recipes' : all_recipes,
                 'suggestions' : random_recipes,
                 'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
-                'tags' : self.get_tags()
+                'tags' : self.get_tags(),
+                'search_form' : search_form,
                 }
         return context
     
@@ -45,6 +48,21 @@ class HomeView(generic.ListView):
                     pass
     
         return tags
+    
+    
+    def post(self, request, *args, **kwargs):
+        form = RecipeSearchFrom(request.GET)
+        queryset = Recipe.objects.filter(user=self.request.user)
+
+        if request.POST.get('action') == 'post':
+            search_string = str(request.POST.get('search_string'))
+            if search_string is not None:
+                search_results = queryset.filter(title__icontains=search_string)
+                data = serializers.serialize('json', list(search_results), fields=('pk','title'))
+
+                return JsonResponse({'data' : data}, status=200)
+            else:
+                return JsonResponse({'data' : 'No results found'}, status=200)
 
 
 # View for the my recipes page that displays all the reciepes created by the user
@@ -53,20 +71,24 @@ class RecipeListView(generic.ListView):
     queryset = Recipe.objects.all()
     template_name = 'my_recipes.html'
     context_object_name = 'all_recipes'
-    paginate_by = 12
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user)
+        queryset = super().get_queryset().filter(user=self.request.user).order_by('created_on')
         self.filterset = RecipeFilter(self.request.GET, queryset=queryset)
+
         return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super(RecipeListView, self).get_context_data(**kwargs)
+        # Pagination
+        paginate = Paginator(self.filterset.qs, 6)
+        page_number = self.request.GET.get('page')
+
         if self.request.user.is_authenticated:
             context = {
                 'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
                 'form' : self.filterset.form,
-                'all_recipes' : self.filterset.qs,
+                'all_recipes' : paginate.get_page(page_number),
                 }
         return context
 
