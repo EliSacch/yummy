@@ -541,6 +541,20 @@ section.search-bar .container > * {
 }
 
 
+/* ----------------------------------------------- Profile form */
+
+.profile-form-line {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    margin: 1em 0;
+}
+
+.profile-form-line .btn-floating:hover,
+.profile-form-line .btn-floating:focus {
+    background-color: var(--clr-primary-0);
+}
+
 /* ----------------------------------------------- Header */
 nav {
     height: fit-content;

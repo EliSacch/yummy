@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<section class="authentication-form valign-wrapper dark-text">
+<section class="valign-wrapper dark-text">
     <div class="container">
         <div class="go-back">
             <button class="btn-floating primary-3 light-text">
@@ -21,17 +21,59 @@
         </div>
         <div class="row">
             <div class="col s12">
-                Name: {{ user.username }}
-                Email: {{ user.email }}
 
-                {% if user_profile_image == None %}
+                <div class="user-profile-header">
+                        {% if user_profile_image == None %}
+                            <i class="material-icons dark-text">
+                                account_circle
+                            </i>
+                        {% else %}
+                            <img src="{{ user_profile_image }}" alt="Profile Image" />
+                        {% endif %}
+            
+                        <p>Hi, {{ user.username }}</p>
+                </div>
 
-                <p>No Image</p>
+                <div class="user-profile-body hidden">
 
-                {% else %}
-                    <img src="{{ user_profile_image }}" alt="Profile Image" />
+                    <p>Username: {{ user.username }}</p> <i class="material-icons dark-text">edit</i>
+                    <p>Email: {{ user.email }}</p> <i class="material-icons dark-text">edit</i>
+                    <p>Password: **********</p> <i class="material-icons dark-text">edit</i>
 
-                {% endif %}
+                </div>
+
+                <hr>
+
+                <form id="profile-form" method="post" action="{% url 'profile' %}">
+                    {% csrf_token %}
+                    {% for field in user_details_form %}
+                    <div class="profile-form-line">
+                        <p>{{ field.label }}: {{ field.value }}</p> 
+                        <button type="button" data-target="id_{{ field.name }}" class="edit-profile-btn btn-floating background-alert">
+                            <i class="material-icons">edit</i>
+                        </button>
+                    </div>
+                    <div class="row hidden">
+                        <div class="input-field col s12">
+                            {{ field }} <button class="small-btn" type="submit">Save</button>
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {% if field.help_text %}
+                                <span class="help-text">{{ field.help_text }}</span>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <span class="help-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </form>
+
+                <hr>
+
+                <div class="user-profile-footer">
+                    <a href="{% url 'account_logout' %}" class="btn btn-invert">Logout</a>
+                    <a href="#">Delete account</a>
+                </div>
 
             </div>
         </div>

@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     /* Custom JS */
 
-    /* We add an event listener to the go back and go home buttons */
+    /* Event listener to the go back and go home buttons */
     $('.go-back').click(function () {
         window.history.back();
     });
@@ -18,35 +18,36 @@ $(document).ready(function () {
         window.location.href = "/";
     });
 
-
-    /* We add an event listener to the add ingredient button */
+    /* Event listener to the add ingredient button */
     $('#add-ingredient-btn').click(add_ingredient_form);
 
-
-    /* We add an event listener to the tags field */
+    /* Event listener to the tags field */
     $('#id_tags').on('keyup', display_tags);
 
-    /* We add an event listener to hours and minutes field.*/
+    /* Event listener to hours and minutes field.*/
     $('#hours').on('input', set_prepration_time);
     $('#minutes').on('input', set_prepration_time);
 
-    /* We call the random_icon function to create random food icons */
-    random_icon();
-
-    /* We add an event listener to the remove-ingredient buttons */
+    /* Event listener to the remove-ingredient buttons */
     if ($('.remove-ingredient').length > 0) {
         $('.remove-ingredient').click(remove_ingredient_form);
     }
 
-    /* Call the display message function to display any error/success message */
-    display_message();
-
-    /* We add an event listener to the difficulty choices */
+    /* Event listener to the difficulty choices */
     $('.difficulty-choices li > label').click(function () {
         $(this).prev().prop('checked', true);
     });
 
-    /* We add an event listener to the search field */
+    /* Event listener for the edit profile details button */
+    $('.edit-profile-btn').click(toggle_edit_profile);
+
+    /* Call the random_icon function to create random food icons */
+    random_icon();
+
+    /* Call the display message function to display any error/success message */
+    display_message();
+
+    /* Call search recipe function to add event listener to the search field */
     search_recipe();
 
 });
@@ -100,9 +101,9 @@ function remove_ingredient_form() {
 
 
 /**
-     * This functions takes the string entered in the tags field and splits it into an array.
-     * The array is displayed underneath the tags field, to show the valid tags.
-     */
+ * This functions takes the string entered in the tags field and splits it into an array.
+ * The array is displayed underneath the tags field, to show the valid tags.
+ */
 function display_tags() {
     var tags = $('#id_tags').val();
     var tagsArray = tags.split(/[ ,#]+/);
@@ -166,6 +167,9 @@ function random_icon() {
     random_position();
 }
 
+/**
+ * This function is used to set random positions to the food icons so that they are randomly spread around the image placeholder.
+ */
 function random_position() {
     const icons = $('.food-icon');
     for (let i = 0; i < icons.length; i++) {
@@ -194,6 +198,12 @@ function display_message() {
 }
 
 
+/**
+ * This function is used to add an event listener to the search field.
+ * When the user types in the search field, the function will send an AJAX request to the server.
+ * The server will return a JSON object with the results.
+ * The results will be displayed in the search results section.
+ */
 function search_recipe() {
 
     /* The following code was taken from the "Very Academy" tutorial on YouTube
@@ -239,4 +249,18 @@ function search_recipe() {
             });
         }
     });
+}
+
+
+/**
+ * This function is called when the user clicks on the edit profile button.
+ * It is used to select the user field related to the selected profile item (e.g. username, email, etc.)
+ */
+function toggle_edit_profile() {
+    const detailLine = $(this).parent('div');
+    const target = $(this).attr('data-target');
+    const input = $(`#${target}`);
+    
+    detailLine.hide();
+    input.closest('.row').removeClass('hidden');
 }

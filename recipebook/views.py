@@ -10,7 +10,7 @@ from django.core import serializers
 from django.core.paginator import Paginator
 
 from .models import Recipe, Ingredient, User, UserProfileImage
-from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom
+from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom, UserProfileForm
 from .filters import RecipeFilter
 
 
@@ -251,21 +251,21 @@ class DeleteRecipeView(DeleteView):
 
 # View for the user profile page
 class ProfileView(View):
-    models = [User, UserProfileImage]
+    model = User
+    form_class = UserProfileForm
     template_name = 'account/profile.html'
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
             user = self.request.user
             user_profile_image = UserProfileImage.objects.filter(user=user).first()
-
-            print('umage 1:    ', user_profile_image)
             return render(
                 request,
                 'account/profile.html',
                 {
                     'user' : user,
-                    'user_profile_image' : user_profile_image
+                    'user_profile_image' : user_profile_image,
+                    'user_details_form': UserProfileForm(instance=user),
                 }
             )
         else:
