@@ -25,9 +25,25 @@
         </div>
     </section>
 
-    <!-- Search bar here when ready-->
-
     {% if all_recipes %}
+        <!-- Search bar here when ready-->
+        <section class="search-bar">
+
+            <div class="container">
+                <form method="get">
+                    {% csrf_token %}
+                    {{ search_form.search }}
+                </form>
+            </div>
+
+            <ul id="search-results">
+                <li>First item</li>
+                <li>Second item</li>
+                <li>Third item</li>
+            </ul>
+
+        </section>
+        
         <!-- Categories -->
         <section class="categories">
             <div class="container">
@@ -71,31 +87,6 @@
                         {% endif %}
 
                         <h3>{{ suggestion.title }}</h3>
-                        {% if suggestion.preparation_time != None and suggestion.difficulty != None %}
-                                <!-- If the recipe has both a preparation time and a difficulty, display both -->
-                                <p>{% if suggestion.preparation_time.hours != 0 %}
-                                        <!-- We display the hours just if not 0 -->
-                                        {{ suggestion.preparation_time.hours }}h
-                                    {% endif %}
-                                    {{ suggestion.preparation_time.minutes }}m | {% for difficulty in difficulty_choices %}
-
-                                    {% if difficulty.0 == suggestion.difficulty %}
-                                        {{ difficulty.1 }}
-                                    {% endif %}
-                                {% endfor %}
-                            </p>
-                            <!-- If there is a preparation time, but not a difficulty, we display the time only -->
-                            {% elif suggestion.preparation_time != None %}
-                                <p>{{ suggestion.preparation_time.hours }}h {{ suggestion.preparation_time.minutes }}m</p>
-                            <!-- If there is a difficulty, but not a preparation time, we display the difficulty ony -->
-                            {% elif suggestion.difficulty != None %}
-                                {% for difficulty in difficulty_choices %}
-                                    {% if difficulty.0 == suggestion.difficulty %}
-                                        <p>{{ difficulty.1 }}</p>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                            <!-- If there is no preparation time and no difficulty we don't display anything -->
                     </div>
                 </a>
 

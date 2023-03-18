@@ -115,6 +115,36 @@
             </a>
 
             {% endfor %}
+
+            <!-- Pagination -->
+            <div class="container center paginator">
+
+                <ul class="pagination">
+                    {% if all_recipes.has_previous %}
+                        <li class="waves-effect"><a href="?page={{ all_recipes.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    {% endif %}
+
+                    {% for page in all_recipes.paginator.page_range %}
+
+                        {% if page == all_recipes.number %}
+                            <li class="active"><a href="?page={{ page }}">{{ page }}</a></li>
+                        {% else %}
+                            <li class="waves-effect"><a href="?page={{ page }}">{{ page }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if all_recipes.has_next %}
+                        <li class="waves-effect"><a href="?page={{ all_recipes.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+                    {% else %}
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    {% endif %}
+                  </ul>
+
+            </div>
+
+
         {% else %} 
             <p>Sorry, there are no recipes to display!</p>
         {% endif %}

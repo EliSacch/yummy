@@ -305,6 +305,8 @@ Check if Errors are returned when passing the final version through the official
 
 - The code to dynamically add ne forms is taken from [CodingEnterpreneur tutorial](https://www.youtube.com/watch?v=s3T-w2jhDHE&t=1293s)
 
+- The code to send an ajax request to show the search results is taken from [Very Academy tutorial](https://www.youtube.com/watch?v=Ct34iiOltgo)
+
 ### Content
 
 - The color palette was generated using [Color Space](https://mycolor.space/)

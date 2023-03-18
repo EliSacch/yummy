@@ -8,6 +8,8 @@ $(document).ready(function () {
 
 
     /* Custom JS */
+
+    /* We add an event listener to the go back and go home buttons */
     $('.go-back').click(function () {
         window.history.back();
     });
@@ -17,22 +19,14 @@ $(document).ready(function () {
     });
 
 
-    /**
-     * This function is used to add a new ingredient to the recipe.
-     * It is called when the user clicks on the "Add Ingredient" button.
-     * */
+    /* We add an event listener to the add ingredient button */
     $('#add-ingredient-btn').click(add_ingredient_form);
 
 
-    /**
-     * We add an event listener to the tags field.
-     */
+    /* We add an event listener to the tags field */
     $('#id_tags').on('keyup', display_tags);
 
-
-    /**
-     * We add an event listener to hours and minutes field.
-     */
+    /* We add an event listener to hours and minutes field.*/
     $('#hours').on('input', set_prepration_time);
     $('#minutes').on('input', set_prepration_time);
 
@@ -47,9 +41,13 @@ $(document).ready(function () {
     /* Call the display message function to display any error/success message */
     display_message();
 
+    /* We add an event listener to the difficulty choices */
     $('.difficulty-choices li > label').click(function () {
         $(this).prev().prop('checked', true);
     });
+
+    /* We add an event listener to the search field */
+    search_recipe();
 
 });
 
@@ -193,4 +191,52 @@ function display_message() {
             messageSection.fadeOut('slow');
         }, 5000);
     }
+}
+
+
+function search_recipe() {
+
+    /* The following code was taken from the "Very Academy" tutorial on YouTube
+        * The link to the tutorial is: https://www.youtube.com/watch?v=Ct34iiOltgo */
+    $('#id_search').on('keyup', function (e) { 
+        e.preventDefault();
+
+        var results = []
+
+        if ($('#id_search').val().length > 0) {
+
+            $.ajax({
+                type: 'POST',
+                url: '',
+                data: {
+                    search_string: $('#id_search').val(),
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                    action: 'post'
+                },
+                success: function (json) {
+                    $.each(JSON.parse(json.data), function (index, recipe) {
+                        results.push({'title': recipe.fields.title, 'id': recipe.pk});
+                    });
+
+                    /* End of the code taken from the tutorial */
+
+                    $('#search-results').empty();
+
+                    for (let i = 0; i < results.length; i++) {
+                        $('#search-results').append(`<li>
+                            <a href="/recipe/${results[i].id}/">
+                                ${results[i].title}
+                            </a>
+                        </li>`);
+                    }
+
+                    if (results.length > 0) {
+                        $('#search-results').show();
+                    } else {
+                        $('#search-results').hide();
+                    }
+                }
+            });
+        }
+    });
 }
