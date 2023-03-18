@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+<!--{% load i18n %}
+{% load account socialaccount %}-->
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<section class="authentication-form valign-wrapper dark-text">
+    <div class="container">
+        <div class="go-back">
+            <button class="btn-floating primary-3 light-text">
+                <i class="lmedium material-icons">arrow_back</i>
+            </button>
+        </div>
+        <div class="row form-header">
+            <div class="col s12">
+                <h1 class="subheading">Profile</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+                Name: {{ user.username }}
+                Email: {{ user.email }}
+
+                {% if user_profile_image == None %}
+
+                <p>No Image</p>
+
+                {% else %}
+                    <img src="{{ user_profile_image }}" alt="Profile Image" />
+
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="errorlist">
+                    {% for key, value in form.errors.items %}
+                        <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

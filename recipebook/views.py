@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.core import serializers
 from django.core.paginator import Paginator
 
-from .models import Recipe, Ingredient
+from .models import Recipe, Ingredient, User, UserProfileImage
 from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom
 from .filters import RecipeFilter
 
@@ -236,6 +236,7 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
     
 
+# View for the recipe delete page
 class DeleteRecipeView(DeleteView):
     model = Recipe
     success_url = '/'
@@ -246,3 +247,27 @@ class DeleteRecipeView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'Recipe deleted successfully!')
         return super().delete(request, *args, **kwargs)
+    
+
+# View for the user profile page
+class ProfileView(View):
+    models = [User, UserProfileImage]
+    template_name = 'account/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            user = self.request.user
+            user_profile_image = UserProfileImage.objects.filter(user=user).first()
+
+            print('umage 1:    ', user_profile_image)
+            return render(
+                request,
+                'account/profile.html',
+                {
+                    'user' : user,
+                    'user_profile_image' : user_profile_image
+                }
+            )
+        else:
+            return HttpResponseRedirect(reverse('login'))
+        
