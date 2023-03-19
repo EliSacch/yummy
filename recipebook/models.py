@@ -48,8 +48,8 @@ class Ingredient(models.Model):
 
 class UserProfileImage(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile_image')
-    image = CloudinaryField('image', default=None, blank=True, null=True)
+    profile_image = CloudinaryField('image', default=None, blank=True, null=True)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 

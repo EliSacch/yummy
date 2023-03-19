@@ -18,6 +18,15 @@ $(document).ready(function () {
         window.location.href = "/";
     });
 
+    /* Event listener to the profile image field */
+    $('#edit-profile-image-btn').click(function () {
+        $('#id_profile_image').click();
+    });
+
+    /* Event listener to the profile image field */
+    $('#id_profile_image').change(save_profile_image);
+
+
     /* Event listener to the add ingredient button */
     $('#add-ingredient-btn').click(add_ingredient_form);
 
@@ -264,3 +273,13 @@ function toggle_edit_profile() {
     detailLine.hide();
     input.closest('.row').removeClass('hidden');
 }
+
+
+/**
+ * This function is called when an image is uploaded to the profile image field.
+ * It submits the image form.
+ */
+function save_profile_image() {
+    $('#profile-image-form').submit();
+    }
+

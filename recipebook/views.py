@@ -10,7 +10,7 @@ from django.core import serializers
 from django.core.paginator import Paginator
 
 from .models import Recipe, Ingredient, User, UserProfileImage
-from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom, UserProfileForm
+from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom, UserProfileForm, UserProfileImageForm
 from .filters import RecipeFilter
 
 
@@ -252,7 +252,8 @@ class DeleteRecipeView(DeleteView):
 # View for the user profile page
 class ProfileView(View):
     model = User
-    form_class = UserProfileForm
+    form_classes = {'user_details': UserProfileForm,
+                    'profile_image': UserProfileImageForm}
     template_name = 'account/profile.html'
 
     def get(self, request, *args, **kwargs):
@@ -266,8 +267,45 @@ class ProfileView(View):
                     'user' : user,
                     'user_profile_image' : user_profile_image,
                     'user_details_form': UserProfileForm(instance=user),
+                    'user_image_form': UserProfileImageForm(instance=user_profile_image),
                 }
             )
         else:
             return HttpResponseRedirect(reverse('login'))
+        
+    def post(self, request, *args, **kwargs):
+        form = UserProfileForm(request.POST, instance=self.request.user)
+
+        user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
+        form_image = UserProfileImageForm(request.POST, self.request.FILES, instance=user_profile_image)
+
+        print('request\n', request.POST)
+
+        if request.FILES:
+            print('profile image submit')
+            image = form_image.save(commit=False)
+            image.user = self.request.user
+            if form_image.is_valid():
+                form_image.save()
+                messages.success(self.request, 'Profile image updated successfully!')
+            else:
+                for error in form.errors:
+                    messages.error(self.request, error)
+        
+        elif 'user-details-submit' in request.POST:
+            print('user details submit')
+            form.save(commit=False)
+            if form.is_valid():
+                form.save()
+                messages.success(self.request, 'User details updated successfully!')
+            else:
+                for error in form.errors:
+                    messages.error(self.request, error)
+        
+        else:
+            print('nothing submitted')
+        
+        return HttpResponseRedirect(reverse('profile'))
+        
+    
         

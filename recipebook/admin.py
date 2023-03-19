@@ -48,4 +48,4 @@ class IngredientsAdmin(admin.ModelAdmin):
 
 @admin.register(UserProfileImage)
 class UserProfileImageAdmin(admin.ModelAdmin):
-    list_filter = ('user', 'image')
+    list_filter = ('user', 'profile_image')

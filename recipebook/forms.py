@@ -35,3 +35,10 @@ class UserProfileForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'password', ]
 
+
+class UserProfileImageForm(forms.ModelForm):
+    profile_image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'hidden',}), required=False)
+    class Meta:
+        model = UserProfileImage
+        fields = ['profile_image', ]
+
