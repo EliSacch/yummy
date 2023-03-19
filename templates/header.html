@@ -2,11 +2,15 @@
     <div class="container dark-text">
 
         <div class="user">
-            <div class="user-handle">
-                <a href="{% url 'profile' %}">
-                    <i class="material-icons dark-text">
-                        account_circle
-                    </i>
+            <div class="user-handle">   
+                <a href="{% url 'profile' %}" class="valign-wrapper">
+                    {% if user_profile_image == None %}
+                        <i class="material-icons dark-text">
+                            account_circle
+                        </i>
+                    {% else %}
+                        <img src="{{ user_profile_image.profile_image.url }}" alt="Profile Image" />
+                    {% endif %}
                 </a>
     
                 Hi, {{ user.username }}

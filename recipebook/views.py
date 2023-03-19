@@ -26,6 +26,7 @@ class HomeView(generic.ListView):
         if self.request.user.is_authenticated:
             all_recipes = Recipe.objects.filter(user=self.request.user)
             random_recipes = all_recipes.order_by('?')[:5]
+            user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
 
             context = {
                 'all_recipes' : all_recipes,
@@ -33,6 +34,7 @@ class HomeView(generic.ListView):
                 'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
                 'tags' : self.get_tags(),
                 'search_form' : search_form,
+                'user_profile_image' : user_profile_image,
                 }
         return context
     
@@ -51,7 +53,7 @@ class HomeView(generic.ListView):
     
     
     def post(self, request, *args, **kwargs):
-        form = RecipeSearchFrom(request.GET)
+        #form = RecipeSearchFrom(request.GET)
         queryset = Recipe.objects.filter(user=self.request.user)
 
         if request.POST.get('action') == 'post':
@@ -83,12 +85,14 @@ class RecipeListView(generic.ListView):
         # Pagination
         paginate = Paginator(self.filterset.qs, 6)
         page_number = self.request.GET.get('page')
+        user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
 
         if self.request.user.is_authenticated:
             context = {
                 'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
                 'form' : self.filterset.form,
                 'all_recipes' : paginate.get_page(page_number),
+                'user_profile_image' : user_profile_image,
                 }
         return context
 
@@ -282,7 +286,6 @@ class ProfileView(View):
         print('request\n', request.POST)
 
         if request.FILES:
-            print('profile image submit')
             image = form_image.save(commit=False)
             image.user = self.request.user
             if form_image.is_valid():

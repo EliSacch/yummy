@@ -70,6 +70,25 @@
                     {% endfor %}
                     
                     {% for field in user_details_form %}
+                    
+                    {% if field.name == 'password' %}
+                    <div class="profile-form-line">
+                        <p>{{ field.label }}: ***************</p> 
+                        <a href="{% url 'account_change_password' %}" class="btn-floating background-alert">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </div>
+
+                    {% elif field.name == 'email' %}
+                    <div class="profile-form-line">
+                        <p>{{ field.label }}: {{ field.value }}</p> 
+                        <a href="{% url 'account_email' %}" class="btn-floating background-alert">
+                            <i class="material-icons">edit</i>
+                        </a>
+                    </div>
+                    
+                    {% else %}
+                    
                     <div class="profile-form-line">
                         <p>{{ field.label }}: {{ field.value }}</p> 
                         <button type="button" data-target="id_{{ field.name }}" class="edit-profile-btn btn-floating background-alert">
@@ -88,6 +107,7 @@
                             {% endfor %}
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
                 </form>
 

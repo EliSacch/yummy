@@ -39,25 +39,18 @@
                 <form class="signup center" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     {% csrf_token %}
 
-                    <div class="input-field">
-                        <input type="text" name="username" autocomplete="username" minlenght="1" maxlenght="150" id="id_username" required />
-                        <label for="id_username">Username</label>
+                    {% for field in form %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            {{ field }}
+                            <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+                        </div>
+                        {% if field.help_text %}
+                                <p class="help-text">{{ field.help_text|safe }}</p>
+                        {% endif %}
+                        {{ field.errors }}
                     </div>
-
-                    <div class="input-field">
-                        <input type="email" name="email" autocomplete="email" id="id_email" required />
-                        <label for="id_email">Email</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input type="password" name="password1" autocomplete="new-password" id="id_password1" required />
-                        <label for="id_password1">Password</label>
-                    </div>
-
-                    <div class="input-field">
-                        <input type="password" name="password2" autocomplete="new-password" id="id_password2" required />
-                        <label for="id_password2">Confirm Password</label>
-                    </div>
+                    {% endfor %}
 
 
                     {% if redirect_field_value %}

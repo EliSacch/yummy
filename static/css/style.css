@@ -395,6 +395,9 @@ input.invalid {
     text-transform: lowercase;
 }
 
+.ctrlHolder > * {
+    font-size: 2em;
+}
 
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
@@ -545,7 +548,6 @@ section.search-bar .container > * {
 .user-profile-header {
     position: relative;
     width: 250px;
-    max-width: 50%;
     margin: 0 auto;
 }
 
@@ -568,9 +570,13 @@ section.search-bar .container > * {
 
 .user-image > i {
     /* Fallback font size for browsers that don't support cq units */
-    font-size: 30vw;
+    font-size: 250px;
     /* Font size in cq units */
-    font-size: 100cqw;
+    /*font-size: 100cqw;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 
@@ -614,11 +620,19 @@ nav {
 }
 
 .user-handle a {
-    display: inline-block;
+    display: flex;
 }
 
 .user-handle a > i {
     font-size: 2em;
+}
+
+.user-handle a > img {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
 }
 
 .main-nav li>a,
