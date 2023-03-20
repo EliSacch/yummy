@@ -2,11 +2,15 @@
     <div class="container dark-text">
 
         <div class="user">
-            <div class="user-handle">
-                <a href="#">
-                    <i class="material-icons dark-text">
-                        account_circle
-                    </i>
+            <div class="user-handle">   
+                <a href="{% url 'profile' %}" class="valign-wrapper">
+                    {% if user_profile_image == None %}
+                        <i class="material-icons dark-text">
+                            account_circle
+                        </i>
+                    {% else %}
+                        <img src="{{ user_profile_image.profile_image.url }}" alt="Profile Image" />
+                    {% endif %}
                 </a>
     
                 Hi, {{ user.username }}
@@ -31,6 +35,6 @@
     <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'add_recipe' %}">Add Recipe</a></li>
     <li><a href="{% url 'my_recipes' %}">All recipes</a></li>
-    <li class="push-down"><a href="">Profile</a></li>
+    <li class="push-down"><a href="{% url 'profile' %}">Profile</a></li>
     <li class="push-up"><a class="waves-effect waves-light modal-trigger" href="#logout-modal">Log Out</a></li>
 </ul>

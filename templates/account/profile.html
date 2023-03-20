@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+<!--{% load i18n %}
+{% load account socialaccount %}-->
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<!-- Messages -->
+<section id="messages">
+    <div class="container">
+        <ul class="messages-list">
+            {% for message in messages %}
+                <li>
+                    <p>{{ message }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+<!-- Profile details -->
+<section id="profile-details" class="valign-wrapper dark-text">
+
+    <div class="container">
+        <div class="row">
+            <div class="go-home">
+                <button class="btn-floating primary-3 light-text">
+                    <i class="lmedium material-icons">arrow_back</i>
+                </button>
+            </div>
+        </div>
+        <div class="row form-header">
+            <div class="col s12">
+                <h1 class="subheading center">Profile</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12">
+
+                <div class="user-profile-header">
+                    <div class="user-image">
+                        {% if user_profile_image == None %}
+                            <i class="material-icons dark-text">
+                                account_circle
+                            </i>
+                        {% else %}
+                            <img src="{{ user_profile_image.profile_image.url }}" alt="Profile Image" />
+                        {% endif %}
+                    </div>
+                    <button type="button" id="edit-profile-image-btn" data-target="id_profile_image" class="btn-floating background-alert">
+                        <i class="material-icons">photo</i>
+                    </button>
+
+                    <form id="profile-image-form" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
+                        {% csrf_token %}
+                        {{ user_image_form.profile_image }}
+
+                        {% for hidden in user_image_form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}
+
+                        <button class="hidden" type="submit" name="profile-image-submit">Save</button>
+
+                    </form>
+                </div>
+                
+                <form id="user-details-form" method="post" action="{% url 'profile' %}">
+                    {% csrf_token %}
+
+                    {% for hidden in user_details_form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    
+                    <!-- Username line -->
+                    {% for field in user_details_form %}
+                    <div class="profile-form-line"> 
+                        <button type="button" data-target="id_{{ field.name }}" class="edit-profile-btn btn-floating background-alert">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <p>{{ field.label }}: {{ field.value }}</p>
+                    </div>
+                    <div class="row hidden">
+                        <div class="input-field  col s12">
+                            {{ field }}
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {% if field.help_text %}
+                                <span class="help-text">{{ field.help_text }}</span>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <span class="help-text">{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="col s12">
+                            <button class="btn-small" type="submit" name="user-details-submit">Save</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </form>
+
+                <!-- Email line -->
+                <div class="profile-form-line"> 
+                    <a href="{% url 'account_email' %}" class="btn-floating background-alert">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <p>Email: {{ user.email }}</p>
+                </div>
+
+                <!-- Password line -->
+                <div class="profile-form-line">
+                    <a href="{% url 'account_change_password' %}" class="btn-floating background-alert">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <p>Password: ***************</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <ul class="errorlist">
+                    {% for key, value in form.errors.items %}
+                        <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
+                    {% endfor %}
+                    </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="profile-other-actions">
+    <div class="container valign-wrapper">
+        <div class="user-profile-footer">
+            <a class="btn-small modal-trigger" href="#logout-modal">Log Out</a>
+            <a class="btn-small background-error modal-trigger"href="#delete-account-modal">Delete account</a>
+        </div>
+    
+        <!-- Logout Modal -->
+        <div id="logout-modal" class="modal">
+            <div class="modal-content">
+                {% include "account/logout.html" %}
+            </div>
+        </div>
+
+        <!-- Delete account Modal -->
+        <div id="delete-account-modal" class="modal">
+            <div class="modal-content">
+                {% include "account/delete_account.html" %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

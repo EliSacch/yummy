@@ -44,4 +44,12 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+class UserProfileImage(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile_image')
+    profile_image = CloudinaryField('image', default=None, blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
 

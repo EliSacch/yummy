@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Recipe, Ingredient
+from .models import Recipe, Ingredient, UserProfileImage
 
 """ This is the admin.py file for the recipebook app. It is used to register the Recipe model with the admin site."""
 
@@ -38,10 +38,14 @@ class ArrayFieldListFilter(admin.SimpleListFilter):
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_filter = ('difficulty', 'created_on', ArrayFieldListFilter)
-    readonly_fields = ('created_on', 'modified_on', 'user')
+    readonly_fields = ('created_on', 'modified_on', 'user', 'pk')
 
 
 @admin.register(Ingredient)
 class IngredientsAdmin(admin.ModelAdmin):
     list_filter = ('name', 'recipe')
     readonly_fields = ('updated_on',)
+
+@admin.register(UserProfileImage)
+class UserProfileImageAdmin(admin.ModelAdmin):
+    list_filter = ('user', 'profile_image')

@@ -2,7 +2,7 @@ from django import forms
 from django.forms import MultiWidget, TextInput, BaseModelFormSet
 from django.forms.models import inlineformset_factory
 
-from .models import Recipe, Ingredient
+from .models import Recipe, Ingredient, User, UserProfileImage
 
 class RecipeForm(forms.ModelForm):
     image = forms.ImageField(required=False)
@@ -27,4 +27,25 @@ IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','am
 
 class RecipeSearchFrom(forms.Form):
     search = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search recipe...', 'data-toggle' : 'drop-down' }), required=False)
+ 
+
+class UserProfileForm(forms.ModelForm):
+    password = forms.PasswordInput()
+    class Meta:
+        model = User
+        fields = ['username',]
+
+
+class UserProfileImageForm(forms.ModelForm):
+    profile_image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'hidden',}), required=False)
+    class Meta:
+        model = UserProfileImage
+        fields = ['profile_image', ]
+
+
+class UserDeleteForm(forms.Form):
+    delete = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'delete-user-confirm'}), required=True)
+    class Meta:
+        model = User
+        fields = ['delete', ]
 

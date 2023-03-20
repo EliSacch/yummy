@@ -9,8 +9,8 @@ from django.contrib import messages
 from django.core import serializers
 from django.core.paginator import Paginator
 
-from .models import Recipe, Ingredient
-from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom
+from .models import Recipe, Ingredient, User, UserProfileImage
+from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom, UserProfileForm, UserProfileImageForm, UserDeleteForm
 from .filters import RecipeFilter
 
 
@@ -26,6 +26,7 @@ class HomeView(generic.ListView):
         if self.request.user.is_authenticated:
             all_recipes = Recipe.objects.filter(user=self.request.user)
             random_recipes = all_recipes.order_by('?')[:5]
+            user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
 
             context = {
                 'all_recipes' : all_recipes,
@@ -33,6 +34,7 @@ class HomeView(generic.ListView):
                 'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
                 'tags' : self.get_tags(),
                 'search_form' : search_form,
+                'user_profile_image' : user_profile_image,
                 }
         return context
     
@@ -51,7 +53,7 @@ class HomeView(generic.ListView):
     
     
     def post(self, request, *args, **kwargs):
-        form = RecipeSearchFrom(request.GET)
+        #form = RecipeSearchFrom(request.GET)
         queryset = Recipe.objects.filter(user=self.request.user)
 
         if request.POST.get('action') == 'post':
@@ -83,12 +85,14 @@ class RecipeListView(generic.ListView):
         # Pagination
         paginate = Paginator(self.filterset.qs, 6)
         page_number = self.request.GET.get('page')
+        user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
 
         if self.request.user.is_authenticated:
             context = {
                 'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
                 'form' : self.filterset.form,
                 'all_recipes' : paginate.get_page(page_number),
+                'user_profile_image' : user_profile_image,
                 }
         return context
 
@@ -153,16 +157,13 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                     else:
                         pass
             else:
-                print('formset is invalid')
-                for error in formset.errors:
-                    messages.error(self.request, error)
+                messages.error(self.request, form.errors)
                 return super().form_invalid(form)
             
             messages.success(self.request, 'Recipe added successfully!')
             return super().form_valid(form)
         else:
-            for error in form.errors:
-                messages.error(self.request, error)
+            messages.error(self.request, form.errors)
             return super().form_invalid(form)
     
     def form_valid(self, form):
@@ -171,7 +172,6 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
     
     def get_success_url(self):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
-
 
 
 # View for the recipe update page
@@ -215,16 +215,13 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
                     else:
                         pass
             else:
-                print('formset is invalid')
-                for error in formset.errors:
-                    messages.error(self.request, error)
+                messages.error(self.request, formset.errors)
                 return super().form_invalid(form)
             
             messages.success(self.request, 'Recipe updated successfully!')
             return super().form_valid(form)
         else:
-            for error in form.errors:
-                messages.error(self.request, error)
+            messages.error(self.request, form.errors)
             return super().form_invalid(form)
     
     
@@ -236,6 +233,7 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
     
 
+# View for the recipe delete page
 class DeleteRecipeView(DeleteView):
     model = Recipe
     success_url = '/'
@@ -246,3 +244,84 @@ class DeleteRecipeView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'Recipe deleted successfully!')
         return super().delete(request, *args, **kwargs)
+    
+
+# View for the user profile page
+class ProfileView(FormView):
+    model = User
+    form_classes = {
+        'user_details_form' : UserProfileForm,
+        'user_image_form' : UserProfileImageForm,
+    }
+    template_name = 'account/profile.html'
+
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            self.object = self.request.user
+            user = self.request.user
+            user_profile_image = UserProfileImage.objects.filter(user=user).first()
+
+            return render(
+                request,
+                'account/profile.html',
+                {
+                    'user' : user,
+                    'user_profile_image' : user_profile_image,
+                    'user_details_form': UserProfileForm(instance=self.object if self.object else None),
+                    'user_image_form': UserProfileImageForm(instance=user_profile_image),
+                    'user_delete_form': UserDeleteForm(),
+                }
+            )
+        else:
+            return HttpResponseRedirect('login')
+        
+    def post(self, request, *args, **kwargs):
+        self.object = self.request.user
+        form = UserProfileForm(self.request.POST, instance=self.object)
+
+        user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
+        form_image = UserProfileImageForm(request.POST, self.request.FILES, instance=user_profile_image)
+
+        if request.FILES:
+            image = form_image.save(commit=False)
+            image.user = self.request.user
+            if form_image.is_valid():
+                form_image.save()
+                messages.success(self.request, 'Profile image updated successfully!')
+                return super().form_valid(form_image)
+            else:
+                messages.error(self.request, form_image.errors)
+                return super().form_invalid(form_image)
+        
+        else:
+            if form.is_valid():
+                form.save()
+                messages.success(self.request, 'User details updated successfully!')
+                return super().form_valid(form)
+            else:
+                print('form invalid')
+                messages.error(self.request, form.errors)
+                return HttpResponseRedirect(reverse('profile'))
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Profile updated updated successfully!')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('profile')
+
+
+# Delete user view
+class DeleteUserView(DeleteView):
+    model = User
+    success_url = '/'
+    
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'User deleted successfully!')
+        return super().delete(request, *args, **kwargs)
+
+
+        

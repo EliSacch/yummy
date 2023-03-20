@@ -9,21 +9,21 @@
 
 
 {% block content %}
+<!-- Messages -->
+<section id="messages">
+    <div class="container">
+        <ul class="messages-list">
+            {% for message in messages %}
+                <li>
+                    <p>{{ message }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
 
 {% if user.is_authenticated %}
 <h1 class="center subheading">What are we cooking today?</h1>
-    <!-- Messages -->
-    <section id="messages">
-        <div class="container">
-            <ul class="messages-list">
-                {% for message in messages %}
-                    <li>
-                        <p>{{ message }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </section>
 
     {% if all_recipes %}
         <!-- Search bar here when ready-->

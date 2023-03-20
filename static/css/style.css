@@ -65,6 +65,11 @@ p {
     font-weight: 400;
 }
 
+small {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 a {
     color: var(--clr-primary-3);
     font-weight: 600;
@@ -112,8 +117,9 @@ nav ul a:hover::after,
     width: 90%;
     max-width: 500px;
     padding: 1em;
-    background-color: var(--clr-secondary);
+    background-color: white;
     color: var(--clr-primary-5);
+    border: 2px solid var(--clr-tertiary-2);
     border-radius: 5px;
     opacity: 0.9;
 }
@@ -169,6 +175,11 @@ nav ul a:hover::after,
     background-color: var(--clr-tertiary-1);
 }
 
+.background-error:hover,
+.background-error:focus {
+    background-color: var(--clr-tertiary-3);
+}
+
 .light-text {
     color: var(--clr-secondary);
 }
@@ -201,12 +212,6 @@ nav ul a:hover::after,
     display: flex;
     gap: 1em;
 }
-
-.recipe-action-buttons .btn-floating:hover,
-.recipe-action-buttons .btn-floating:focus {
-    background-color: var(--clr-tertiary-3);
-}
-
 
 /* ----------------------------------------------- Override input Materialize CSS style */
 input.invalid:not([type]), 
@@ -318,6 +323,7 @@ textarea.materialize-textarea.invalid:focus,
 
 .errorlist {
     color: var(--clr-tertiary-1);
+    font-size: 1.2rem;
 }
 
 /* ----------------------------------------------- Forms */
@@ -395,6 +401,9 @@ input.invalid {
     text-transform: lowercase;
 }
 
+.ctrlHolder > * {
+    font-size: 2em;
+}
 
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
@@ -541,6 +550,81 @@ section.search-bar .container > * {
 }
 
 
+/* ----------------------------------------------- Profile form */
+.user-profile-header {
+    position: relative;
+    width: 250px;
+    margin: 0 auto;
+}
+
+.user-profile-header > button {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    z-index: 1;
+}
+
+.user-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+    border-radius: 50%;
+    container-type: inline-size;
+    overflow: hidden;
+}
+
+.user-image > i {
+    /* Fallback font size for browsers that don't support cq units */
+    font-size: 250px;
+    /* Font size in cq units */
+    /*font-size: 100cqw;*/
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.user-image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-form-line {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1em;
+    margin: 1em 0;
+}
+
+.user-profile-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-block: 2em;
+}
+
+.delete-user-form button {
+    display: block;
+}
+
+[type="checkbox"].delete-user-confirm:not(:checked),
+[type="checkbox"].delete-user-confirm:checked {
+    border: 1px solid var(--clr-primary-4);
+    opacity: 1;
+    position: relative;
+    pointer-events: all;
+    margin-block: 1em;
+}
+
+[type="checkbox"].delete-user-confirm + label {
+    color: var(--clr-primary-4);
+    font-size: 1.2em;
+    font-family: var(--font-headers);
+}
+
 /* ----------------------------------------------- Header */
 nav {
     height: fit-content;
@@ -563,11 +647,19 @@ nav {
 }
 
 .user-handle a {
-    display: inline-block;
+    display: flex;
 }
 
 .user-handle a > i {
     font-size: 2em;
+}
+
+.user-handle a > img {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
 }
 
 .main-nav li>a,
