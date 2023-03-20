@@ -269,6 +269,7 @@ class ProfileView(FormView):
                     'user_profile_image' : user_profile_image,
                     'user_details_form': UserProfileForm(instance=self.object if self.object else None),
                     'user_image_form': UserProfileImageForm(instance=user_profile_image),
+                    'user_delete_form': UserDeleteForm(),
                 }
             )
         else:
@@ -311,13 +312,16 @@ class ProfileView(FormView):
 
 
 # Delete user view
-class DeleteUserView(FormView):
+class DeleteUserView(DeleteView):
     model = User
-    form_class = UserDeleteForm
-    template_name = 'account/profile.html'
-
-    def post(self, request, *args, **kwargs):
-        form = UserDeleteForm(self.request.POST, instance=self.request.user)
+    success_url = '/'
+    
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, 'User deleted successfully!')
+        return super().delete(request, *args, **kwargs)
 
 
         

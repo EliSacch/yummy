@@ -44,5 +44,8 @@ class UserProfileImageForm(forms.ModelForm):
 
 
 class UserDeleteForm(forms.Form):
-    delete = forms.BooleanField(required=True)
+    delete = forms.BooleanField(widget=forms.CheckboxInput(attrs={'class': 'delete-user-confirm'}), required=True)
+    class Meta:
+        model = User
+        fields = ['delete', ]
 

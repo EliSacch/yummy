@@ -65,6 +65,11 @@ p {
     font-weight: 400;
 }
 
+small {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
 a {
     color: var(--clr-primary-3);
     font-weight: 600;
@@ -170,6 +175,11 @@ nav ul a:hover::after,
     background-color: var(--clr-tertiary-1);
 }
 
+.background-error:hover,
+.background-error:focus {
+    background-color: var(--clr-tertiary-3);
+}
+
 .light-text {
     color: var(--clr-secondary);
 }
@@ -202,12 +212,6 @@ nav ul a:hover::after,
     display: flex;
     gap: 1em;
 }
-
-.recipe-action-buttons .btn-floating:hover,
-.recipe-action-buttons .btn-floating:focus {
-    background-color: var(--clr-tertiary-3);
-}
-
 
 /* ----------------------------------------------- Override input Materialize CSS style */
 input.invalid:not([type]), 
@@ -600,6 +604,25 @@ section.search-bar .container > * {
     flex-direction: column;
     gap: 1em;
     margin-block: 2em;
+}
+
+.delete-user-form button {
+    display: block;
+}
+
+[type="checkbox"].delete-user-confirm:not(:checked),
+[type="checkbox"].delete-user-confirm:checked {
+    border: 1px solid var(--clr-primary-4);
+    opacity: 1;
+    position: relative;
+    pointer-events: all;
+    margin-block: 1em;
+}
+
+[type="checkbox"].delete-user-confirm + label {
+    color: var(--clr-primary-4);
+    font-size: 1.2em;
+    font-family: var(--font-headers);
 }
 
 /* ----------------------------------------------- Header */
