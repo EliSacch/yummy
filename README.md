@@ -259,11 +259,18 @@ Check if Errors are returned when passing the final version through the official
   ![Update form fix 2](media/errors/update-view-fix-2.png)
   ![Update form fix 3](media/errors/update-view-fix-3.png)
 
-
-
-
-
 </details>
+
+
+<details>
+  <summary>Username Form disappears if invalid form</summary>
+
+  - Issue: When updating the usename form the ProfileView, if the form was invalid, the error message was displaying correctly, but the form field disappeared completely.
+
+  ![Error missing form](media/errors/invalid-username-form-disappears-error.png)
+
+  - Fix: To fix this error, instead of returning "super().form_invalid(form)", I opted to redirect the user to the same page.
+  The field reloads correctly, and an error message informs the user that the choosen username was invalid.
 
 
 </details>

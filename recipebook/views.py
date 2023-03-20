@@ -10,7 +10,7 @@ from django.core import serializers
 from django.core.paginator import Paginator
 
 from .models import Recipe, Ingredient, User, UserProfileImage
-from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom, UserProfileForm, UserProfileImageForm
+from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom, UserProfileForm, UserProfileImageForm, UserDeleteForm
 from .filters import RecipeFilter
 
 
@@ -157,16 +157,13 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                     else:
                         pass
             else:
-                print('formset is invalid')
-                for error in formset.errors:
-                    messages.error(self.request, error)
+                messages.error(self.request, form.errors)
                 return super().form_invalid(form)
             
             messages.success(self.request, 'Recipe added successfully!')
             return super().form_valid(form)
         else:
-            for error in form.errors:
-                messages.error(self.request, error)
+            messages.error(self.request, form.errors)
             return super().form_invalid(form)
     
     def form_valid(self, form):
@@ -175,7 +172,6 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
     
     def get_success_url(self):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
-
 
 
 # View for the recipe update page
@@ -219,16 +215,13 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
                     else:
                         pass
             else:
-                print('formset is invalid')
-                for error in formset.errors:
-                    messages.error(self.request, error)
+                messages.error(self.request, formset.errors)
                 return super().form_invalid(form)
             
             messages.success(self.request, 'Recipe updated successfully!')
             return super().form_valid(form)
         else:
-            for error in form.errors:
-                messages.error(self.request, error)
+            messages.error(self.request, form.errors)
             return super().form_invalid(form)
     
     
@@ -254,36 +247,39 @@ class DeleteRecipeView(DeleteView):
     
 
 # View for the user profile page
-class ProfileView(View):
+class ProfileView(FormView):
     model = User
-    form_classes = {'user_details': UserProfileForm,
-                    'profile_image': UserProfileImageForm}
+    form_classes = {
+        'user_details_form' : UserProfileForm,
+        'user_image_form' : UserProfileImageForm,
+    }
     template_name = 'account/profile.html'
 
     def get(self, request, *args, **kwargs):
         if self.request.user.is_authenticated:
+            self.object = self.request.user
             user = self.request.user
             user_profile_image = UserProfileImage.objects.filter(user=user).first()
+
             return render(
                 request,
                 'account/profile.html',
                 {
                     'user' : user,
                     'user_profile_image' : user_profile_image,
-                    'user_details_form': UserProfileForm(instance=user),
+                    'user_details_form': UserProfileForm(instance=self.object if self.object else None),
                     'user_image_form': UserProfileImageForm(instance=user_profile_image),
                 }
             )
         else:
-            return HttpResponseRedirect(reverse('login'))
+            return HttpResponseRedirect('login')
         
     def post(self, request, *args, **kwargs):
-        form = UserProfileForm(request.POST, instance=self.request.user)
+        self.object = self.request.user
+        form = UserProfileForm(self.request.POST, instance=self.object)
 
         user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
         form_image = UserProfileImageForm(request.POST, self.request.FILES, instance=user_profile_image)
-
-        print('request\n', request.POST)
 
         if request.FILES:
             image = form_image.save(commit=False)
@@ -291,24 +287,37 @@ class ProfileView(View):
             if form_image.is_valid():
                 form_image.save()
                 messages.success(self.request, 'Profile image updated successfully!')
+                return super().form_valid(form_image)
             else:
-                for error in form.errors:
-                    messages.error(self.request, error)
+                messages.error(self.request, form_image.errors)
+                return super().form_invalid(form_image)
         
-        elif 'user-details-submit' in request.POST:
-            print('user details submit')
-            form.save(commit=False)
+        else:
             if form.is_valid():
                 form.save()
                 messages.success(self.request, 'User details updated successfully!')
+                return super().form_valid(form)
             else:
-                for error in form.errors:
-                    messages.error(self.request, error)
-        
-        else:
-            print('nothing submitted')
-        
-        return HttpResponseRedirect(reverse('profile'))
-        
-    
+                print('form invalid')
+                messages.error(self.request, form.errors)
+                return HttpResponseRedirect(reverse('profile'))
+
+    def form_valid(self, form):
+        messages.success(self.request, 'Profile updated updated successfully!')
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('profile')
+
+
+# Delete user view
+class DeleteUserView(FormView):
+    model = User
+    form_class = UserDeleteForm
+    template_name = 'account/profile.html'
+
+    def post(self, request, *args, **kwargs):
+        form = UserDeleteForm(self.request.POST, instance=self.request.user)
+
+
         

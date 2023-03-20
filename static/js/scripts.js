@@ -200,9 +200,9 @@ function display_message() {
 
     if (isThereMessage) {
         messageSection.fadeIn('slow');
-        setTimeout(function () {
+        /*setTimeout(function () {
             messageSection.fadeOut('slow');
-        }, 5000);
+        }, 5000);*/
     }
 }
 

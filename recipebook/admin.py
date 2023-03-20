@@ -38,7 +38,7 @@ class ArrayFieldListFilter(admin.SimpleListFilter):
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     list_filter = ('difficulty', 'created_on', ArrayFieldListFilter)
-    readonly_fields = ('created_on', 'modified_on', 'user')
+    readonly_fields = ('created_on', 'modified_on', 'user', 'pk')
 
 
 @admin.register(Ingredient)

@@ -112,8 +112,9 @@ nav ul a:hover::after,
     width: 90%;
     max-width: 500px;
     padding: 1em;
-    background-color: var(--clr-secondary);
+    background-color: white;
     color: var(--clr-primary-5);
+    border: 2px solid var(--clr-tertiary-2);
     border-radius: 5px;
     opacity: 0.9;
 }
@@ -318,6 +319,7 @@ textarea.materialize-textarea.invalid:focus,
 
 .errorlist {
     color: var(--clr-tertiary-1);
+    font-size: 1.2rem;
 }
 
 /* ----------------------------------------------- Forms */
@@ -588,14 +590,16 @@ section.search-bar .container > * {
 
 .profile-form-line {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto 1fr;
     gap: 1em;
     margin: 1em 0;
 }
 
-.profile-form-line .btn-floating:hover,
-.profile-form-line .btn-floating:focus {
-    background-color: var(--clr-primary-0);
+.user-profile-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-block: 2em;
 }
 
 /* ----------------------------------------------- Header */

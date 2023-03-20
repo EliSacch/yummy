@@ -33,7 +33,7 @@ class UserProfileForm(forms.ModelForm):
     password = forms.PasswordInput()
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', ]
+        fields = ['username',]
 
 
 class UserProfileImageForm(forms.ModelForm):
@@ -41,4 +41,8 @@ class UserProfileImageForm(forms.ModelForm):
     class Meta:
         model = UserProfileImage
         fields = ['profile_image', ]
+
+
+class UserDeleteForm(forms.Form):
+    delete = forms.BooleanField(required=True)
 

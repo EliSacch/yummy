@@ -20,7 +20,7 @@
 </section>
 
 <!-- Profile details -->
-<section class="valign-wrapper dark-text">
+<section id="profile-details" class="valign-wrapper dark-text">
     <div class="container">
         <div class="go-back">
             <button class="btn-floating primary-3 light-text">
@@ -45,7 +45,7 @@
                             <img src="{{ user_profile_image.profile_image.url }}" alt="Profile Image" />
                         {% endif %}
                     </div>
-                    <button type="button" id="edit-profile-image-btn" data-target="id_profile_image" class="btn-floating">
+                    <button type="button" id="edit-profile-image-btn" data-target="id_profile_image" class="btn-floating background-alert">
                         <i class="material-icons">photo</i>
                     </button>
 
@@ -69,35 +69,17 @@
                         {{ hidden }}
                     {% endfor %}
                     
+                    <!-- Username line -->
                     {% for field in user_details_form %}
-                    
-                    {% if field.name == 'password' %}
-                    <div class="profile-form-line">
-                        <p>{{ field.label }}: ***************</p> 
-                        <a href="{% url 'account_change_password' %}" class="btn-floating background-alert">
-                            <i class="material-icons">edit</i>
-                        </a>
-                    </div>
-
-                    {% elif field.name == 'email' %}
-                    <div class="profile-form-line">
-                        <p>{{ field.label }}: {{ field.value }}</p> 
-                        <a href="{% url 'account_email' %}" class="btn-floating background-alert">
-                            <i class="material-icons">edit</i>
-                        </a>
-                    </div>
-                    
-                    {% else %}
-                    
-                    <div class="profile-form-line">
-                        <p>{{ field.label }}: {{ field.value }}</p> 
+                    <div class="profile-form-line"> 
                         <button type="button" data-target="id_{{ field.name }}" class="edit-profile-btn btn-floating background-alert">
                             <i class="material-icons">edit</i>
                         </button>
+                        <p>{{ field.label }}: {{ field.value }}</p>
                     </div>
                     <div class="row hidden">
-                        <div class="input-field col s12">
-                            {{ field }} <button class="small-btn" type="submit" name="user-details-submit">Save</button>
+                        <div class="input-field  col s12">
+                            {{ field }}
                             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                             {% if field.help_text %}
                                 <span class="help-text">{{ field.help_text }}</span>
@@ -106,14 +88,27 @@
                                 <span class="help-text">{{ error }}</span>
                             {% endfor %}
                         </div>
+                        <div class="col s12">
+                            <button class="btn-small" type="submit" name="user-details-submit">Save</button>
+                        </div>
                     </div>
-                    {% endif %}
                     {% endfor %}
                 </form>
 
-                <div class="user-profile-footer">
-                    <a href="{% url 'account_logout' %}" class="btn btn-invert">Logout</a>
-                    <a href="#">Delete account</a>
+                <!-- Email line -->
+                <div class="profile-form-line"> 
+                    <a href="{% url 'account_email' %}" class="btn-floating background-alert">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <p>Email: {{ user.email }}</p>
+                </div>
+
+                <!-- Password line -->
+                <div class="profile-form-line">
+                    <a href="{% url 'account_change_password' %}" class="btn-floating background-alert">
+                        <i class="material-icons">edit</i>
+                    </a>
+                    <p>Password: ***************</p>
                 </div>
 
             </div>
@@ -125,6 +120,29 @@
                         <li>{% if key != '__all__' %}{{ key }} {% endif %}{{ value }}</li>
                     {% endfor %}
                     </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="profile-other-actions">
+    <div class="container valign-wrapper">
+        <div class="user-profile-footer">
+            <a class="btn-small modal-trigger" href="#logout-modal">Log Out</a>
+            <a class="btn-small background-error modal-trigger"href="#delete-account-modal">Delete account</a>
+        </div>
+    
+        <!-- Logout Modal -->
+        <div id="logout-modal" class="modal">
+            <div class="modal-content">
+                {% include "account/logout.html" %}
+            </div>
+        </div>
+
+        <!-- Delete account Modal -->
+        <div id="delete-account-modal" class="modal">
+            <div class="modal-content">
+                {% include "account/logout.html" %}
             </div>
         </div>
     </div>
