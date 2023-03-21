@@ -407,14 +407,16 @@ input.invalid {
 
 /* ----------------------------------------------- Multiple entry form fields (ingredients/steps) */
 
-.ingredient-form {
+.ingredient-form,
+.steps-form {
     display: grid;
     grid-template-columns: auto 1fr;
     padding: 0 1em;
     background-color: var(--clr-secondary-transparent);
 }
 
-.ingredient-formset {
+.ingredient-formset,
+.steps-formset {
     height: 100%;
     margin: 5px;
 }
@@ -437,7 +439,8 @@ input.invalid {
     font-family: var(--font-headers);
 }
 
-.btn-floating.remove-ingredient {
+.btn-floating.remove-ingredient,
+.btn-floating.remove-step {
     background-color: transparent;
     border: 1px solid var(--clr-tertiary-1);
     margin-inline: 1em;
@@ -450,18 +453,25 @@ input.invalid {
     padding: .5em 0;
 }
 
-.btn-floating.remove-ingredient > i {
+.btn-floating.remove-ingredient > i,
+.btn-floating.remove-step > i {
     color: var(--clr-tertiary-1);
 }
 
-.btn-floating.remove-ingredient:hover {
+.btn-floating.remove-ingredient:hover,
+.btn-floating.remove-step:hover {
     background-color: var(--clr-tertiary-1);
 }
 
-.btn-floating.remove-ingredient:hover > i {
+.btn-floating.remove-ingredient:hover > i,
+.btn-floating.remove-step:hover > i {
     color: white;
 }
 
+#add-procedure-step {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
 
 /* ----------------------------------------------- Filter form */
 

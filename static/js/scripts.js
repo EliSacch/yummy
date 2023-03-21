@@ -26,9 +26,11 @@ $(document).ready(function () {
     /* Event listener to the profile image field */
     $('#id_profile_image').change(save_profile_image);
 
-
     /* Event listener to the add ingredient button */
     $('#add-ingredient-btn').click(add_ingredient_form);
+
+    /* Event listener to the add step button */
+    $('#add-step-btn').click(add_step_form);
 
     /* Event listener to the tags field */
     $('#id_tags').on('keyup', display_tags);
@@ -40,6 +42,11 @@ $(document).ready(function () {
     /* Event listener to the remove-ingredient buttons */
     if ($('.remove-ingredient').length > 0) {
         $('.remove-ingredient').click(remove_ingredient_form);
+    }
+
+    /* Event listener to the remove-step buttons */
+    if ($('.remove-step').length > 0) {
+        $('.remove-step').click(remove_step_form);
     }
 
     /* Event listener to the difficulty choices */
@@ -101,6 +108,49 @@ function remove_ingredient_form() {
     const parentDiv = $(this).parents('.ingredient-form');
     const index = allForms.index(parentDiv);
     const deleteForm = $(`#id_ingredients-${index}-DELETE`);
+    if (allForms.length > 1) {
+        deleteForm.val('on');
+        deleteForm.prop('checked', true);
+        parentDiv.hide();
+    }
+}
+
+
+/**
+ * This function is used to add a new step form.
+ */
+function add_step_form() {
+    const emptyFormCopy = $('#empty-step-form').clone();
+    const stepsContainer = $('#steps-container');
+    const totalForms = $('#id_form-TOTAL_FORMS');
+    const formCount = $('.steps-form').length;
+    const regex = RegExp('__prefix__', 'g');
+    
+    let newFormCount = formCount;
+
+    emptyFormCopy.removeClass('hidden').addClass('steps-form');
+    
+    totalForms.val(newFormCount + 1);
+    emptyFormCopy.prop('id', `form-${newFormCount}`);
+    emptyFormCopy.html(emptyFormCopy.html().replace(regex, newFormCount));
+
+    stepsContainer.append(emptyFormCopy);
+
+    /* Add event listener to the remove-step button */
+    $('.remove-step').click(remove_step_form);
+
+}
+
+
+/**
+ * This function is used to remove a step form.
+ * It is called when the user clicks on the remove-step button.
+ */
+function remove_step_form() {
+    const allForms = $('.steps-form');
+    const parentDiv = $(this).parents('.steps-form');
+    const index = allForms.index(parentDiv);
+    const deleteForm = $(`#id_form-${index}-DELETE`);
     if (allForms.length > 1) {
         deleteForm.val('on');
         deleteForm.prop('checked', true);
@@ -200,9 +250,9 @@ function display_message() {
 
     if (isThereMessage) {
         messageSection.fadeIn('slow');
-        /*setTimeout(function () {
+        setTimeout(function () {
             messageSection.fadeOut('slow');
-        }, 5000);*/
+        }, 5000);
     }
 }
 
@@ -215,8 +265,10 @@ function display_message() {
  */
 function search_recipe() {
 
-    /* The following code was taken from the "Very Academy" tutorial on YouTube
-        * The link to the tutorial is: https://www.youtube.com/watch?v=Ct34iiOltgo */
+    /* 
+    * The following code was taken from the "Very Academy" tutorial on YouTube
+    * The link to the tutorial is: https://www.youtube.com/watch?v=Ct34iiOltgo 
+    */
     $('#id_search').on('keyup', function (e) { 
         e.preventDefault();
 

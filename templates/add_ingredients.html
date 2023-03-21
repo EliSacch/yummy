@@ -1,5 +1,7 @@
 {% if formset %}
-<p>Ingredients</p>
+<span class="row">
+    <p class="left">Ingredients</p>
+</span>
 
 <div id="ingredients-container">  
 {{ formset.management_form }}
@@ -68,7 +70,7 @@
                 {{ field.errors }}
 
                 {% elif field.name == 'DELETE' %} 
-                <div class="delete-checkbox">
+                <div class="hidden">
                     {{ field }}
                     <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
                 </div>

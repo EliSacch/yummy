@@ -8,7 +8,7 @@ from cloudinary.models import CloudinaryField
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
-    procedure = ArrayField(models.TextField(max_length=200))
+    procedure = ArrayField(models.TextField(max_length=200), blank=True, null=True)
     servings = models.IntegerField()
     preparation_time = models.JSONField(blank=True, null=True)
     difficulty = models.IntegerField(blank=True, null=True)

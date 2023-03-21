@@ -1,11 +1,13 @@
 from django import forms
-from django.forms import MultiWidget, TextInput, BaseModelFormSet
+from django.forms import formset_factory
 from django.forms.models import inlineformset_factory
+from django.contrib.postgres.forms import SimpleArrayField
 
 from .models import Recipe, Ingredient, User, UserProfileImage
 
 class RecipeForm(forms.ModelForm):
     image = forms.ImageField(required=False)
+    procedure = SimpleArrayField(forms.CharField(max_length=1000), widget=forms.Textarea, required=False)
     servings = forms.IntegerField(widget=forms.Select(choices=[(i, i) for i in range(1, 25)]))
     preparation_time = forms.JSONField(widget=forms.HiddenInput, required=False)
     difficulty_choices = [('1', 'Easy'), ('2', 'Medium'), ('3', 'Hard')]
@@ -23,6 +25,12 @@ class IngredientsForm(forms.ModelForm):
 
 
 IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','amount', 'unit'), extra=0, can_delete=True)
+
+
+class StepsForm(forms.Form): 
+    step = forms.CharField(max_length=50, required=False)
+
+StepsFormset = formset_factory(StepsForm, extra=0, can_delete=True)
 
 
 class RecipeSearchFrom(forms.Form):

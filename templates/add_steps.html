@@ -1,0 +1,91 @@
+<span class="row">
+    <p class="left">Procedure</p>
+</span>
+
+{% if steps_formset %}
+
+
+<div id="steps-container">  
+{{ steps_formset.management_form }}
+    
+    {% for form in steps_formset %}
+    {% for hidden in form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+    <div class="steps-form">
+        <div class="btn-container">
+            <a class="tooltipped" data-position="bottom" data-tooltip="Remove Step">
+                <button type="button" class="btn-floating primary-3 light-text remove-step">
+                    <i class="material-icons">remove</i>
+                </button>
+            </a>
+        </div>
+        <div class="row steps-formset">
+        {% for field in form.visible_fields %}
+            
+            {% if field.name == 'DELETE' %} 
+            <div class="hidden">
+                {{ field }}
+            </div>
+
+            {% else %}
+
+            <div class="input-field">
+                {{ field }}
+                <label for="{{ field.id_for_label }}">What to do next...</label>
+            </div>
+            {{ field.errors }}
+
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+
+    {% endfor %}
+
+    <!-- Empty form -->
+    <div id="empty-step-form" class="hidden">
+        <div class="btn-container">
+            <a class="tooltipped" data-position="bottom" data-tooltip="Remove Step">
+                <button type="button" class="btn-floating primary-3 light-text remove-step">
+                    <i class="material-icons">remove</i>
+                </button>
+            </a>
+        </div>
+        <div>
+            <div class="row steps-formset">
+            {% for field in steps_formset.empty_form.visible_fields %}
+                
+                {% if field.name == 'DELETE' %} 
+                <div class="hidden">
+                    {{ field }}
+                </div>
+
+                {% else %}
+
+                <div class="input-field">
+                    {{ field }}
+                    <label for="{{ field.id_for_label }}">What to do next...</label>
+                </div>
+                {{ field.errors }}
+
+                {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- End of empty form -->
+</div>
+
+<div class="btn-container">
+    <a class="tooltipped" data-position="bottom" data-tooltip="Add Step">
+        <button id="add-step-btn" type="button" class="btn primary-3 light-text">
+            Add Step
+        </button>
+    </a>
+</div>
+
+{{ steps_formset.non_form_errors}}
+    
+
+{% endif %}
