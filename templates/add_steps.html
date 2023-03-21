@@ -1,19 +1,32 @@
+<!--
+    This is the formset for the steps of the procedure.
+    It is included in the recipe_form.html template.
+-->
 <span class="row">
     <p class="left">Procedure</p>
 </span>
 
 {% if steps_formset %}
 
-
 <div id="steps-container">  
 {{ steps_formset.management_form }}
     
     {% for form in steps_formset %}
+    <!-- 
+        Because it is used both for the 'add' and the 'edit' functionality,
+        we check first if there is any previous form added to the formset.
+        If so, we display them and populate with the existing data.
+    -->
     {% for hidden in form.hidden_fields %}
         {{ hidden }}
     {% endfor %}
     <div class="steps-form">
         <div class="btn-container">
+            <!--
+                This is the delete step button. 
+                When clicked it hides the current form, and it checks the associated 'DELETE' field, 
+                which is hidden by default
+            -->
             <a class="tooltipped" data-position="bottom" data-tooltip="Remove Step">
                 <button type="button" class="btn-floating primary-3 light-text remove-step">
                     <i class="material-icons">remove</i>
@@ -22,7 +35,7 @@
         </div>
         <div class="row steps-formset">
         {% for field in form.visible_fields %}
-            
+            <!-- This is the hidden 'DELETE' field, which (if checked), deletes the current form from the formset -->
             {% if field.name == 'DELETE' %} 
             <div class="hidden">
                 {{ field }}
@@ -43,9 +56,14 @@
 
     {% endfor %}
 
-    <!-- Empty form -->
+    <!-- 
+        This is the empty form, which is used to add new steps to the formset.
+        It is hidden by default, and it is used as blueprint for the new forms.
+        It works the same way as the previous forms
+     -->
     <div id="empty-step-form" class="hidden">
         <div class="btn-container">
+            <!-- Remove step button, that checks the 'DELETE' field -->
             <a class="tooltipped" data-position="bottom" data-tooltip="Remove Step">
                 <button type="button" class="btn-floating primary-3 light-text remove-step">
                     <i class="material-icons">remove</i>
@@ -55,7 +73,7 @@
         <div>
             <div class="row steps-formset">
             {% for field in steps_formset.empty_form.visible_fields %}
-                
+                <!-- hidden delete field -->
                 {% if field.name == 'DELETE' %} 
                 <div class="hidden">
                     {{ field }}
@@ -79,6 +97,9 @@
 
 <div class="btn-container">
     <a class="tooltipped" data-position="bottom" data-tooltip="Add Step">
+        <!-- 
+            This button, when clicked, triggers the JS function yo add new step forms.
+        -->
         <button id="add-step-btn" type="button" class="btn primary-3 light-text">
             Add Step
         </button>
@@ -86,6 +107,5 @@
 </div>
 
 {{ steps_formset.non_form_errors}}
-    
 
 {% endif %}

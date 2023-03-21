@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+<!-- 
+    This is the template for the page where the user can see all the recipes he/she has added.
+    The user can filter the recipes by name, difficulty and category.
+-->
+
 {% block title %}Yummy - My Recipes{% endblock %}
 
 {% block header %}
@@ -9,9 +14,9 @@
     {% endif %}
 {% endblock header %}
 
-
 {% block content %}
 
+<!-- First we check if the user is authenticated -->
 {% if user.is_authenticated %}
 <h1 class="center subheading">My Recipes</h1>
     <!-- Messages -->
@@ -27,6 +32,7 @@
         </div>
     </section>
 
+    <!-- Filters -->
     <section class="filters">
         <div class="container">
             <div class="section-header">
@@ -66,16 +72,24 @@
     
         <div class="recipes-container">
         {% if all_recipes  %}
+        <!-- 
+            This is what's displayed is the query prvided any result, 
+            and therefore there is at least one recipe, based on the filter used,
+            or any recipe at all if there is no filter.
+        -->
 
             {% for recipe in all_recipes %}
-
-                
+            
+            <!--
+                Each recipe is displayed in a card, which is clickable, 
+                and it redirect the user to the recipe detail page.
+            -->
             <a href="{% url 'recipe_detail' recipe.pk %}" class="clickable-div">
                 <div class="recipe-card">
                     {% if "placeholder" in recipe.image.url %}
                         <div class="image-placeholder-container">
                             <div class="food-icons-container">
-                                <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                                <!-- The content of this placeholder div is generated randomly using a custom JS function ( random_icon() )-->
                             </div>
                         </div>
                     {% else %}
@@ -110,7 +124,6 @@
                             {% endfor %}
                         {% endif %}
                         <!-- If there is no preparation time and no difficulty we don't display anything -->
-                    
                 </div>
             </a>
 
@@ -120,14 +133,21 @@
             <div class="container center paginator">
 
                 <ul class="pagination">
+                    <!-- 
+                        .has_previous is provided by django Paginator, and it equals to True if we are not on the first page.
+                        In that case we display a link to the previous page, otherwise we display a disabled link.
+                    -->
                     {% if all_recipes.has_previous %}
                         <li class="waves-effect"><a href="?page={{ all_recipes.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
                     {% else %}
                         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                     {% endif %}
 
+                    <!-- 
+                        We loop through all the pages in the paginator, and we display a link to each page.
+                        The page we are currently on is displayed as an active link.
+                    -->
                     {% for page in all_recipes.paginator.page_range %}
-
                         {% if page == all_recipes.number %}
                             <li class="active"><a href="?page={{ page }}">{{ page }}</a></li>
                         {% else %}
@@ -135,6 +155,10 @@
                         {% endif %}
                     {% endfor %}
 
+                    <!-- 
+                        .has_next is provided by django Paginator, and it equals to True if we are not on the last page.
+                        In that case we display a link to the next page, otherwise we display a disabled link.
+                    -->
                     {% if all_recipes.has_next %}
                         <li class="waves-effect"><a href="?page={{ all_recipes.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
                     {% else %}
@@ -144,8 +168,11 @@
 
             </div>
 
-
-        {% else %} 
+        {% else %}
+        <!--
+            This is what's displayed if the query provided no result,
+            and therefore there are no recipes to display.
+        -->
             <p>Sorry, there are no recipes to display!</p>
         {% endif %}
         </div>
@@ -161,7 +188,7 @@
   </div>
 
   {% else %} 
-
+  <!-- If the user is not logged in, we display a message and a link to the login page, or to the home page -->
   <section>
       <div class="container">
           <h1>Please, <a href="{% url 'account_login' %}">log in</a> to view your recipes.</h1>

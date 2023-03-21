@@ -1,6 +1,7 @@
-{% load i18n %}
-
-{% block content %}
+<!-- 
+    This templates does not have the content tags, because is it to be included in another template.
+    It will be displayed in a modal.
+-->
 <section>
     <div class="container">
         <div class="row">
@@ -15,8 +16,11 @@
     
                 <form method="post" action="{% url 'delete_account' pk=user.pk %}" class="delete-user-form">
                     {% csrf_token %}
-
+                    <!-- This is the checkbox from the UserDeleteForm.
+                    The user_delete_form is passed to the profile view -->
                     {{ user_delete_form.delete }}
+
+                    {{ user_delete_form.errors }}
 
                     <label for="delete">I confirm that I wish to delete my account.</label>
 
@@ -31,4 +35,3 @@
         </div>
     </div>
 </section>
-{% endblock %}

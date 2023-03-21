@@ -1,8 +1,10 @@
 {% extends "base.html" %}
-
-{% load i18n %}
-<!--{% load account socialaccount %}-->
-
+<!--
+    This is the login page. It is a form that takes in the user's username and password.
+    It is used to customize the login template from the allauth package.
+    The base template was initially taken from the following link: https://github.com/pennersr/django-allauth/tree/master/allauth/templates/account
+    The base template was then modified to fit the needs and the style of the project.
+-->
 {% block title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}

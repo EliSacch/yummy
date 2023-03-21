@@ -1,6 +1,10 @@
-<nav class="nav-wrapper transparent">
+<!--
+    This is the header template that is used on almost all pages.
+    It contains the navigation bar and the logout modal.
+-->
+    <nav class="nav-wrapper transparent">
     <div class="container dark-text">
-
+        <!-- User -->
         <div class="user">
             <div class="user-handle">   
                 <a href="{% url 'profile' %}" class="valign-wrapper">
@@ -18,12 +22,14 @@
             </div>
         </div>
 
+        <!-- Navifation bar for large screens -->
         <ul class="main-nav right hide-on-med-and-down">
             <li><a href="{% url 'home' %}">Home</a></li>
             <li><a href="{% url 'add_recipe' %}">Add Recipe</a></li>
             <li><a class="waves-effect waves-light modal-trigger" href="#logout-modal">Log Out</a></li>
         </ul>
 
+        <!-- Sidenav trgger button, which is displayed on medium and small screens only -->
         <a href="#" class="sidenav-trigger right hide-on-large-only" data-target="mobile-nav">
             <i class="material-icons dark-text">menu</i>
         </a>
@@ -31,6 +37,7 @@
     </div>
 </nav>
 
+<!-- side nav, which is displayed on medium and small screens only -->
 <ul class="sidenav main-nav right hide-on-large-only" id="mobile-nav">
     <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'add_recipe' %}">Add Recipe</a></li>

@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-
-{% load i18n %}
+<!-- 
+    This template is the custom template for the email confirmation page.
+    It is used to customize the email_confirm template from the allauth package.
+    The base template was initially taken from the following link: https://github.com/pennersr/django-allauth/tree/master/allauth/templates/account
+    The base template was then modified to fit the needs and the style of the project.
+ -->
 {% load account %}
 
 {% block title %}{% trans "Confirm E-mail Address" %}{% endblock %}
@@ -8,9 +12,7 @@
 
 {% block content %}
 <section>
-
     <div class="container">
-        
         <div class="row">
             <div class="col s12">
                 <h1 class="subheading">{% trans "Confirm E-mail Address" %}</h1>
@@ -19,14 +21,12 @@
     
                 {% user_display confirmation.email_address.user as user_display %}
     
-    
                 <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
     
                 <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
                 {% csrf_token %}
                     <button type="submit" class="btn action-btn">{% trans 'Confirm' %}</button>
                 </form>
-    
     
                 {% else %}
     
@@ -47,7 +47,6 @@
                     </ul>
             </div>
         </div>
-        
     </div>
 
 </section>

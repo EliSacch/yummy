@@ -1,10 +1,18 @@
 import django_filters
-from .models import Recipe, Ingredient
+from .models import Recipe
 
-
+"""
+This is a custom filter for the tags field in the Recipe model. 
+It is a CharField, but it is a comma-separated list of values. 
+This filter allows us to search for recipes that contain a specific tag.
+"""
 class CharArrayFilter(django_filters.BaseCSVFilter, django_filters.CharFilter):
      pass
 
+
+"""
+This is the filter class for the Recipe model. It allows us to filter the recipes by title, tags, and difficulty.
+"""
 class RecipeFilter(django_filters.FilterSet):
 
     DIFFICULTY_CHOICES = (
@@ -20,11 +28,3 @@ class RecipeFilter(django_filters.FilterSet):
     class Meta:
         model = Recipe
         fields = ['title', 'tags', 'difficulty']
-
-class IngredientFilter(django_filters.FilterSet):
-    name = django_filters.CharFilter(lookup_expr='icontains')
-
-    class Meta:
-        model = Ingredient
-        fields = ['name',]
-

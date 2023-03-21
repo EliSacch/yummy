@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+<!--
+    This cutom form is used to add a new recipe.
+-->
 
 {% load cloudinary %}
 
@@ -36,11 +39,14 @@
             </div>
         </div>
 
-        <!-- Add recipe form -->
+        <!-- 
+            The add recipe form includes the recipe-form, used to edit recipes as well.
+            For this reason the form tag is not included in the general recipe-form, because the form id and action are different.
+        -->
         <div class="row">
             <div class="col s12">
                 <form class="center recipe_form" enctype="multipart/form-data" id="add_recipe_form" method="post" action="{% url 'add_recipe' %}">
-                {% include 'recipe-form.html' %}
+                {% include 'recipe_form.html' %}
                 </form>
             </div>
         </div>

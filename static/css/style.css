@@ -32,7 +32,7 @@
 body {
     font-family: var(--font-basic);
     color: var(--clr-primary-5);
-    /* Backup height for browsers that don't support dvh */
+    /* Fallback height for browsers that don't support dvh */
     min-height: 100vh;
     /* Height for browsers that do support dvh */
     min-height: 100dvh;
@@ -213,6 +213,7 @@ nav ul a:hover::after,
     gap: 1em;
 }
 
+
 /* ----------------------------------------------- Override input Materialize CSS style */
 input.invalid:not([type]), 
 input.invalid:not([type]):focus, 
@@ -325,6 +326,7 @@ textarea.materialize-textarea.invalid:focus,
     color: var(--clr-tertiary-1);
     font-size: 1.2rem;
 }
+
 
 /* ----------------------------------------------- Forms */
 

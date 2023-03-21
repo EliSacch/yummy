@@ -1,3 +1,8 @@
+<!--
+    This is a partial template, to be included in the general recipe_form.html template.
+    It is used to display the formset for the ingredients.
+-->
+    
 {% if formset %}
 <span class="row">
     <p class="left">Ingredients</p>
@@ -6,11 +11,21 @@
 <div id="ingredients-container">  
 {{ formset.management_form }}
     
+    <!-- 
+        Because the template is used bot for the create or the edit view, 
+        we check first if there is any previous form added to the formset.
+        If so, we display them and populate with the existing data.
+    -->
     {% for form in formset %}
     {% for hidden in form.hidden_fields %}
         {{ hidden }}
     {% endfor %}
     <div class="ingredient-form">
+        <!-- 
+            This is the delete ingredient button. 
+            When clicked it hides the current form, and it checks the associated 'DELETE' field, 
+            which is hidden by default 
+        -->
         <div class="btn-container">
             <a class="tooltipped" data-position="bottom" data-tooltip="Remove Ingredient">
                 <button type="button" class="btn-floating primary-3 light-text remove-ingredient">
@@ -20,7 +35,7 @@
         </div>
         <div class="row ingredient-formset">
         {% for field in form.visible_fields %}
-            
+            <!-- The name field is displayed differently because it must be larger than the other 2 fields -->
             {% if field.name == 'name' %} 
             <div class="input-field col s10 m5">
                 {{ field }}
@@ -28,14 +43,17 @@
             </div>
             {{ field.errors }}
 
-            {% elif field.name == 'DELETE' %} 
+            {% elif field.name == 'DELETE' %}
+            <!-- 
+                This is the hidden 'DELETE' field.
+                When checked it will delete the ingredient from the database.
+            -->
             <div class="hidden">
                 {{ field }}
-                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
             </div>
 
             {% else %}
-
+            <!-- The amount and unit fields use the same template, so we don;t need to repeat the code -->
             <div class="input-field col s5 m3">
                 {{ field }}
                 <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
@@ -49,7 +67,10 @@
 
     {% endfor %}
 
-    <!-- Empty form -->
+    <!-- 
+        This is the empty form that it is used as blueprint for the new forms.
+        It works in the same way as the previous forms, but it is hidden by default.
+    -->
     <div id="empty-form" class="hidden">
         <div class="btn-container">
             <a class="tooltipped" data-position="bottom" data-tooltip="Remove Ingredient">
@@ -72,7 +93,6 @@
                 {% elif field.name == 'DELETE' %} 
                 <div class="hidden">
                     {{ field }}
-                    <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
                 </div>
 
                 {% else %}
@@ -93,6 +113,7 @@
 
 <div class="btn-container">
     <a class="tooltipped" data-position="bottom" data-tooltip="Add Ingredient">
+        <!-- This buttons triggers the js function that copies the empty form to create a new ingredient -->
         <button id="add-ingredient-btn" type="button" class="btn primary-3 light-text">
             Add Ingredient
         </button>
@@ -100,6 +121,5 @@
 </div>
 
 {{ formset.non_form_errors}}
-    
 
 {% endif %}

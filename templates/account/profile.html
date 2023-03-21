@@ -1,8 +1,5 @@
 {% extends "base.html" %}
-
-<!--{% load i18n %}
-{% load account socialaccount %}-->
-
+<!-- Custom template for the profile page -->
 {% block title %}Profile{% endblock %}
 
 {% block content %}
@@ -37,8 +34,8 @@
         </div>
         <div class="row">
             <div class="col s12">
-
                 <div class="user-profile-header">
+                    <!-- Profile Image -->
                     <div class="user-image">
                         {% if user_profile_image == None %}
                             <i class="material-icons dark-text">
@@ -48,10 +45,12 @@
                             <img src="{{ user_profile_image.profile_image.url }}" alt="Profile Image" />
                         {% endif %}
                     </div>
+                    <!-- Button to edit the image. It triggers the following form -->
                     <button type="button" id="edit-profile-image-btn" data-target="id_profile_image" class="btn-floating background-alert">
                         <i class="material-icons">photo</i>
                     </button>
 
+                    <!-- Form to edit the profile image. It is hidden, but triggered from the previous button -->
                     <form id="profile-image-form" method="post" enctype="multipart/form-data" action="{% url 'profile' %}">
                         {% csrf_token %}
                         {{ user_image_form.profile_image }}
@@ -61,8 +60,8 @@
                         {% endfor %}
 
                         <button class="hidden" type="submit" name="profile-image-submit">Save</button>
-
                     </form>
+                    <!-- End of the profile image section -->
                 </div>
                 
                 <form id="user-details-form" method="post" action="{% url 'profile' %}">
@@ -74,12 +73,20 @@
                     
                     <!-- Username line -->
                     {% for field in user_details_form %}
+                    <!-- 
+                        The following div is the line that contains the username and the edit button.
+                        It is what's visible by default.
+                    -->
                     <div class="profile-form-line"> 
                         <button type="button" data-target="id_{{ field.name }}" class="edit-profile-btn btn-floating background-alert">
                             <i class="material-icons">edit</i>
                         </button>
                         <p>{{ field.label }}: {{ field.value }}</p>
                     </div>
+                    <!-- 
+                        The following div is the line that contains the input field and the save button.
+                        It is hidden by default.
+                    -->
                     <div class="row hidden">
                         <div class="input-field  col s12">
                             {{ field }}
@@ -97,9 +104,11 @@
                     </div>
                     {% endfor %}
                 </form>
+                <!-- End of username line -->
 
                 <!-- Email line -->
-                <div class="profile-form-line"> 
+                <div class="profile-form-line">
+                    <!-- The email is managed by allauth package, so we just redirected to the custom 'email' template -->
                     <a href="{% url 'account_email' %}" class="btn-floating background-alert">
                         <i class="material-icons">edit</i>
                     </a>
@@ -108,9 +117,11 @@
 
                 <!-- Password line -->
                 <div class="profile-form-line">
+                    <!-- The password is also managed by allauth, so we redirect to the 'password_change' template -->
                     <a href="{% url 'account_change_password' %}" class="btn-floating background-alert">
                         <i class="material-icons">edit</i>
                     </a>
+                    <!-- We don't want to show the password, so we just show a bunch of asterisks -->
                     <p>Password: ***************</p>
                 </div>
 
@@ -128,6 +139,7 @@
     </div>
 </section>
 
+<!-- The followinf section contains two other profile functionalities, which are 'logout' and 'delete account' -->
 <section id="profile-other-actions">
     <div class="container valign-wrapper">
         <div class="user-profile-footer">

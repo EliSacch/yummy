@@ -5,6 +5,7 @@ from django.contrib.postgres.forms import SimpleArrayField
 
 from .models import Recipe, Ingredient, User, UserProfileImage
 
+
 class RecipeForm(forms.ModelForm):
     image = forms.ImageField(required=False)
     procedure = SimpleArrayField(forms.CharField(max_length=1000), widget=forms.Textarea, required=False)
@@ -22,7 +23,6 @@ class IngredientsForm(forms.ModelForm):
     class Meta:
         model = Ingredient
         fields = ['name', 'amount', 'unit']
-
 
 IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','amount', 'unit'), extra=0, can_delete=True)
 
@@ -56,4 +56,3 @@ class UserDeleteForm(forms.Form):
     class Meta:
         model = User
         fields = ['delete', ]
-

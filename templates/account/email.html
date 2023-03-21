@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
-{% load i18n %}
+<!--
+    This is the template for the email page. It is used to display the user's email addresses, so that they can manage them.
+    This templates overrides the email template from the allauth package.
+    The base template was initially taken from the following link: https://github.com/pennersr/django-allauth/tree/master/allauth/templates/account
+    The base template was then modified to fit the needs and the style of the project.
+-->
 
 {% block head_title %}{% trans "E-mail Addresses" %}{% endblock %}
 
@@ -25,7 +30,7 @@
                 <i class="lmedium material-icons">arrow_back</i>
             </button>
         </div>
-        <h1>{% trans "E-mail Addresses" %}</h1>
+        <h1 class="subheading">{% trans "E-mail Addresses" %}</h1>
         {% if user.emailaddress_set.all %}
         <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
         
@@ -35,18 +40,18 @@
         
           {% for emailaddress in user.emailaddress_set.all %}
         <div class="ctrlHolder">
-              <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
-        
-              <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
-        
-        {{ emailaddress.email }}
-            {% if emailaddress.verified %}
-            <span class="verified">{% trans "Verified" %}</span>
-            {% else %}
-            <span class="unverified">{% trans "Unverified" %}</span>
-            {% endif %}
-              {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
-        </label>
+            <label for="email_radio_{{forloop.counter}}" class="{% if emailaddress.primary %}primary_email{%endif%}">
+    
+            <input id="email_radio_{{forloop.counter}}" type="radio" name="email" {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{%endif %} value="{{emailaddress.email}}"/>
+    
+            {{ emailaddress.email }}
+                {% if emailaddress.verified %}
+                <span class="verified">{% trans "Verified" %}</span>
+                {% else %}
+                <span class="unverified">{% trans "Unverified" %}</span>
+                {% endif %}
+                {% if emailaddress.primary %}<span class="primary">{% trans "Primary" %}</span>{% endif %}
+            </label>
         </div>
           {% endfor %}
         

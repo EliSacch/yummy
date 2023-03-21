@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
+<!--
+    This is the home page of the website.
+-->
+
 {% block header %}
+<!-- If the user is not authenticate we don't display the navifation bar -->
     {% if user.is_authenticated %}
         {% include "header.html" %}
     {% else %}
@@ -22,11 +27,17 @@
     </div>
 </section>
 
+<!-- This is what we display if the user is authenticated -->
 {% if user.is_authenticated %}
 <h1 class="center subheading">What are we cooking today?</h1>
 
+    <!-- 
+        First we check if there is any recipe added, 
+        otherwise there is no need to display the search bar, categories and suggestions,
+        since they would be empty.
+     -->
     {% if all_recipes %}
-        <!-- Search bar here when ready-->
+        <!-- Search bar -->
         <section class="search-bar">
 
             <div class="container">
@@ -34,13 +45,11 @@
                     {% csrf_token %}
                     {{ search_form.search }}
                 </form>
-            </div>
 
-            <ul id="search-results">
-                <li>First item</li>
-                <li>Second item</li>
-                <li>Third item</li>
-            </ul>
+                <ul id="search-results">
+                    <!-- The results of the search queries are displayed here -->
+                </ul>
+            </div>
 
         </section>
         
@@ -49,6 +58,11 @@
             <div class="container">
                 <h2>Categories</h2>
 
+                <!-- 
+                    Here we display all the tags for the recipes added by this user.
+                    If clicked, they will bring the user to the my_recipes view,
+                    and will filter the recipes by the selected tag.
+                 -->
                 <div class="horizontal-scroll-small-columns">
                     {% for tag in tags %}
                     <a class="tag-span" href="{% url 'my_recipes' %}?title=&tags={{tag}}&difficulty=">{{ tag }}</a>
@@ -69,34 +83,41 @@
                 </div>
             
         
-            <div class="horizontal-scroll">
-                {% for suggestion in suggestions %}
-                
-                <a href="{% url 'recipe_detail' suggestion.pk %}" class="clickable-div">
-                    <div class="recipe-card">
-                        {% if "placeholder" in suggestion.image.url %}
-                            <div class="image-placeholder-container">
-                                <div class="food-icons-container">
-                                    <!-- The content of this placeholder div is generated randomply using a custom JS function ( random_icon() )-->
+                <div class="horizontal-scroll">
+                    <!-- 
+                        Only up to 5 recipes are displayed here.
+                        The recipes are selected randomly from the recipes added by this user.
+                        The user can go to the my_recipes view to see all the recipes.
+                        Or use the search functionality to look for a specific recipe. 
+                    -->
+                    {% for suggestion in suggestions %}
+                    
+                    <!-- Each suggestion card is clickable, so that the user can selct it and go to the recipe detail page directly -->
+                    <a href="{% url 'recipe_detail' suggestion.pk %}" class="clickable-div">
+                        <div class="recipe-card">
+                            {% if "placeholder" in suggestion.image.url %}
+                                <div class="image-placeholder-container">
+                                    <div class="food-icons-container">
+                                        <!-- The content of this placeholder div is generated randomly using a custom JS function ( random_icon() )-->
+                                    </div>
                                 </div>
-                            </div>
-                        {% else %}
-                            <div class="recipe-detail-image-container">
-                                <img src="{{ suggestion.image.url }}" alt="{{ recipe.name }}" class="recipe-detail-image">
-                            </div>
-                        {% endif %}
+                            {% else %}
+                                <div class="recipe-detail-image-container">
+                                    <img src="{{ suggestion.image.url }}" alt="{{ recipe.name }}" class="recipe-detail-image">
+                                </div>
+                            {% endif %}
 
-                        <h3>{{ suggestion.title }}</h3>
-                    </div>
-                </a>
+                            <h3>{{ suggestion.title }}</h3>
+                        </div>
+                    </a>
 
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        
         </section>
     {% else %}
-
+    
+    <!-- If the user has not added any recipe, we show the following message and a prompt to add a recipe instead -->
     <section id="no-recipes-section">
         <div class="container">
             <p>Sorry, there are no recipes to display!</p>
@@ -114,6 +135,7 @@
 
 {% else %}
 
+<!-- If the user is not authenticate we show a pahe with the login and signup buttons -->
 <section class="landingpage valign-wrapper">
     <div class="container">
         <div class="row">

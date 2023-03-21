@@ -57,8 +57,8 @@ class HomeView(generic.ListView):
     
     def post(self, request, *args, **kwargs):
         queryset = Recipe.objects.filter(user=self.request.user)
-        """The following code was taken from the "Very Academy" tutorial on YouTube
-            The link to the tutorial is: https://www.youtube.com/watch?v=Ct34iiOltgo"""
+        # The following code was taken from the "Very Academy" tutorial on YouTube
+        # The link to the tutorial is: https://www.youtube.com/watch?v=Ct34iiOltgo
         if request.POST.get('action') == 'post':
             search_string = str(request.POST.get('search_string'))
             if search_string is not None:
@@ -68,7 +68,7 @@ class HomeView(generic.ListView):
                 return JsonResponse({'data' : data}, status=200)
             else:
                 return JsonResponse({'data' : 'No results found'}, status=200)
-        """End of the code taken from the "Very Academy" tutorial on YouTube"""
+        # End of the code taken from the "Very Academy" tutorial on YouTube
 
 
 # View for the my recipes page that displays all the reciepes created by the user
@@ -395,6 +395,3 @@ class DeleteUserView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'User deleted successfully!')
         return super().delete(request, *args, **kwargs)
-
-
-        
