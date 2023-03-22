@@ -5,6 +5,8 @@ from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.core import serializers
 from django.core.paginator import Paginator
@@ -72,6 +74,7 @@ class HomeView(generic.ListView):
 
 
 # View for the my recipes page that displays all the reciepes created by the user
+@method_decorator(login_required, name='dispatch')
 class RecipeListView(generic.ListView):
     model = Recipe
     queryset = Recipe.objects.all()
@@ -103,6 +106,7 @@ class RecipeListView(generic.ListView):
 
 
 # View for the recipe detail page
+@method_decorator(login_required, name='dispatch')
 class RecipeDetailView(View):
     
     def get(self, request, pk, *args, **kwargs):
@@ -123,6 +127,7 @@ class RecipeDetailView(View):
 
 
 # View for the recipe creation page
+@method_decorator(login_required, name='dispatch')
 class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
@@ -212,6 +217,7 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
 
 
 # View for the recipe update page
+@method_decorator(login_required, name='dispatch')
 class EditRecipeView(UpdateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
@@ -296,6 +302,7 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
     
 
 # View for the recipe delete page
+@method_decorator(login_required, name='dispatch')
 class DeleteRecipeView(DeleteView):
     model = Recipe
     success_url = '/'
@@ -309,6 +316,7 @@ class DeleteRecipeView(DeleteView):
     
 
 # View for the user profile page
+@method_decorator(login_required, name='dispatch')
 class ProfileView(FormView):
     """
     View for the user profile page.
@@ -384,6 +392,7 @@ class ProfileView(FormView):
 
 
 # Delete user view
+@method_decorator(login_required, name='dispatch')
 class DeleteUserView(DeleteView):
     model = User
     # If the user deletes the account, we redirect to the home page

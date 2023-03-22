@@ -330,8 +330,6 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
 
 - Background image is from [Mae Mu](https://unsplash.com/@picoftasty?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 
 
-- Card placeholder image is from [Marisol Benitez](https://unsplash.com/@marisolbenitez?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-
 - The favicon is from [Icons8](https://icons8.com/icon/A2GuNMcdfGfC/torta)
 
 
