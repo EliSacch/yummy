@@ -641,7 +641,6 @@ section.search-bar .container > * {
 }
 
 #id_remember + label {
-
     position: absolute;
     left: 20px;
 }
@@ -652,7 +651,6 @@ section.search-bar .container > * {
     font-family: var(--font-headers);
 }
 
-#
 
 /* ----------------------------------------------- Header */
 nav {
