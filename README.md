@@ -272,9 +272,23 @@ Check if Errors are returned when passing the final version through the official
   - Fix: To fix this error, instead of returning "super().form_invalid(form)", I opted to redirect the user to the same page.
   The field reloads correctly, and an error message informs the user that the choosen username was invalid.
 
-
 </details>
 
+
+<details>
+  <summary>Search results not clearing if there is no value in the searchbar</summary>
+
+  - Issue: When looking for recipes by name, the results are shown dynamically uderneatch the search bar. After some results were found, if the user tried and deleted all the charachters in the search field, the search result div was still showing the last results found.
+  This was caused by the fact that all the logic was contained in the 'if' statement, which is fired only if the search string is longer then a minChar value. When deleting charachters from the search bar, the length of the search string was falling below the minChar value, so the search results array was not cleared.
+
+  ![Search results not clearing - error](media/errors/search-result-not-clearing-error.png)
+
+  - Fix: To solve this issue I added an else statement, that hides the search results if the search string length is less then the minChar value.
+
+  ![Search result not clearing - fix](media/errors/search-result-not-clearing-fix.png)
+
+
+</details>
 
 <details>
   <summary> </summary>

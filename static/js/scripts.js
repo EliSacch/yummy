@@ -271,10 +271,10 @@ function search_recipe() {
     */
     $('#id_search').on('keyup', function (e) { 
         e.preventDefault();
-
+        const minChar = 2;
         var results = []
 
-        if ($('#id_search').val().length > 0) {
+        if ($('#id_search').val().length > minChar) {
 
             $.ajax({
                 type: 'POST',
@@ -290,24 +290,28 @@ function search_recipe() {
                     });
 
                     /* End of the code taken from the tutorial */
+                
+                $('#search-results').empty();
 
-                    $('#search-results').empty();
-
-                    for (let i = 0; i < results.length; i++) {
-                        $('#search-results').append(`<li>
-                            <a href="/recipe/${results[i].id}/">
-                                ${results[i].title}
-                            </a>
-                        </li>`);
-                    }
-
-                    if (results.length > 0) {
-                        $('#search-results').show();
-                    } else {
-                        $('#search-results').hide();
-                    }
+                for (let i = 0; i < results.length; i++) {
+                    $('#search-results').append(`<li>
+                        <a href="/recipe/${results[i].id}/">
+                            ${results[i].title}
+                        </a>
+                    </li>`);
                 }
+
+                if (results.length > 0) {
+                    $('#search-results').show();
+                } else {
+                    $('#search-results').hide();
+                }
+            },
+                
             });
+
+        } else {
+            $('#search-results').hide();
         }
     });
 }
