@@ -42,6 +42,7 @@ body {
 
 main {
     overflow-x: hidden;
+    padding-block: 2em;
 }
 
 h1,
