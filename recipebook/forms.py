@@ -20,6 +20,7 @@ class RecipeForm(forms.ModelForm):
 
 
 class IngredientsForm(forms.ModelForm):
+    unit = forms.CharField(max_length=50, required=False)
     class Meta:
         model = Ingredient
         fields = ['name', 'amount', 'unit']
@@ -29,12 +30,18 @@ IngredientFormSet = inlineformset_factory(Recipe, Ingredient, fields=('name','am
 
 class StepsForm(forms.Form): 
     step = forms.CharField(max_length=50, required=False)
+    class Meta:
+        model = Recipe
+        fields = ['step', ]
 
 StepsFormset = formset_factory(StepsForm, extra=0, can_delete=True)
 
 
-class RecipeSearchFrom(forms.Form):
+class RecipeSearchForm(forms.Form):
     search = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Search recipe...', 'data-toggle' : 'drop-down' }), required=False)
+    class Meta:
+        model = Recipe
+        fields = ['search', ]
  
 
 class UserProfileForm(forms.ModelForm):

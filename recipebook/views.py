@@ -12,7 +12,7 @@ from django.core import serializers
 from django.core.paginator import Paginator
 
 from .models import Recipe, Ingredient, User, UserProfileImage
-from .forms import RecipeForm, IngredientFormSet, RecipeSearchFrom, UserProfileForm, UserProfileImageForm, UserDeleteForm, StepsFormset
+from .forms import RecipeForm, IngredientFormSet, RecipeSearchForm, UserProfileForm, UserProfileImageForm, UserDeleteForm, StepsFormset
 from .filters import RecipeFilter
 
 
@@ -24,7 +24,7 @@ class HomeView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
-        search_form = RecipeSearchFrom()
+        search_form = RecipeSearchForm()
         if self.request.user.is_authenticated:
             # We only display the recipes created by the logged in user
             all_recipes = Recipe.objects.filter(user=self.request.user)
