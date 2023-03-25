@@ -42,7 +42,10 @@ body {
 
 main {
     overflow-x: hidden;
-    padding-block: 2em;
+}
+
+main section:last-child {
+    padding-bottom: 2em;
 }
 
 h1,
