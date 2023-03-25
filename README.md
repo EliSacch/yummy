@@ -1,10 +1,12 @@
 # yummy
-Recipe book 
 
+Yummy is a recipe book web application, that allows users to save and store their recipes and access them from any device.
+
+It is designed to fit both small and big screens.
 
 ![Responsive Mockup]()
 
-[See deployed website]()
+[See deployed website](https://yummy-recipe-book.herokuapp.com/)
 
 ## Table of content
 
@@ -39,6 +41,9 @@ Recipe book
 
 ## Design and User Experience
 
+The web app was developed following the Agile methodology, utilizing the project functionality provided by GitHub
+[Link to the project board](https://github.com/users/EliSacch/projects/5/views/1)
+
 ### Design
 
 - Color palette:
@@ -57,9 +62,27 @@ Recipe book
 
 ### User Stories
 
-- As website owner I want:
+- As a website user I can log into my personal area so that I can save and see my own recipes and not the ones from other users.
 
-- As a user I want:
+- As a first-time user I can receive a confirmation email when I sign up so that I know I entered the correct email.
+
+- As a user I can reset my password so that I can recover access if I forgot my password.
+
+- As a user I can have a dashboard with a clean design and clear navigation so that I know how to use all the features.
+
+- As a user I can see and edit my personal information so that I can keep my information up to date.
+
+- As a user I can add my recipe so that I can have them saved and I am able to review them whenever I need.
+
+- As a user I can click on my recipes cards so that I can see all the details.
+
+- As a user I can edit my recipes so that I don't need to delete them and add them from scratch if I want to change something.
+
+- As a user I can delete a recipe so that I can keep just the ones I like.
+
+- As a user I can search my recipes by name so that I don't have to scroll all the recipes to find the one I need.
+
+- As a user I can see some random suggestions so that I can be inspired by my previous recipes.
 
 
 ### Recipes model
