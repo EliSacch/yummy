@@ -48,6 +48,19 @@
         {% endblock header %}
     </header>
 
+    <!-- Messages -->
+    <div id="messages">
+        <div class="container">
+            <ul class="messages-list">
+                {% for message in messages %}
+                    <li>
+                        <p>{{ message }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
     <main>
         {% block content %}
         <!-- Content Goes here -->

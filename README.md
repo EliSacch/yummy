@@ -63,6 +63,9 @@ The web app was developed following the Agile methodology, utilizing the project
   ![contrast](media/design/contrast.png)
   ![contrast](media/design/contrast-1.png)
 
+
+[Back to the top](#table-of-content)
+
 ### User Stories
 
 - As a website user I can log into my personal area so that I can save and see my own recipes and not the ones from other users.
@@ -87,6 +90,7 @@ The web app was developed following the Agile methodology, utilizing the project
 
 - As a user I can see some random suggestions so that I can be inspired by my previous recipes.
 
+[Back to the top](#table-of-content)
 
 ### Database Models
 
@@ -112,6 +116,7 @@ It is a model that stores the ingredients information. It is linked to the Recip
 
 ![Ingredient Model](media/design/ingredient-model.png)
 
+[Back to the top](#table-of-content)
 
 ### Wireframes
 
@@ -143,6 +148,7 @@ It is a model that stores the ingredients information. It is linked to the Recip
 
 </details>
 
+[Back to the top](#table-of-content)
 
 ## Features 
 
@@ -174,6 +180,8 @@ The landing page is the first page that the user sees when they visit the websit
   ![Login Page](media/features/signup-page.png)
 
 </details>
+
+[Back to the top](#table-of-content)
 
 ### Dashboard
 
@@ -246,6 +254,8 @@ The landing page is the first page that the user sees when they visit the websit
 
 ![Suggestions](media/features/suggestions.png)
 
+[Back to the top](#table-of-content)
+
 ### My Recipes
 
 In this page the user can see all their recipes.
@@ -274,6 +284,8 @@ In this page the user can see all their recipes.
   ![Results](media/features/recipes-list.png)
 
 </details>
+
+[Back to the top](#table-of-content)
 
 ### CRUD
 
@@ -326,6 +338,7 @@ In this page the user can see all their recipes.
 
   ![Delete](media/features/delete.png)
 
+[Back to the top](#table-of-content)
 
 ### Profile page
 
@@ -337,8 +350,13 @@ From this page the user can review and manage the profile and login information.
 
 <details>
   <summary>Screenshot</summary>
+  No image uploaded:
 
-  ![Profile Image](media/features/create.png)
+  ![Profile Image](media/features/profile-no-image.png)
+
+  Image uploaded:
+  
+  ![Profile Image](media/features/profile-image.png)
 
 </details>
 
@@ -418,14 +436,19 @@ From this page the user can review and manage the profile and login information.
 
 </details>
 
+[Back to the top](#table-of-content)
 
 ## Testing 
 
+[Back to the top](#table-of-content)
 
 ### Tests
 
+[Back to the top](#table-of-content)
 
 ### Validator Testing
+
+[Back to the top](#table-of-content)
 
 #### HTML
 
@@ -438,6 +461,7 @@ From this page the user can review and manage the profile and login information.
   ![Image]()
   </details>
 
+[Back to the top](#table-of-content)
 
 #### CSS
 
@@ -450,6 +474,7 @@ From this page the user can review and manage the profile and login information.
   ![Image]()
   </details>
 
+[Back to the top](#table-of-content)
 
 #### JavaScript
 
@@ -463,6 +488,7 @@ Check if Errors are returned when passing the final version through the official
 
 </details>
 
+[Back to the top](#table-of-content)
 
 ### Fixed Bugs
 
@@ -596,12 +622,15 @@ Check if Errors are returned when passing the final version through the official
 
 </details>
 
+[Back to the top](#table-of-content)
 
 ### Unfixed Bugs
 
+[Back to the top](#table-of-content)
 
 ### Performance
 
+[Back to the top](#table-of-content)
 
 ## Deployment
 
@@ -617,6 +646,7 @@ Check if Errors are returned when passing the final version through the official
     - Open your terminal and run the command __git clone 'link'__
     - use the link just copied, without quotes, instead of 'link'
 
+[Back to the top](#table-of-content)
 
 ## Credits 
 
@@ -646,6 +676,7 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
 
 - The favicon is from [Icons8](https://icons8.com/icon/A2GuNMcdfGfC/torta)
 
+[Back to the top](#table-of-content)
 
 ## Technologies used
 
@@ -662,6 +693,7 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
   - inline forms
   - django-filters
   
+[Back to the top](#table-of-content)
 
 ## Acknowledgements
 
