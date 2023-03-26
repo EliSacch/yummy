@@ -192,6 +192,10 @@ nav ul a:hover::after,
     color: var(--clr-primary-5);
 }
 
+.grey-text {
+    color: var(--clr-secondary-1);
+}
+
 .hidden {
     display: none;
 }
@@ -252,7 +256,6 @@ textarea.materialize-textarea.invalid:focus,
 
 .fixed-label {
     font-size: 1.4rem;
-    color: var(--clr-secondary-1);
     font-weight: 400;
     margin-right: 1em;
 }
@@ -280,6 +283,16 @@ textarea.materialize-textarea.invalid:focus,
     color: var(--clr-secondary);
 }
 
+textarea {
+    padding: .5em 1em;
+    font-size: inherit;
+    color: var(--clr-primary-4);
+    border: 1px solid var(--clr-primary-4);
+}
+
+textarea:focus {
+    outline-color: var(--clr-primary-4);
+}
 
 /* ----------------------------------------------- Landing page before authentication */
 .landingpage {
@@ -352,7 +365,6 @@ input {
 }
 
 .input-field > label {
-    color: var(--clr-secondary-1);
     font-size: 1.4rem;
 }
 
@@ -434,14 +446,6 @@ input.invalid {
 #ingredients-list {
     text-align: left;
     font-size: 1.5rem;
-    font-family: var(--font-headers);
-}
-
-#ingredients-list:has(div):before {
-    content: "Ingredients";
-    display: block;
-    color: var(--clr-primary-4);
-    font-size: 1.3em;
     font-family: var(--font-headers);
 }
 
@@ -594,7 +598,7 @@ section.search-bar .container > * {
     /* Fallback font size for browsers that don't support cq units */
     font-size: 250px;
     /* Font size in cq units */
-    /*font-size: 100cqw;*/
+    font-size: 100cqw;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1005,7 +1009,7 @@ footer a:hover {
     position: absolute;
     color: var(--clr-primary-0);
     opacity: .3;
-    /* Backup for browsers that don't support container queries */
+    /* Fallback font for browsers that don't support container queries */
     font-size: 5rem;
     /* Font-size for browser that support container queries */
     font-size: 30cqw;

@@ -80,7 +80,7 @@
 
     {% elif field.name == "notes" %}
     <div class="row">
-        <label for="{{ field.id_for_label }}" class="fixed-label">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+        <label for="{{ field.id_for_label }}" class="left fixed-label">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
         <div class="input-field">
             {{ field }}
         </div>

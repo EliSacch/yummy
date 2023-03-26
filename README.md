@@ -448,8 +448,6 @@ From this page the user can review and manage the profile and login information.
 
 ### Validator Testing
 
-[Back to the top](#table-of-content)
-
 #### HTML
 
  Check if errors are returned when passing the final version through the official [W3C validator](https://validator.w3.org/nu/#textarea)
@@ -465,14 +463,50 @@ From this page the user can review and manage the profile and login information.
 
 #### CSS
 
- Check if Errors are returned when passing the final version through the official [Jigsaw validator](https://jigsaw.w3.org/css-validator/validator)
+4 errors are returned when passing the final version through the official [Jigsaw validator](https://jigsaw.w3.org/css-validator/validator)
 
-  <details>
+Although, these errors are caused by a new css property, that is still not widely supported.
+  - 2 errors are related to the container-type property.
+  - 2 errors are related to the cqw values.
 
-  <summary>W3 - CSS validation screenshot</summary>
-  
-  ![Image]()
-  </details>
+<details>
+
+<summary>W3 - CSS validation screenshot</summary>
+
+![Image](media/testing/validator/css-w3c-result.png)
+</details>
+
+These errors can be ignored, for the following reasons:
+
+The Container-type property is actually a valid property, according to W3.
+
+[Check on W3](https://www.w3.org/TR/css-contain-3/#propdef-container-type)
+
+  - Accepted value: 	normal || [ size | inline-size ]
+  - Applies to: All elements
+
+Even if not supported on some browser, it does not affect the rest of the style, and it will simply be ignored when not supported.
+
+<details>
+
+<summary>Check browser support</summary>
+
+![Image](media/testing/validator/css-container-type-support.png)
+</details>
+
+
+This property is used, in this particular instance, to make this div a 'container', so that I can use the container-relative size for some chldren elements (cqw in this case)
+
+[Check on W3](https://www.w3.org/TR/css-contain-3/#container-lengths)
+
+This unit is become more an more supprted, although a fallback size was provided in both instances, so that I could reach a similar result also on unsuported browsers.
+
+<details>
+
+<summary>Check browser support</summary>
+
+![Image](media/testing/validator/css-cqw-support.png)
+</details>
 
 [Back to the top](#table-of-content)
 
