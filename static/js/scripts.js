@@ -188,7 +188,7 @@ function display_tags() {
 function set_prepration_time() {
     const preparationTime = $('#id_preparation_time');
     const minutes = $('#minutes').val();
-    const hours = $('#hours').val()
+    const hours = $('#hours').val();
 
     let totalHours = 0 + Math.floor(minutes / 60);
 
@@ -199,13 +199,13 @@ function set_prepration_time() {
     const remainingMinutes = minutes % 60;
     let time = null;
     if (totalHours == 0 && remainingMinutes == 0) {
-        time = null 
+        time = null;
     } else {
         time = {
         'hours': totalHours,
         'minutes': remainingMinutes
-        }
-    };
+        };
+    }
 
     preparationTime.val(JSON.stringify(time));
 }
@@ -272,7 +272,7 @@ function search_recipe() {
     $('#id_search').on('keyup', function (e) { 
         e.preventDefault();
         const minChar = 2;
-        var results = []
+        var results = [];
 
         if ($('#id_search').val().length > minChar) {
 
