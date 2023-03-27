@@ -12,7 +12,15 @@ from django.core import serializers
 from django.core.paginator import Paginator
 
 from .models import Recipe, Ingredient, User, UserProfileImage
-from .forms import RecipeForm, IngredientFormSet, RecipeSearchForm, UserProfileForm, UserProfileImageForm, UserDeleteForm, StepsFormset
+from .forms import (
+    RecipeForm,
+    IngredientFormSet,
+    RecipeSearchForm,
+    UserProfileForm,
+    UserProfileImageForm,
+    UserDeleteForm,
+    StepsFormset
+)
 from .filters import RecipeFilter
 
 
@@ -30,21 +38,27 @@ class HomeView(generic.ListView):
             all_recipes = Recipe.objects.filter(user=self.request.user)
             # We only display 5 random recipes in the home page
             random_recipes = all_recipes.order_by('?')[:5]
-            user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
+            user_profile_image = UserProfileImage.objects.filter(
+                user=self.request.user
+                ).first()
 
             context = {
-                'all_recipes' : all_recipes,
-                'suggestions' : random_recipes,
-                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
-                'tags' : self.get_tags(),
-                'search_form' : search_form,
-                'user_profile_image' : user_profile_image,
+                'all_recipes': all_recipes,
+                'suggestions': random_recipes,
+                'difficulty_choices': [(1, 'Easy'),
+                                       (2, 'Medium'),
+                                       (3, 'Hard')],
+                'tags': self.get_tags(),
+                'search_form': search_form,
+                'user_profile_image': user_profile_image,
                 }
         return context
-    
+
     def get_tags(self):
         # We get all the tags from the recipes created by the user
-        all_tags = Recipe.objects.filter(user=self.request.user).values_list('tags', flat=True).distinct()
+        all_tags = Recipe.objects.filter(
+            user=self.request.user
+            ).values_list('tags', flat=True).distinct()
         # Then we remove the duplicates
         tags = []
         for tag in all_tags:
@@ -53,27 +67,33 @@ class HomeView(generic.ListView):
                     tags.append(t)
                 else:
                     pass
-    
+
         return tags
-    
-    
+
     def post(self, request, *args, **kwargs):
         queryset = Recipe.objects.filter(user=self.request.user)
-        # The following code was taken from the "Very Academy" tutorial on YouTube
-        # The link to the tutorial is: https://www.youtube.com/watch?v=Ct34iiOltgo
+        # The following code was taken from
+        # the "Very Academy" tutorial on YouTube
+        # The link to the tutorial is:
+        # https://www.youtube.com/watch?v=Ct34iiOltgo
         if request.POST.get('action') == 'post':
             search_string = str(request.POST.get('search_string'))
             if search_string is not None:
-                search_results = queryset.filter(title__icontains=search_string)
-                data = serializers.serialize('json', list(search_results), fields=('pk','title'))
+                search_results = queryset.filter(
+                    title__icontains=search_string
+                    )
+                data = serializers.serialize('json',
+                                             list(search_results),
+                                             fields=('pk', 'title'))
 
-                return JsonResponse({'data' : data}, status=200)
+                return JsonResponse({'data': data}, status=200)
             else:
-                return JsonResponse({'data' : 'No results found'}, status=200)
+                return JsonResponse({'data': 'No results found'}, status=200)
         # End of the code taken from the "Very Academy" tutorial on YouTube
 
 
-# View for the my recipes page that displays all the reciepes created by the user
+# View for the my recipes page
+# that displays all the reciepes created by the user
 @method_decorator(login_required, name='dispatch')
 class RecipeListView(generic.ListView):
     model = Recipe
@@ -82,7 +102,9 @@ class RecipeListView(generic.ListView):
     context_object_name = 'all_recipes'
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(user=self.request.user).order_by('created_on')
+        queryset = super().get_queryset().filter(
+            user=self.request.user
+            ).order_by('created_on')
         self.filterset = RecipeFilter(self.request.GET, queryset=queryset)
 
         return self.filterset.qs
@@ -93,14 +115,18 @@ class RecipeListView(generic.ListView):
         paginate = Paginator(self.filterset.qs, 6)
         page_number = self.request.GET.get('page')
         # Profile image
-        user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
+        user_profile_image = UserProfileImage.objects.filter(
+            user=self.request.user
+            ).first()
 
         if self.request.user.is_authenticated:
             context = {
-                'difficulty_choices' : [(1, 'Easy'), (2, 'Medium'), (3, 'Hard')],
-                'form' : self.filterset.form,
-                'all_recipes' : paginate.get_page(page_number),
-                'user_profile_image' : user_profile_image,
+                'difficulty_choices': [(1, 'Easy'),
+                                       (2, 'Medium'),
+                                       (3, 'Hard')],
+                'form': self.filterset.form,
+                'all_recipes': paginate.get_page(page_number),
+                'user_profile_image': user_profile_image,
                 }
         return context
 
@@ -108,7 +134,7 @@ class RecipeListView(generic.ListView):
 # View for the recipe detail page
 @method_decorator(login_required, name='dispatch')
 class RecipeDetailView(View):
-    
+
     def get(self, request, pk, *args, **kwargs):
         if self.request.user.is_authenticated:
             queryset = Recipe.objects.filter(user=self.request.user)
@@ -120,8 +146,8 @@ class RecipeDetailView(View):
                 request,
                 'recipe_detail.html',
                 {
-                    'recipe' : recipe,
-                    'difficulty_choices' : difficulty_choices
+                    'recipe': recipe,
+                    'difficulty_choices': difficulty_choices
                 }
             )
 
@@ -132,27 +158,33 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
     model = Recipe
     form_class = RecipeForm
     template_name = 'add_recipe.html'
-    
+
     def get_context_data(self, **kwargs):
         self.object = []
         context = super(AddNewRecipeView, self).get_context_data(**kwargs)
         context = {
             'form': RecipeForm(instance=self.object or None),
-            'formset' : IngredientFormSet(queryset=Ingredient.objects.none()),
-            'steps_formset' : StepsFormset,
+            'formset': IngredientFormSet(queryset=Ingredient.objects.none()),
+            'steps_formset': StepsFormset,
         }
         return context
-    
+
     def get(self, request, *args, **kwargs):
         form = RecipeForm()
         formset = IngredientFormSet(queryset=Ingredient.objects.none())
         steps_formset = StepsFormset
-        return render(request, 'add_recipe.html', {'form': form, 'formset': formset, 'steps_formset' : steps_formset})
-    
+        return render(request, 'add_recipe.html',
+                      {'form': form,
+                       'formset': formset,
+                       'steps_formset': steps_formset
+                       }
+                      )
+
     def post(self, request, *args, **kwargs):
         form = RecipeForm(self.request.POST)
 
-        # Before saving the form we check if there is any step added to the procedure
+        # Before saving the form we check if
+        # there is any step added to the procedure
         steps_formset = StepsFormset(self.request.POST)
         procedure = []
         if steps_formset.is_valid():
@@ -170,11 +202,11 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
         else:
             messages.error(self.request, form.errors)
             return super().form_invalid(form)
-        
+
         if form.is_valid():
             recipe = form.save(commit=False)
             formset = IngredientFormSet(self.request.POST, instance=recipe)
-            
+
             if formset.is_valid():
                 # We assign the user to the recipe
                 recipe.user = self.request.user
@@ -193,7 +225,8 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                     if ingredient in formset.deleted_forms:
                         pass
                     elif ingredient.cleaned_data.get('name') is not None:
-                        # If the ingredient is not empty we assign the user and add it to the recipe
+                        # If the ingredient is not empty
+                        # we assign the user and add it to the recipe
                         ingredient.instance.recipe = recipe
                         ingredient.save()
                     else:
@@ -201,17 +234,17 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
             else:
                 messages.error(self.request, form.errors)
                 return super().form_invalid(form)
-            
+
             messages.success(self.request, 'Recipe added successfully!')
             return super().form_valid(form)
         else:
             messages.error(self.request, form.errors)
             return super().form_invalid(form)
-    
+
     def form_valid(self, form):
         messages.success(self.request, 'Recipe updated successfully!')
         return HttpResponseRedirect(self.get_success_url())
-    
+
     def get_success_url(self):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
 
@@ -226,19 +259,25 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
     def get_context_data(self, **kwargs):
         self.object = self.get_object()
         context = super(EditRecipeView, self).get_context_data(**kwargs)
+        preparation_time = self.object.preparation_time
         context = {
             'form': RecipeForm(instance=self.object),
-            'preparation_time' : self.object.preparation_time if self.object else None,
-            'formset' : IngredientFormSet(instance=self.object),
-            'steps_formset' : StepsFormset(initial=[{'step': step} for step in self.object.procedure])
+            'preparation_time': preparation_time if self.object else None,
+            'formset': IngredientFormSet(instance=self.object),
+            'steps_formset': StepsFormset(
+                initial=[{'step': step} for step in self.object.procedure]
+            )
         }
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form = RecipeForm(self.request.POST, request.FILES, instance=self.object)
+        form = RecipeForm(self.request.POST,
+                          request.FILES,
+                          instance=self.object)
 
-        # Before saving the form we check if there is any step added to the procedure
+        # Before saving the form we check
+        # if there is any step added to the procedure
         steps_formset = StepsFormset(self.request.POST)
         procedure = []
         if steps_formset.is_valid():
@@ -256,10 +295,12 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
         else:
             messages.error(self.request, form.errors)
             return super().form_invalid(form)
-        
+
         if form.is_valid():
             recipe = form.save(commit=False)
-            formset = IngredientFormSet(self.request.POST, self.request.FILES, instance=recipe)
+            formset = IngredientFormSet(self.request.POST,
+                                        self.request.FILES,
+                                        instance=recipe)
 
             if formset.is_valid():
                 # We assign the user to the recipe
@@ -277,7 +318,8 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
                     if ingredient in formset.deleted_forms:
                         ingredient.instance.delete()
                     elif ingredient.cleaned_data.get('name') is not None:
-                        # If the ingredient is not empty we assign the user and add it to the recipe
+                        # If the ingredient is not empty
+                        # we assign the user and add it to the recipe
                         ingredient.instance.recipe = recipe
                         ingredient.save()
                     else:
@@ -285,48 +327,49 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
             else:
                 messages.error(self.request, formset.errors)
                 return super().form_invalid(form)
-            
+
             messages.success(self.request, 'Recipe updated successfully!')
             return super().form_valid(form)
         else:
             messages.error(self.request, form.errors)
             return super().form_invalid(form)
-    
-    
+
     def form_valid(self, form):
         messages.success(self.request, 'Recipe updated successfully!')
         return HttpResponseRedirect(self.get_success_url())
-    
+
     def get_success_url(self):
         return reverse('recipe_detail', kwargs={'pk': self.object.pk})
-    
+
 
 # View for the recipe delete page
 @method_decorator(login_required, name='dispatch')
 class DeleteRecipeView(DeleteView):
     model = Recipe
     success_url = '/'
-    
+
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-    
+
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'Recipe deleted successfully!')
         return super().delete(request, *args, **kwargs)
-    
+
 
 # View for the user profile page
 @method_decorator(login_required, name='dispatch')
 class ProfileView(FormView):
     """
     View for the user profile page.
-    I used a FormView, instead of UpdateView, because the UpdateView requires to have pk in the url.
-    Because each user hase only one profile, I don't need to have pk in the url.
+    I used a FormView, instead of UpdateView,
+    because the UpdateView requires to have pk in the url.
+    Because each user hase only one profile,
+    I don't need to have pk in the url.
     """
     model = User
     form_classes = {
-        'user_details_form' : UserProfileForm,
-        'user_image_form' : UserProfileImageForm,
+        'user_details_form': UserProfileForm,
+        'user_image_form': UserProfileImageForm,
     }
     template_name = 'account/profile.html'
 
@@ -334,28 +377,38 @@ class ProfileView(FormView):
         if self.request.user.is_authenticated:
             self.object = self.request.user
             user = self.request.user
-            user_profile_image = UserProfileImage.objects.filter(user=user).first()
+            user_profile_image = UserProfileImage.objects.filter(
+                user=user
+                ).first()
 
             return render(
                 request,
                 'account/profile.html',
                 {
-                    'user' : user,
-                    'user_profile_image' : user_profile_image,
-                    'user_details_form': UserProfileForm(instance=self.object if self.object else None),
-                    'user_image_form': UserProfileImageForm(instance=user_profile_image),
+                    'user': user,
+                    'user_profile_image': user_profile_image,
+                    'user_details_form': UserProfileForm(
+                            instance=self.object if self.object else None
+                    ),
+                    'user_image_form': UserProfileImageForm(
+                        instance=user_profile_image
+                        ),
                     'user_delete_form': UserDeleteForm(),
                 }
             )
         else:
             return HttpResponseRedirect('login')
-        
+
     def post(self, request, *args, **kwargs):
         self.object = self.request.user
         form = UserProfileForm(self.request.POST, instance=self.object)
 
-        user_profile_image = UserProfileImage.objects.filter(user=self.request.user).first()
-        form_image = UserProfileImageForm(request.POST, self.request.FILES, instance=user_profile_image)
+        user_profile_image = UserProfileImage.objects.filter(
+            user=self.request.user
+            ).first()
+        form_image = UserProfileImageForm(request.POST,
+                                          self.request.FILES,
+                                          instance=user_profile_image)
 
         # We check if the user has uploaded a new image
         if request.FILES:
@@ -364,27 +417,32 @@ class ProfileView(FormView):
             image.user = self.request.user
             if form_image.is_valid():
                 form_image.save()
-                messages.success(self.request, 'Profile image updated successfully!')
+                messages.success(self.request,
+                                 'Profile image updated successfully!')
                 return super().form_valid(form_image)
             else:
                 messages.error(self.request, form_image.errors)
                 return super().form_invalid(form_image)
-        
+
         else:
-            # If the user has not uploaded a new image, it means that the post request was for the user details
+            # If the user has not uploaded a new image,
+            # it means that the post request was for the user details
             if form.is_valid():
                 form.save()
-                messages.success(self.request, 'User details updated successfully!')
+                messages.success(self.request,
+                                 'User details updated successfully!')
                 return super().form_valid(form)
             else:
                 print('form invalid')
                 messages.error(self.request, form.errors)
-                # Using "return super().form_invalid(form)" here caused issues with the form, that disappeared form the page, 
+                # Using "return super().form_invalid(form)" here
+                # caused issues with the form,
+                # that disappeared form the page,
                 # so I used the following line instead
                 return HttpResponseRedirect(reverse('profile'))
 
     def form_valid(self, form):
-        messages.success(self.request, 'Profile updated updated successfully!')
+        messages.success(self.request, 'Profile updated successfully!')
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
@@ -397,10 +455,10 @@ class DeleteUserView(DeleteView):
     model = User
     # If the user deletes the account, we redirect to the home page
     success_url = '/'
-    
+
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-    
+
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, 'User deleted successfully!')
         return super().delete(request, *args, **kwargs)

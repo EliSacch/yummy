@@ -1,9 +1,14 @@
 from django.contrib import admin
 from .models import Recipe, Ingredient, UserProfileImage
 
-""" This is the admin.py file for the recipebook app. It is used to register the Recipe model with the admin site."""
+""" This is the admin.py file for the recipebook app.
+It is used to register the Recipe model with the admin site."""
 
-# The following code to filter the recipes by tag in the admin page is taken from the following link: https://bradmontgomery.net/blog/django-admin-filters-arrayfields/
+# The following code to filter the recipes by tag in the admin page
+#  is taken from the following link:
+# https://bradmontgomery.net/blog/django-admin-filters-arrayfields/
+
+
 class ArrayFieldListFilter(admin.SimpleListFilter):
     """This is a list filter based on the values
     from a model's `tags` ArrayField. """
@@ -18,7 +23,7 @@ class ArrayFieldListFilter(admin.SimpleListFilter):
         return tags
 
     def queryset(self, request, queryset):
-        lookup_value = self.value() 
+        lookup_value = self.value()
         if lookup_value:
             queryset = queryset.filter(tags__contains=[lookup_value])
         return queryset

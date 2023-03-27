@@ -6,19 +6,29 @@ Back to [main README](readme.md)
 
 Testing
 - [Tests](#tests)
+    - [Unit test](#unit-test)
+    - [Manual test](#manual-test)
 - [Validator Testing](#validator-testing)
+    - [HTML](#html)
+    - [CSS](#css)
+    - [JS](#javascript)
+    - [Python](#python)
 - [Fixed bugs](#fixed-bugs)
 - [Unfixed bugs](#unfixed-bugs)
 - [Performance](#performance)
 
 
-### Tests
+## Tests
+
+### Unit test
+
+### Manual test
 
 [Back to the top](#table-of-content)
 
-### Validator Testing
+## Validator Testing
 
-#### HTML
+### HTML
 
 Check if errors are returned when passing the final version through the official [W3C validator](https://validator.w3.org/nu/#textarea)
 
@@ -144,7 +154,7 @@ Check if errors are returned when passing the final version through the official
 
 [Back to the top](#table-of-content)
 
-#### CSS
+### CSS
 
 4 errors are returned when passing the final version through the official [Jigsaw validator](https://jigsaw.w3.org/css-validator/validator)
 
@@ -193,7 +203,7 @@ This unit is become more an more supprted, although a fallback size was provided
 
 [Back to the top](#table-of-content)
 
-#### JavaScript
+### JavaScript
 
 No errors are returned when passing the final version through the official [JsHint validator](https://jshint.com/)
 
@@ -206,7 +216,71 @@ No errors are returned when passing the final version through the official [JsHi
 
 [Back to the top](#table-of-content)
 
-### Fixed Bugs
+
+### Python
+
+The final version of python files was checked using [CI Python Linter](https://pep8ci.herokuapp.com/#)
+
+Se scrrenshots below:
+
+<details>
+  <summary>Admin.py</summary>
+
+  ![Image](media/testing/validator/py-admin.png)
+
+</details>
+
+
+<details>
+  <summary>Apps.py</summary>
+
+  ![Image](media/testing/validator/py-apps.png)
+
+</details>
+
+
+<details>
+  <summary>Filters.py</summary>
+
+  ![Image](media/testing/validator/py-filters.png)
+
+</details>
+
+
+<details>
+  <summary>Forms.py</summary>
+
+  ![Image](media/testing/validator/py-forms.png)
+
+</details>
+
+
+<details>
+  <summary>Models.py</summary>
+
+  ![Image](media/testing/validator/py-models.png)
+
+</details>
+
+
+<details>
+  <summary>Urls.py</summary>
+
+  ![Image](media/testing/validator/py-urls.png)
+
+</details>
+
+
+<details>
+  <summary>Views.py</summary>
+
+  ![Image](media/testing/validator/py-views.png)
+
+</details>
+
+[Back to the top](#table-of-content)
+
+## Fixed Bugs
 
 <details>
   <summary> Unable to load static files on Heroku:</summary>
@@ -333,12 +407,12 @@ No errors are returned when passing the final version through the official [JsHi
 
 </details>
 
-### Unfixed Bugs
+## Unfixed Bugs
 
 There are currently 0 known unfixed bugs
 
 [Back to the top](#table-of-content)
 
-### Performance
+## Performance
 
 [Back to the top](#table-of-content)

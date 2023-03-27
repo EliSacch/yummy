@@ -11,7 +11,8 @@ class CharArrayFilter(django_filters.BaseCSVFilter, django_filters.CharFilter):
 
 
 """
-This is the filter class for the Recipe model. It allows us to filter the recipes by title, tags, and difficulty.
+This is the filter class for the Recipe model.
+It allows us to filter the recipes by title, tags, and difficulty.
 """
 class RecipeFilter(django_filters.FilterSet):
 
