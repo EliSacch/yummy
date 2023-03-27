@@ -96,6 +96,8 @@ function add_ingredient_form() {
     /* Add event listener to the remove-ingredient button */
     $('.remove-ingredient').click(remove_ingredient_form);
 
+    /* To activate tooltips on ew buttons */
+    $('.tooltipped').tooltip();
 }
 
 
@@ -139,6 +141,8 @@ function add_step_form() {
     /* Add event listener to the remove-step button */
     $('.remove-step').click(remove_step_form);
 
+    /* To activate tooltips on ew buttons */
+    $('.tooltipped').tooltip();
 }
 
 

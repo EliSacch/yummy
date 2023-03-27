@@ -4,9 +4,9 @@
 -->
     
 {% if formset %}
-<span class="row">
+<div class="row">
     <p class="left grey-text">Ingredients</p>
-</span>
+</div>
 
 <div id="ingredients-container">  
 {{ formset.management_form }}
@@ -26,12 +26,10 @@
             When clicked it hides the current form, and it checks the associated 'DELETE' field, 
             which is hidden by default 
         -->
-        <div class="btn-container">
-            <a class="tooltipped" data-position="bottom" data-tooltip="Remove Ingredient">
-                <button type="button" class="btn-floating primary-3 light-text remove-ingredient">
-                    <i class="material-icons">remove</i>
-                </button>
-            </a>
+        <div class="tooltipped btn-container" data-position="bottom" data-tooltip="Remove Ingredient">
+            <button type="button" class="btn-floating primary-3 light-text remove-ingredient">
+                <i class="material-icons">remove</i>
+            </button>
         </div>
         <div class="row ingredient-formset">
         {% for field in form.visible_fields %}
@@ -72,12 +70,11 @@
         It works in the same way as the previous forms, but it is hidden by default.
     -->
     <div id="empty-form" class="hidden">
-        <div class="btn-container">
-            <a class="tooltipped" data-position="bottom" data-tooltip="Remove Ingredient">
-                <button type="button" class="btn-floating primary-3 light-text remove-ingredient">
-                    <i class="material-icons">remove</i>
-                </button>
-            </a>
+        <!-- This button removes the current form -->
+        <div class="tooltipped btn-container" data-position="bottom" data-tooltip="Remove Ingredient">
+            <button type="button" class="btn-floating primary-3 light-text remove-ingredient">
+                <i class="material-icons">remove</i>
+            </button>
         </div>
         <div>
             <div class="row ingredient-formset">
@@ -112,12 +109,10 @@
 </div>
 
 <div class="btn-container">
-    <a class="tooltipped" data-position="bottom" data-tooltip="Add Ingredient">
-        <!-- This buttons triggers the js function that copies the empty form to create a new ingredient -->
-        <button id="add-ingredient-btn" type="button" class="btn primary-3 light-text">
-            Add Ingredient
-        </button>
-    </a>
+    <!-- This buttons triggers the js function that copies the empty form to create a new ingredient -->
+    <button type="button" id="add-ingredient-btn" class="tooltipped btn primary-3 light-text" data-position="bottom" data-tooltip="Add Ingredient">
+        Add Ingredient
+    </button>
 </div>
 
 {{ formset.non_form_errors}}

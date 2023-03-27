@@ -2,9 +2,9 @@
     This is the formset for the steps of the procedure.
     It is included in the recipe_form.html template.
 -->
-<span class="row">
+<div class="row">
     <p class="left grey-text">Procedure</p>
-</span>
+</div>
 
 {% if steps_formset %}
 
@@ -27,11 +27,11 @@
                 When clicked it hides the current form, and it checks the associated 'DELETE' field, 
                 which is hidden by default
             -->
-            <a class="tooltipped" data-position="bottom" data-tooltip="Remove Step">
+            <div class="tooltipped btn-container" data-position="bottom" data-tooltip="Remove Step">
                 <button type="button" class="btn-floating primary-3 light-text remove-step">
                     <i class="material-icons">remove</i>
                 </button>
-            </a>
+            </div>
         </div>
         <div class="row steps-formset">
         {% for field in form.visible_fields %}
@@ -62,13 +62,11 @@
         It works the same way as the previous forms
      -->
     <div id="empty-step-form" class="hidden">
-        <div class="btn-container">
-            <!-- Remove step button, that checks the 'DELETE' field -->
-            <a class="tooltipped" data-position="bottom" data-tooltip="Remove Step">
-                <button type="button" class="btn-floating primary-3 light-text remove-step">
-                    <i class="material-icons">remove</i>
-                </button>
-            </a>
+        <!-- Remove steps buttonn. When clicked it checks the related 'DELETE' checkbox -->
+        <div class="tooltipped btn-container" data-position="bottom" data-tooltip="Remove Step">
+            <button type="button" class="btn-floating primary-3 light-text remove-step">
+                <i class="material-icons">remove</i>
+            </button>
         </div>
         <div>
             <div class="row steps-formset">
@@ -96,14 +94,10 @@
 </div>
 
 <div class="btn-container">
-    <a class="tooltipped" data-position="bottom" data-tooltip="Add Step">
-        <!-- 
-            This button, when clicked, triggers the JS function yo add new step forms.
-        -->
-        <button id="add-step-btn" type="button" class="btn primary-3 light-text">
-            Add Step
-        </button>
-    </a>
+    <!-- This buttons triggers the js function that copies the empty form to create a new step form -->
+    <button type="button" id="add-step-btn" class="tooltipped btn primary-3 light-text" data-position="bottom" data-tooltip="Add Step">
+        Add Step
+    </button>
 </div>
 
 {{ steps_formset.non_form_errors}}

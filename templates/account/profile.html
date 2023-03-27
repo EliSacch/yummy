@@ -9,9 +9,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="go-home">
+            <div class="go-home tooltipped" data-position="bottom" data-tooltip="Go home">
                 <button class="btn-floating primary-3 light-text">
-                    <i class="lmedium material-icons">arrow_back</i>
+                    <i class="material-icons">arrow_back</i>
                 </button>
             </div>
         </div>
@@ -21,6 +21,9 @@
             </div>
         </div>
         <div class="row">
+            <!-- This heading is hidden because it helps users using a screen reader for a better navigation, 
+                by creating a table of content, but it is not needed for other users, where the different sections are clearly visible -->
+            <h2 class="hidden">Profile Image</h2>
             <div class="col s12">
                 <div class="user-profile-header">
                     <!-- Profile Image -->
@@ -30,7 +33,7 @@
                                 account_circle
                             </i>
                         {% else %}
-                            <img src="{{ user_profile_image.profile_image.url }}" alt="Profile Image" />
+                            <img src="{{ user_profile_image.profile_image.url }}" alt="Profile Image">
                         {% endif %}
                     </div>
                     <!-- Button to edit the image. It triggers the following form -->
@@ -52,6 +55,9 @@
                     <!-- End of the profile image section -->
                 </div>
                 
+                <!-- This heading is hidden because it helps users using a screen reader for a better navigation, 
+                by creating a table of content, but it is not needed for other users, where the different sections are clearly visible -->
+                <h2 class="hidden">User Details</h2>
                 <form id="user-details-form" method="post" action="{% url 'profile' %}">
                     {% csrf_token %}
 
@@ -129,10 +135,14 @@
 
 <!-- The followinf section contains two other profile functionalities, which are 'logout' and 'delete account' -->
 <section id="profile-other-actions">
+    <!-- This heading is hidden because it helps users using a screen reader for a better navigation, 
+        by creating a table of content, but it is not needed for other users, where the different sections are clearly visible -->
+        <h2 class="hidden">Profile actions</h2>
+
     <div class="container valign-wrapper">
         <div class="user-profile-footer">
             <a class="btn-small modal-trigger" href="#logout-modal">Log Out</a>
-            <a class="btn-small background-error modal-trigger"href="#delete-account-modal">Delete account</a>
+            <a class="btn-small background-error modal-trigger" href="#delete-account-modal">Delete account</a>
         </div>
     
         <!-- Logout Modal -->

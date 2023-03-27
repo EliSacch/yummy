@@ -30,12 +30,16 @@
 
                 <div class="fields-container">
                     {% for field in form %}
+                    
                         <div class="filter-input">
-                            <label for="{{ field.id_for_label }}"><p>{{ field.label }}</p></label>
-                            {{ field }}
-                            {% if field.help_text %}
+                            <div class="input-field">
+                                {{ field }}
+                                <label for="{{ field.id_for_label }}">{{ field.label }} {% if field.field.required %}*{% endif %}</label>
+                                {% if field.help_text %}
                                 <span class="help">{{ field.help_text }}</span>
-                            {% endif %}
+                                {% endif %}
+                            </div>
+                            
                             
                             {{ field.errors }}
                         </div>

@@ -20,14 +20,127 @@ Testing
 
 #### HTML
 
- Check if errors are returned when passing the final version through the official [W3C validator](https://validator.w3.org/nu/#textarea)
+Check if errors are returned when passing the final version through the official [W3C validator](https://validator.w3.org/nu/#textarea)
 
-  <details>
+<details>
+<summary>Home page before login</summary>
 
-  <summary>W3 - HTML validation screenshot</summary>
+![Image](media/testing/validator/html-index-before-login.png)
+</details>
 
-  ![Image]()
-  </details>
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Sign up page</summary>
+
+![Image](media/testing/validator/html-signup.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Login page</summary>
+
+![Image](media/testing/validator/html-login.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Reset password</summary>
+
+![Image](media/testing/validator/html-reset-password.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Dashboard after login</summary>
+
+![Image](media/testing/validator/html-dashboard-after-login.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>My recipes page</summary>
+
+![Image](media/testing/validator/html-all-recipes.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Recipe detail page</summary>
+
+![Image](media/testing/validator/html-detail-page.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Add Recipe page</summary>
+
+![Image](media/testing/validator/html-add-recipe.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Edit Recipe</summary>
+
+![Image](media/testing/validator/html-edit-recipe.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Profile page</summary>
+
+![Image](media/testing/validator/html-profile-page.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Manage email page</summary>
+
+![Image](media/testing/validator/html-email-manager.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
+
+<details>
+<summary>Change password page</summary>
+
+![Image](media/testing/validator/html-change-password.png)
+</details>
+
+- Errors: 0
+- Warnings: 0
+
 
 [Back to the top](#table-of-content)
 

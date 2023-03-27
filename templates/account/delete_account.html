@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="">
-                <h1 class="subheading">Delete Account</h1>
+                <h2 class="subheading">Delete Account</h2>
     
                 <p>Are you sure you want to delete your account?</p>
                 <small>You will not be able to restore your data</small>
@@ -22,7 +22,7 @@
 
                     {{ user_delete_form.errors }}
 
-                    <label for="delete">I confirm that I wish to delete my account.</label>
+                    <label>I confirm that I wish to delete my account.</label>
 
                     {% for hidden in user_delete_form.hidden_fields %}
                         {{ hidden }}

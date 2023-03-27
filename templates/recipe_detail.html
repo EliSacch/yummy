@@ -12,31 +12,25 @@
 
             <header class="recipe-detail-background hide-on-large-only">
                 <!-- Go home button for small screens -->
-                <div class="go-home">
-                    <a class="tooltipped" data-position="bottom" data-tooltip="Go home">
-                        <button class="btn-floating primary-3 light-text">
-                            <i class="material-icons">arrow_back</i>
-                        </button>
-                    </a>
+                <div class="go-home tooltipped" data-position="bottom" data-tooltip="Go home">
+                    <button class="btn-floating primary-3 light-text">
+                        <i class="material-icons">arrow_back</i>
+                    </button>
                 </div>
 
                 <div class="recipe-action-buttons hide-on-large-only">
 
                     <!-- Edit recipe button -->
                     <div class=" edit">
-                        <a href="{% url 'edit_recipe' recipe.pk %}" class="tooltipped" data-position="bottom" data-tooltip="Edit">
-                            <button class="btn-floating background-alert light-text">
-                                <i class="material-icons">edit</i>
-                            </button>
+                        <a href="{% url 'edit_recipe' recipe.pk %}" class="tooltipped btn-floating background-alert light-text" data-position="bottom" data-tooltip="Edit">
+                            <i class="material-icons">edit</i>
                         </a>
                     </div>
 
                     <!-- Delete recipe button -->
                     <div class="delete">
-                        <a href="#delete-recipe-confirmation-modal" class="tooltipped modal-trigger" data-position="bottom" data-tooltip="Delete">
-                            <button class="btn-floating background-error light-text">
-                                    <i class="material-icons">delete</i>
-                            </button>
+                        <a href="#delete-recipe-confirmation-modal" class="tooltipped modal-trigger btn-floating background-error light-text" data-position="bottom" data-tooltip="Delete">
+                            <i class="material-icons">delete</i>
                         </a>
                     </div>
 
@@ -61,31 +55,25 @@
 
             <div class="recipe-detail">
                 <!-- Go home button for large screens-->
-                <div class="go-home hide-on-med-and-down">
-                    <a class="tooltipped" data-position="bottom" data-tooltip="Go home">        
-                        <button class="btn-floating primary-3 light-text">
-                            <i class="material-icons">arrow_back</i>
-                        </button> 
-                    </a>
+                <div class="go-home tooltipped hide-on-med-and-down" data-position="bottom" data-tooltip="Go home">
+                    <button class="btn-floating primary-3 light-text">
+                        <i class="material-icons">arrow_back</i>
+                    </button>
                 </div>
 
                 <div class="recipe-action-buttons hide-on-med-and-down">
 
                     <!-- Edit recipe button -->
                     <div class=" edit">
-                        <a href="{% url 'edit_recipe' recipe.pk %}" class="tooltipped" data-position="bottom" data-tooltip="Edit">
-                            <button class="btn-floating background-alert light-text">
-                                <i class="material-icons">edit</i>
-                            </button>
+                        <a href="{% url 'edit_recipe' recipe.pk %}" class="tooltipped btn-floating background-alert light-text" data-position="bottom" data-tooltip="Edit">
+                            <i class="material-icons">edit</i>
                         </a>
                     </div>
 
                     <!-- Delete recipe button -->
                     <div class="delete">
-                        <a href="#delete-recipe-confirmation-modal" class="tooltipped modal-trigger" data-position="bottom" data-tooltip="Delete">
-                            <button class="btn-floating background-error light-text">
-                                    <i class="material-icons">delete</i>
-                            </button>
+                        <a href="#delete-recipe-confirmation-modal" class="tooltipped modal-trigger btn-floating background-error light-text" data-position="bottom" data-tooltip="Delete">
+                            <i class="material-icons">delete</i>
                         </a>
                     </div>
 
@@ -171,7 +159,7 @@
                         <ol>
                             {% for step in recipe.procedure %}
                                 <li class="row">
-                                    <span><p class="step">{{ step }}</p></span>
+                                    <p class="step">{{ step }}</p>
                                 </li>
                             {% endfor %}
                         </ol>
