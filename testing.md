@@ -278,6 +278,7 @@ Se scrrenshots below:
 
 </details>
 
+
 [Back to the top](#table-of-content)
 
 ## Fixed Bugs
