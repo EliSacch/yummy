@@ -24,6 +24,27 @@ Testing
 
 ### Manual test
 
+<details>
+<summary>Home page before login</summary>
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Go to the web app link | The browser shows the home page before login, with the signup and ligin buttons | Pass |
+| Click on the signup button | The user is redirected to the sign up form | Pass |
+| Click on the button without any information filled out | A message prompts the user to enter the required information | Pass |
+| Enter the email address only, and submit the form | A message prompts the user to fill out the username | Pass |
+| Enter email and username and submit | A message prompts the user to enter the password | Pass |
+| Enter email, username and password | A message prompts the user to re-enter the pssowrd | Pass |
+| Enter all information, but type two different password | A message informs the user that the two passwords must match | Pass |
+| Enter all information, but an inavlid username | A message informs the user that the username is invalid | Pass |
+| Enter all information, but an invalid email | A essage informs the user that the email is not valid | Pass |
+| Enter all valid information | The form submits and the user is informed that a verification email has been sent to their email address | Pass |
+
+
+</details>
+
+
+
 [Back to the top](#table-of-content)
 
 ## Validator Testing
@@ -405,6 +426,18 @@ Se scrrenshots below:
   ![Search result not clearing - fix](media/errors/search-result-not-clearing-fix.png)
 
 [Back to the top](#table-of-content)
+
+</details>
+
+
+<details>
+  <summary>Server error 500 when signing up</summary>
+
+  - Issue: when signing up for a new account, the server was unable to load the verification email template, due to a missing tag.
+
+  - Fix: I added the missing tag "{% load i18n %}" and the issue was resolved.
+
+  ![Updated code](media/errors/unable-to-send-verification-email-fix.png)
 
 </details>
 
