@@ -141,9 +141,9 @@ Note: These actions where performed after some recipes have been added, although
 
 
 <details>
-<summary>Add recipe</summary>
+<summary>Add recipe page</summary>
 
-Enter invalid information:
+Recipe form:
 
 | Action | Expected result | Pass/Fail |
 |--------|-----------------|-----------|
@@ -156,9 +156,168 @@ Ingredients formset:
 | Action | Expected result | Pass/Fail |
 |--------|-----------------|-----------|
 | When adding a recipe, click on the 'Add ingredient' button, to open a new ingredient line, but do not enter any information | When submitting the form, this form line should be ignored, since empty | Pass |
-| When adding an ingredient, enter the ingredient name only | The user should be informed that the ingredient was not valid, because of missing amount |
+| When adding an ingredient, enter the ingredient name only | The user should be informed that the ingredient was not valid, because of missing amount | Pass |
+| When adding the ingredients, add some extra forms and then click on the remove button | The selected ingredient lines should be removed, and the submitted form should ignore them | Pass |
+
+Steps formset:
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| When adding a recipe, click on the 'Add step' button, to open a new step line, but do not enter any information | When submitting the form, this form line should be ignored, since empty | Pass |
+| When adding a step, add some extra forms and then click on the remove button | The selected step lines should be removed, and the submitted form should ignore them | Pass |
 
 
+</details>
+
+
+<details>
+<summary>Recipe detail page</summary>
+
+General:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| For each recipe added, check the information displaying on the detail page | Each information correspond to the detail entered when submitting the form | Pass |
+| Check the recipe image | If no image was submitted, the image should be replaced by the standard placeholder | Pass |
+| Check the image for a recipe where it was provided | The choosen image is displayed in the relative section | Pass |
+| Check the notes section | If nothing was provided in the notes input, this section should not be displayed at all, otherwise it should contain the provided information | Pass |
+| Change the viewport size | The layout should changed if we pass from large to small screen, and viceversa | Pass |
+| Click on the Edit button | The user is redirected to the 'edit recipe' page for the current recipe | Pass |
+| Click on the Delete button | The delete recipe modal opens up | Pass |
+| Click on the 'go-home' button | The user is redirected to the dashboard | Pass |
+
+
+</details>
+
+<details>
+<summary>Edit / Delete recipe</summary>
+
+Edit:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Go to the edit page for one recipe and check the form | The form should be pre-populated with the existing information | Pass |
+| Remove the title completely | The form should not be submitted, and the user is asked to enter a tilte | Pass |
+| Change the title | The form is submitted and the updated information displays in the detail page | Pass |
+| Change the image | The new image is displayed in the detail page | Pass |
+| Remove an ingredient name from one existing ingredient | The form is not submitted and the user is asked to fill out the required fields | Pass |
+| Remove an ingredient amount from one existing ingredient | The form is not submitted and the user is asked to fill out the required fields | Pass |
+| Remove one ingredient line | The removed ingredient is not displayed anymore in the detail page | Pass |
+| Add new ingredients with correct information | The new ingredients are displayed in the detail page | Pass |
+| Remove all the existing tags | The form is not submitted and the user is asked to enter the tags | Pass |
+| Edit the other optional fields | The updated information displays in the detail page | Pass |
+
+
+Delete:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on the delete button | The delete recipe modal opens and the user is asked to confirm that they want to delete the recipe | Pass |
+| Click on cancel, or outside the modal | The modal closes with no action | Pass |
+| Cick on 'confirm' | The recipe is deleted and the user is redirected to the dashboard | Pass |
+
+
+</details>
+
+
+<details>
+<summary>My recipes page</summary>
+
+General:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Check the results section | Because there are no filters selected, all recipes added by this user show n this section | Pass |
+| Check the pagination | If there are more than 6 recipes, the recipes are split in multiple pages | Pass |
+| Click on the single page number | The user is rediected to the selected page | Pass |
+| Click on the 'previous' button | If there is a previous page, the user is redirected to that page, otherwise the button is disabled | Pass |
+| Click on the 'next' button | If there is a following page, the user is redirected to that page, otherwise the button is disabled | Pass |
+| click on the recipe card | The user is redirected to the selected recipe detail page | Pass |
+
+
+Filtering:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on filter button, without selecting any filter | All the recipes are displayed | Pass |
+| Enter some keywords in the 'title contains' section and click on 'filter'| If there is any recipe with the entered string in the title, the results section will display those recipes only | Pass |
+| Remove the title and enter one tag in the 'tags contains' filter, and click on 'filter' | If there is any recipe with that tag, it will be displayed in the results section | Pass |
+| Enter multiple tags, separated by commas, and click on 'filter' | Only the recipes that contain all the tags are displayed (if any) | Pass |
+| Remove the tags and select one 'difficulty' and click on 'filter' | Only the recipes for which the specific difficulty was selected are displayed (if any) | Pass |
+| Try to combine multiple filters | Only the recipes that match all the filters are displayed (if any) | Pass |
+
+</details>
+
+
+<details>
+<summary>Profile page</summary>
+
+General:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Check the information in the profile page | The information match the user information | Pass |
+| Check the user image | If the user has not provided a profile image, the default account icon is displayed, otherwise the profile shows the image uploaded by the user | Pass |
+| Check the password | The password is hidden | Pass |
+
+
+Update information:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on the image upload button and upload an image | The user profile image is updated with the uploaded image | Pass |
+| Click on the username update button | The form to update the username is displayed | Pass |
+| Try to remove the name completely and save | The user is prompted to fill out the username | Pass |
+| Try to eneter an invalid username | An error message informs the user that the username could not be updated | Pass |
+| Try to eneter a username already in use | An error message informs the user that the username could not be updated | Pass |
+| Enter a valid username | The username is updated successfully | Pass |
+| Click on the edit email button | The user is redirected to the 'email manager' page | Pass |
+| click on the edit password button | The user is redirected to the 'change password' page | Pass |
+
+
+Update email:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| In the 'Add E-mail Address' try to re-enter the account emil address and click on 'add e-mail address' | An error message informs the user that the email address is already asscoated to the account | Pass |
+| Enter an email address associated to another account and click on 'add e-mail address' | An error message informs the user that the email address is already asscoated to another account | Pass |
+| Add an invalid email address and click on 'add e-mail address' | An error message informs the user that the email address is not valid | Pass |
+| Enter a valid email address and click on 'add email address' | The form is submitted successfully and the new email address appears in the 'email addresses' area | Pass |
+| Check the status of the new email address | The new email address appears to be unverified | Pass |
+| Select the new email address and click on 'make primary' | An error informs the user that the primary email address must be verified | Pass |
+| Select the new email address and click on re-sent verification | Check the email inbox to confirm that a new verification email has been sent | Pass |
+| Re verify the email address following the same steps followed during the signup process | | |
+| After the new email is verified, select it and click on make primary again | The new email address appears now to be the primary email address | Pass |
+| Select the primary email address and click on remove | A message informs the user that the primary email address cannot be removed | Pass |
+| Select the other email address, and click on remove | The email address is removed successfully and does not appear in account anymore | Pass |
+
+
+Change passqord:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Go to the change password page and click on the forgot password link | The user is redirected to the reset password page | Pass |
+| Note: This page has already been tested in the 'home page before login' section | | |
+| Go back to the change email page and submit the form with no information | A message informs the user to fill out the form | Pass |
+| Enter the old password only and submit | a message informs the use to fill out the missing fields | Pass |
+| Enter the old password and the new password just one time | The user is asked to repeat the password | Pass |
+| Enter all the information, but enter two different new password | An error informs the user that the two passwods must match | Pass |
+| Enter two identical new passwords, but a wrong old password | An error informs that the user must type the current password | Pass |
+| Enter all valid information | the password is updated successfully | Pass |
+| Log out and try logging in with the new password | The user logs in correctly | Pass |
+
+
+Log out and delete account:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on the logout button | A pop up opens, asking the use to log out | Pass |
+| click outside the modal | The modal closes | Pass |
+| Reopen the modal and click on sign out | The user is logged out and the landing page is displayed | Pass |
+| Log in agan, and reopen the profile page. then click on delete account | A modal opens up, asking the user to confirm if they want to delete the account | Pass |
+| Click outside the modal | The modal closes with no action | Pass |
+| Click on 'delete account' again, and click on 'delete' without checking the box | The user is informed that they need to confirm they wish to delete the account | Pass |
+| Check the checkbox and click on 'delete' again | The user is redirected to the landing page, and a message informs the user that their account has been deleted | Pass |
+| Access to the admin section and check that the user and all associated recipes have been deleted | Pass |
 
 
 </details>
@@ -642,6 +801,21 @@ The website performance were measured using the Chrome built in tool __Lighthous
 <summary>Profile page</summary>
 
 ![Image](media/testing/lighthouse/profile.png)
+</details>
+
+
+Note: For the following pages (Add recipe page / Edit recipe page and My recipes page) the accessibility score is 87%, although in all three cases, the only issue found by lighthouse is a missing label for a select input, which is provided by materilize CSS library, and for which I do not have control.
+
+The input that we can see in the screenshots, which is causing the issue, does not have an id, therefore I could not even add a custom label to my template.
+
+<details>
+<summary>Screenshots</summary>
+
+![Accessibility issue 1](media/testing/lighthouse/edit-recipe.png)
+![Accessibility issue 2](media/testing/lighthouse/add-recipe.png)
+![Accessibility issue 3](media/testing/lighthouse/add-recipe-accessibility-issue1.png)
+![Accessibility issue 4](media/testing/lighthouse/add-recipe-accessibility-issue2.png)
+![Accessibility issue 5](media/testing/lighthouse/add-recipe-accessibility-issue3.png)
 </details>
 
 

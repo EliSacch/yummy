@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+<!--
+    This is the custom 404 page.
+-->
+
+{% block title %}Error 404{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="subheading">Error 500</h1>
+                </div>
+        </div>
+        <div class="row">
+            <p>Server error. Please try again.</p>
+            <!-- Action buttons -->
+            <ul class="col s12 center">
+                <!-- The user can go back to the home page -->
+                <li><a href="{% url 'home' %}" class="btn action-btn">Go Home</a></li>
+            </ul>
+        </div>
+    
+    </div>
+</section>
+{% endblock %}

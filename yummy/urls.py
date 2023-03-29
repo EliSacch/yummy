@@ -21,3 +21,7 @@ urlpatterns = [
     path('', include('recipebook.urls'), name='recipes_urls'),
     path('accounts/', include('allauth.urls')),
     ]
+
+# Custom 404 and 500 pages
+handler404 = "yummy.views.error_404_view"
+handler500 = "yummy.views.error_500_view"

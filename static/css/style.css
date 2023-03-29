@@ -16,10 +16,12 @@
     --clr-secondary: #E3E4D4;
     --clr-secondary-1: #5e6563;
     --clr-secondary-transparent: #e3e4d43b;
+    --clr-secondary-lighter: #fdfcf6;
 
     /* Tertiary colors */
     --clr-tertiary-0: #00B1FF;
     --clr-tertiary-1: #FB7B7C;
+    --clr-tertiary-1-darker: #ba3737;
     --clr-tertiary-2: #FFDC82;
     --clr-tertiary-3: #fac491;
 }
@@ -75,7 +77,7 @@ small {
 }
 
 a {
-    color: var(--clr-primary-3);
+    color: var(--clr-primary-4);
     font-weight: 600;
 }
 
@@ -170,6 +172,12 @@ nav ul a:hover::after,
 .primary-3 {
     background-color: var(--clr-primary-3);
 }
+.primary-4 {
+    background-color: var(--clr-primary-4);
+}
+.primary-5 {
+    background-color: var(--clr-primary-5);
+}
 
 .background-alert {
     background-color: var(--clr-tertiary-2);
@@ -256,6 +264,10 @@ textarea.materialize-textarea.invalid:focus,
     color: var(--clr-secondary-1);
 }
 
+label {
+    color: var(--clr-secondary-1);
+}
+
 .fixed-label {
     font-size: 1.4rem;
     font-weight: 400;
@@ -284,7 +296,7 @@ textarea.materialize-textarea.invalid:focus,
 .difficulty-choices li > label:hover,
 .difficulty-choices li > input[type=radio]:checked + label {
     background-color: var(--clr-primary-4);
-    color: var(--clr-secondary-1);
+    color: white;
 }
 
 textarea {
@@ -317,6 +329,15 @@ textarea:focus {
     z-index: -1;
 }
 
+.btn {
+    font-weight: 500;
+}
+
+.btn:hover,
+.btn-large:hover,
+.btn-small:hover {
+    background-color: var(--clr-primary-3);
+}
 
 .action-btn {
     width: 90%;
@@ -324,9 +345,9 @@ textarea:focus {
     max-width: 300px;
     margin: 10px;
     padding: 10px;
-    border: 2px solid var(--clr-primary-3);
-    background-color: var(--clr-primary-3);
-    color: var(--clr-secondary);
+    border: 2px solid var(--clr-primary-4);
+    background-color: var(--clr-primary-4);
+    color: white;
     line-height: normal;
     font-size: 1.5rem;
     font-weight: 600;
@@ -338,9 +359,8 @@ textarea:focus {
 }
 
 .action-btn:hover {
-    background-color: var(--clr-primary-2);
-    border: 2px solid var(--clr-primary-2);
-    color: var(--clr-primary-5);
+    background-color: var(--clr-primary-3);
+    border: 2px solid var(--clr-primary-3);
 }
 
 .errorlist {
@@ -407,9 +427,9 @@ input.invalid {
     display: block;
     font-size: 1.1em;
     text-align: left;
-    color: var(--clr-primary-2);
+    color: var(--clr-primary-4);
     margin-block: 10px;
-    border-top: 1px dotted var(--clr-primary-2);
+    border-top: 1px dotted var(--clr-primary-3);
 }
 #valid-tags {
     text-align: left;
@@ -436,7 +456,7 @@ input.invalid {
     display: grid;
     grid-template-columns: auto 1fr;
     padding: 0 1em;
-    background-color: var(--clr-secondary-transparent);
+    background-color: var(--clr-secondary-lighter);
 }
 
 .ingredient-formset,
@@ -458,8 +478,9 @@ input.invalid {
 .btn-floating.remove-ingredient,
 .btn-floating.remove-step {
     background-color: transparent;
-    border: 1px solid var(--clr-tertiary-1);
+    border: 2px solid var(--clr-tertiary-1-darker);
     margin-inline: 1em;
+    font-weight: 600;
 }
 
 .ingredient-line {
@@ -471,12 +492,12 @@ input.invalid {
 
 .btn-floating.remove-ingredient > i,
 .btn-floating.remove-step > i {
-    color: var(--clr-tertiary-1);
+    color: var(--clr-tertiary-1-darker);
 }
 
 .btn-floating.remove-ingredient:hover,
 .btn-floating.remove-step:hover {
-    background-color: var(--clr-tertiary-1);
+    background-color: var(--clr-tertiary-1-darker);
 }
 
 .btn-floating.remove-ingredient:hover > i,

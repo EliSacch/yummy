@@ -47,7 +47,7 @@
                     {% endfor %}
                 </div>
                 <div class="filter-btn-container">
-                    <input type="submit" class="btn-small center" value="Filter"/>
+                    <input type="submit" class="btn-small center primary-4" value="Filter"/>
                 </div>
 
             </form>
@@ -132,7 +132,7 @@
                     {% if all_recipes.has_previous %}
                         <li class="waves-effect"><a href="?page={{ all_recipes.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
                     {% else %}
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                        <li class="disabled"><a href="#!" class="grey-text"><i class="material-icons">chevron_left</i></a></li>
                     {% endif %}
 
                     <!-- 
@@ -154,7 +154,7 @@
                     {% if all_recipes.has_next %}
                         <li class="waves-effect"><a href="?page={{ all_recipes.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
                     {% else %}
-                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                        <li class="disabled"><a href="#!" class="grey-text"><i class="material-icons">chevron_right</i></a></li>
                     {% endif %}
                   </ul>
 
