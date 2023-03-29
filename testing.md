@@ -119,6 +119,24 @@ The following actions have been performed for both navigation bar (expanded navi
 | Click on the 'logout' link | The 'logout' modal opens up | Pass |
 
 
+Dashboard, after adding recipes:
+Note: These actions where performed after some recipes have been added, although the manual testing for adding recipes will show in a separate section.
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Check the dashboard after having added some recipes | The previous message for 'no recipes added' disappeared, and now there is a search bar, a category section, and a suggestions section | Pass |
+| Type something in the reach bar | If the search strings does not correspond to a part of a recipe name, nothing shows up underneath the search bar | Pass |
+| Type something in the reach bar | If the search strings corresponds to a part of a recipe name, a list of recipes that contain that string appears underneath the search bar | Pass |
+| Cancel the whole string, and look for another recipe | The results previously found disappear and the results are updated dynamically | Pass |
+| Click on one of the results | The user is redirected to the detail page for the selected recipe | Pass |
+| Check the tags line | All the tags added so far from the user appears as clickable buttons, and there are no repetitions | Pass |
+| Click on one tag | The user is redirected to the filtered result for that specific tag | Pass |
+| Check the suggestions section | Up to 5 random recipes added by this user are displayed in this section as cards | Pass |
+| Check the recipe card image | If the user has not added an image, the placeholder is displayed, otherwise the recipe image is displayed | Pass |
+| Click on the cards | The user is redirected to the specific recipe detail page | Pass |
+| Click on the 'See All Recipes' link | The user is redirected to 'my_recipes' page | Pass |
+
+
 </details>
 
 
@@ -129,6 +147,18 @@ Enter invalid information:
 
 | Action | Expected result | Pass/Fail |
 |--------|-----------------|-----------|
+| Submit the form without entering any mandatory (title/tags) information | the user is requested to add the mandatory information | Pass |
+| Enter just the title and submit | The user is requested to enter at least one tag | Pass |
+| Enter the mandatory information and submit | The recipe is created and the user is redirected to the recipe detail page | Pass |
+| Add new recipes filling out one extra input at a time | a new recipe is created each time, and the user is redirected to the new recipe detail page | Pass |
+
+Ingredients formset:
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| When adding a recipe, click on the 'Add ingredient' button, to open a new ingredient line, but do not enter any information | When submitting the form, this form line should be ignored, since empty | Pass |
+| When adding an ingredient, enter the ingredient name only | The user should be informed that the ingredient was not valid, because of missing amount |
+
+
 
 
 </details>
@@ -529,6 +559,32 @@ Se scrrenshots below:
   ![Updated code](media/errors/unable-to-send-verification-email-fix.png)
 
 </details>
+
+
+<details>
+<summary>Recipe image not uploaded when adding a new recipe</summary>
+
+- Issue: When adding a new recipe, the image was not uploaded, even when selected correctly by the user.
+
+- Fix: The isue was caused by the post method, in the AddRecipeView, because the request.FILES as argument was not passed to the RecipeForm.
+
+To solve this issuue I changed the code from:
+
+      def post(self, request, *args, **kwargs):
+          form = RecipeForm(self.request.POST)
+
+To:
+
+      def post(self, request, *args, **kwargs):
+          form = RecipeForm(self.request.POST,
+                            request.FILES)
+
+
+
+![Image](media/errors/no-image-uploaded-fix.png)
+
+</details>
+
 
 ## Unfixed Bugs
 
