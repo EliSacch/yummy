@@ -449,4 +449,57 @@ There are currently 0 known unfixed bugs
 
 ## Performance
 
+The website performance were measured using the Chrome built in tool __Lighthouse__
+
+<details>
+<summary>Home page begore login</summary>
+
+![Image](media/testing/lighthouse/index-before-login.png)
+</details>
+
+
+<details>
+<summary>Sign up page</summary>
+
+![Image](media/testing/lighthouse/signup-page.png)
+</details>
+
+
+<details>
+<summary>Log in page</summary>
+
+![Image](media/testing/lighthouse/login-page.png)
+</details>
+
+
+<details>
+<summary>Password reset page</summary>
+
+![Image](media/testing/lighthouse/password-reset.png)
+</details>
+
+
+<details>
+<summary>Dashboard</summary>
+
+![Image](media/testing/lighthouse/dashboard.png)
+</details>
+
+
+<details>
+<summary>Detail page</summary>
+
+![Image](media/testing/lighthouse/detail-page.png)
+</details>
+
+
+<details>
+<summary>Profile page</summary>
+
+![Image](media/testing/lighthouse/profile.png)
+</details>
+
+
 [Back to the top](#table-of-content)
+
+Back to [main README](readme.md)

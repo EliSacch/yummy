@@ -193,7 +193,9 @@ nav ul a:hover::after,
 }
 
 .grey-text {
-    color: var(--clr-secondary-1);
+    font-size: 1.4rem;
+    color: var(--clr-secondary-1) !important;
+    font-family: var(--font-basic);
 }
 
 .hidden {
@@ -251,13 +253,14 @@ textarea.materialize-textarea.invalid:focus,
     transform: translateY(-20px) scale(0.8);
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
-    color: var(--clr-primary-4);
+    color: var(--clr-secondary-1);
 }
 
 .fixed-label {
     font-size: 1.4rem;
     font-weight: 400;
     margin-right: 1em;
+    color: var(--clr-secondary-1);
 }
 
 .difficulty-choices {
@@ -275,12 +278,13 @@ textarea.materialize-textarea.invalid:focus,
     border: 1px solid var(--clr-primary-4);
     color: var(--clr-primary-4);
     cursor: pointer;
+    color: var(--clr-secondary-1);
 }
 
 .difficulty-choices li > label:hover,
 .difficulty-choices li > input[type=radio]:checked + label {
     background-color: var(--clr-primary-4);
-    color: var(--clr-secondary);
+    color: var(--clr-secondary-1);
 }
 
 textarea {
@@ -366,12 +370,14 @@ input {
 
 .input-field > label {
     font-size: 1.4rem;
+    color: var(--clr-secondary-1);
 }
 
 .label-left {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 1em;
+    color: var(--clr-secondary-1);
 }
 
 .input-field.small-input {
@@ -651,6 +657,7 @@ section.search-bar .container > * {
 #id_remember + label {
     position: absolute;
     left: 20px;
+    color: var(--clr-secondary-1);
 }
 
 [type="checkbox"].delete-user-confirm + label {

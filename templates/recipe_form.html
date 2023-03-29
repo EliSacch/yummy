@@ -55,7 +55,7 @@
 
     {% elif field.name == "difficulty" %}
     <div class="row">    
-        <label for="{{ field.id_for_label }}" class="left fixed-label">{{ field.label }}</label>
+        <label class="left fixed-label">{{ field.label }}</label>
         <ul class="input-field difficulty-choices">
         {% for radio in field %}
             <li>
