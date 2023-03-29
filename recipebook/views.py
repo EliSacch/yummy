@@ -35,7 +35,13 @@ class HomeView(generic.ListView):
         search_form = RecipeSearchForm()
         if self.request.user.is_authenticated:
             # We only display the recipes created by the logged in user
-            all_recipes = Recipe.objects.filter(user=self.request.user)
+            
+
+            """Removed just for screenshot. To be added again"""
+            #all_recipes = Recipe.objects.filter(user=self.request.user)
+
+            """Temporary, just for responsive screenshot"""
+            all_recipes = Recipe.objects.order_by('created_on')
             # We only display 5 random recipes in the home page
             random_recipes = all_recipes.order_by('?')[:5]
             user_profile_image = UserProfileImage.objects.filter(
