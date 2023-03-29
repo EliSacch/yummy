@@ -7,6 +7,7 @@ Back to [main README](readme.md)
 [Tests](#tests)
   - [Unit test](#unit-test)
   - [Manual test](#manual-test)
+  - [Responsiveness](#responsiveness)
 
 [Validator Testing](#validator-testing)
   - [HTML](#html)
@@ -319,11 +320,156 @@ Log out and delete account:
 | Check the checkbox and click on 'delete' again | The user is redirected to the landing page, and a message informs the user that their account has been deleted | Pass |
 | Access to the admin section and check that the user and all associated recipes have been deleted | Pass |
 
+</details>
 
+[Back to the top](#table-of-content)
+
+### Responsiveness
+
+The web app has been testes both on large and small screens.
+
+Because the login is required, I could not use "Am I responsive" website to document the responsiveness of the website, but it has been documentated with the scrrenshots below:
+
+- Mobile:
+
+<details>
+<summary>Landing page</summary>
+
+![Mobile - signup](media/testing/responsive/mobile-landingpage.png)
+</details>
+
+<details>
+<summary>Sign up</summary>
+
+![Mobile - signup](media/testing/responsive/mobile-signup.png)
+</details>
+
+<details>
+<summary>Login</summary>
+
+![Mobile - login](media/testing/responsive/mobile-login.png)
+</details>
+
+<details>
+<summary>Dashboard</summary>
+
+![Mobile - landing page](media/testing/responsive/mobile-dashboard.png)
+</details>
+
+<details>
+<summary>Side bar</summary>
+
+![Mobile - add recipe](media/testing/responsive/mobile-sidebar.png)
+</details>
+
+<details>
+<summary>All recipes</summary>
+
+![Mobile - all recipes](media/testing/responsive/mobile-all-recipes.png)
+</details>
+
+<details>
+<summary>Add recipe</summary>
+
+![Mobile - add recipe](media/testing/responsive/mobile-addrecipe.png)
+</details>
+
+<details>
+<summary>Detail page</summary>
+
+![Mobile - detail page](media/testing/responsive/mobile-detail-page.png)
+</details>
+
+<details>
+<summary>Profile</summary>
+
+![Mobile - profile](media/testing/responsive/mobile-profile.png)
 </details>
 
 
-[Back to the top](#table-of-content)
+- Tablet:
+
+<details>
+<summary>Landing page</summary>
+
+![Tablet - signup](media/testing/responsive/tablet-landingpage.png)
+</details>
+
+<details>
+<summary>Login</summary>
+
+![Tablet - login](media/testing/responsive/tablet-login.png)
+</details>
+
+<details>
+<summary>Dashboard</summary>
+
+![Tablet - landing page](media/testing/responsive/tablet-home.png)
+</details>
+
+<details>
+<summary>All recipes</summary>
+
+![Tablet - all recipes](media/testing/responsive/tablet-all-recipes.png)
+</details>
+
+<details>
+<summary>Edit recipe</summary>
+
+![Tablet - edit recipe](media/testing/responsive/tablet-edit-page.png)
+</details>
+
+<details>
+<summary>Detail page</summary>
+
+![Tablet - detail page](media/testing/responsive/tablet-detailpage.png)
+</details>
+
+
+- Desktop:
+
+<details>
+<summary>Sign up</summary>
+
+![Desktop - signup](media/testing/responsive/desktop-signup.png)
+</details>
+
+<details>
+<summary>Login</summary>
+
+![Desktop - login](media/testing/responsive/desktop-login.png)
+</details>
+
+<details>
+<summary>Dashboard</summary>
+
+![Desktop - landing page](media/testing/responsive/desktop-dashboard.png)
+</details>
+
+<details>
+<summary>All recipes</summary>
+
+![Desktop - all recipes](media/testing/responsive/desktop-all-recipes.png)
+</details>
+
+<details>
+<summary>Add recipe</summary>
+
+![Desktop - add recipe](media/testing/responsive/desktop-add-recipe.png)
+</details>
+
+<details>
+<summary>Detail page</summary>
+
+![Desktop - detail page](media/testing/responsive/desktop-detail-page.png)
+</details>
+
+<details>
+<summary>Profile</summary>
+
+![Desktop - profile](media/testing/responsive/desktop-profile.png)
+</details>
+
 
 ## Validator Testing
 
