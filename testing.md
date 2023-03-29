@@ -256,9 +256,68 @@ General:
 | Action | Expected result | Pass/Fail |
 |--------|-----------------|-----------|
 | Check the information in the profile page | The information match the user information | Pass |
-| Check the user image | If the user has not provided a profile image, the default account icon is displayed | Pass |
-| Check the password | The password just shows some asteriscs | Pass |
+| Check the user image | If the user has not provided a profile image, the default account icon is displayed, otherwise the profile shows the image uploaded by the user | Pass |
+| Check the password | The password is hidden | Pass |
 
+
+Update information:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on the image upload button and upload an image | The user profile image is updated with the uploaded image | Pass |
+| Click on the username update button | The form to update the username is displayed | Pass |
+| Try to remove the name completely and save | The user is prompted to fill out the username | Pass |
+| Try to eneter an invalid username | An error message informs the user that the username could not be updated | Pass |
+| Try to eneter a username already in use | An error message informs the user that the username could not be updated | Pass |
+| Enter a valid username | The username is updated successfully | Pass |
+| Click on the edit email button | The user is redirected to the 'email manager' page | Pass |
+| click on the edit password button | The user is redirected to the 'change password' page | Pass |
+
+
+Update email:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| In the 'Add E-mail Address' try to re-enter the account emil address and click on 'add e-mail address' | An error message informs the user that the email address is already asscoated to the account | Pass |
+| Enter an email address associated to another account and click on 'add e-mail address' | An error message informs the user that the email address is already asscoated to another account | Pass |
+| Add an invalid email address and click on 'add e-mail address' | An error message informs the user that the email address is not valid | Pass |
+| Enter a valid email address and click on 'add email address' | The form is submitted successfully and the new email address appears in the 'email addresses' area | Pass |
+| Check the status of the new email address | The new email address appears to be unverified | Pass |
+| Select the new email address and click on 'make primary' | An error informs the user that the primary email address must be verified | Pass |
+| Select the new email address and click on re-sent verification | Check the email inbox to confirm that a new verification email has been sent | Pass |
+| Re verify the email address following the same steps followed during the signup process | | |
+| After the new email is verified, select it and click on make primary again | The new email address appears now to be the primary email address | Pass |
+| Select the primary email address and click on remove | A message informs the user that the primary email address cannot be removed | Pass |
+| Select the other email address, and click on remove | The email address is removed successfully and does not appear in account anymore | Pass |
+
+
+Change passqord:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Go to the change password page and click on the forgot password link | The user is redirected to the reset password page | Pass |
+| Note: This page has already been tested in the 'home page before login' section | | |
+| Go back to the change email page and submit the form with no information | A message informs the user to fill out the form | Pass |
+| Enter the old password only and submit | a message informs the use to fill out the missing fields | Pass |
+| Enter the old password and the new password just one time | The user is asked to repeat the password | Pass |
+| Enter all the information, but enter two different new password | An error informs the user that the two passwods must match | Pass |
+| Enter two identical new passwords, but a wrong old password | An error informs that the user must type the current password | Pass |
+| Enter all valid information | the password is updated successfully | Pass |
+| Log out and try logging in with the new password | The user logs in correctly | Pass |
+
+
+Log out and delete account:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on the logout button | A pop up opens, asking the use to log out | Pass |
+| click outside the modal | The modal closes | Pass |
+| Reopen the modal and click on sign out | The user is logged out and the landing page is displayed | Pass |
+| Log in agan, and reopen the profile page. then click on delete account | A modal opens up, asking the user to confirm if they want to delete the account | Pass |
+| Click outside the modal | The modal closes with no action | Pass |
+| Click on 'delete account' again, and click on 'delete' without checking the box | The user is informed that they need to confirm they wish to delete the account | Pass |
+| Check the checkbox and click on 'delete' again | The user is redirected to the landing page, and a message informs the user that their account has been deleted | Pass |
+| Access to the admin section and check that the user and all associated recipes have been deleted | Pass |
 
 
 </details>
