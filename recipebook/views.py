@@ -181,7 +181,8 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                       )
 
     def post(self, request, *args, **kwargs):
-        form = RecipeForm(self.request.POST)
+        form = RecipeForm(self.request.POST,
+                          request.FILES)
 
         # Before saving the form we check if
         # there is any step added to the procedure
@@ -232,7 +233,8 @@ class AddNewRecipeView(generic.CreateView, SingleObjectMixin):
                     else:
                         pass
             else:
-                messages.error(self.request, form.errors)
+                messages.error(self.request, """There was an error. 
+                Please, make sure to fill out all the fieldscorrectly and try again.""")
                 return super().form_invalid(form)
 
             messages.success(self.request, 'Recipe added successfully!')
@@ -325,7 +327,8 @@ class EditRecipeView(UpdateView, SingleObjectMixin):
                     else:
                         pass
             else:
-                messages.error(self.request, formset.errors)
+                messages.error(self.request, """There was an error. 
+                Please, make sure to fill out all the fieldscorrectly and try again.""")
                 return super().form_invalid(form)
 
             messages.success(self.request, 'Recipe updated successfully!')

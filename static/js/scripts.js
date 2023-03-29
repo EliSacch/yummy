@@ -168,8 +168,8 @@ function remove_step_form() {
  * The array is displayed underneath the tags field, to show the valid tags.
  */
 function display_tags() {
-    var tags = $('#id_tags').val();
-    var tagsArray = tags.split(/[ ,#]+/);
+    const tags = $('#id_tags').val();
+    const tagsArray = tags.split(/[ ,#]+/);
 
     $('#valid-tags').empty();
     for(let tag of tagsArray) {
@@ -223,7 +223,7 @@ const iconsNames = ['restaurant', 'cake', 'local_pizza', 'egg',
     'bakery_dining', 'icecream', 'local_cafe', 'local_bar', 'nutrition', 'ramen_dining'];
 function random_icon() {
     for (let i = 0; i < 6; i++) {
-        var randomIcon = iconsNames[Math.floor(Math.random() * iconsNames.length)];
+        const randomIcon = iconsNames[Math.floor(Math.random() * iconsNames.length)];
         const iconHtml = `<span class="food-icon"><i class="material-icons">${randomIcon}</i></span>`;
         $('.food-icons-container').append(iconHtml);
     } 
@@ -236,8 +236,8 @@ function random_icon() {
 function random_position() {
     const icons = $('.food-icon');
     for (let i = 0; i < icons.length; i++) {
-        var top = Math.floor(Math.random() * 90);
-        var left = Math.floor(Math.random() * 90);
+        const top = Math.floor(Math.random() * 90);
+        const left = Math.floor(Math.random() * 90);
         icons[i].style.top = `${top}%`;
         icons[i].style.left = `${left}%`;
     }
@@ -276,7 +276,7 @@ function search_recipe() {
     $('#id_search').on('keyup', function (e) { 
         e.preventDefault();
         const minChar = 2;
-        var results = [];
+        let results = [];
 
         if ($('#id_search').val().length > minChar) {
 
