@@ -141,9 +141,9 @@ Note: These actions where performed after some recipes have been added, although
 
 
 <details>
-<summary>Add recipe</summary>
+<summary>Add recipe page</summary>
 
-Enter invalid information:
+Recipe form:
 
 | Action | Expected result | Pass/Fail |
 |--------|-----------------|-----------|
@@ -156,8 +156,108 @@ Ingredients formset:
 | Action | Expected result | Pass/Fail |
 |--------|-----------------|-----------|
 | When adding a recipe, click on the 'Add ingredient' button, to open a new ingredient line, but do not enter any information | When submitting the form, this form line should be ignored, since empty | Pass |
-| When adding an ingredient, enter the ingredient name only | The user should be informed that the ingredient was not valid, because of missing amount |
+| When adding an ingredient, enter the ingredient name only | The user should be informed that the ingredient was not valid, because of missing amount | Pass |
+| When adding the ingredients, add some extra forms and then click on the remove button | The selected ingredient lines should be removed, and the submitted form should ignore them | Pass |
 
+Steps formset:
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| When adding a recipe, click on the 'Add step' button, to open a new step line, but do not enter any information | When submitting the form, this form line should be ignored, since empty | Pass |
+| When adding a step, add some extra forms and then click on the remove button | The selected step lines should be removed, and the submitted form should ignore them | Pass |
+
+
+</details>
+
+
+<details>
+<summary>Recipe detail page</summary>
+
+General:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| For each recipe added, check the information displaying on the detail page | Each information correspond to the detail entered when submitting the form | Pass |
+| Check the recipe image | If no image was submitted, the image should be replaced by the standard placeholder | Pass |
+| Check the image for a recipe where it was provided | The choosen image is displayed in the relative section | Pass |
+| Check the notes section | If nothing was provided in the notes input, this section should not be displayed at all, otherwise it should contain the provided information | Pass |
+| Change the viewport size | The layout should changed if we pass from large to small screen, and viceversa | Pass |
+| Click on the Edit button | The user is redirected to the 'edit recipe' page for the current recipe | Pass |
+| Click on the Delete button | The delete recipe modal opens up | Pass |
+| Click on the 'go-home' button | The user is redirected to the dashboard | Pass |
+
+
+</details>
+
+<details>
+<summary>Edit / Delete recipe</summary>
+
+Edit:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Go to the edit page for one recipe and check the form | The form should be pre-populated with the existing information | Pass |
+| Remove the title completely | The form should not be submitted, and the user is asked to enter a tilte | Pass |
+| Change the title | The form is submitted and the updated information displays in the detail page | Pass |
+| Change the image | The new image is displayed in the detail page | Pass |
+| Remove an ingredient name from one existing ingredient | The form is not submitted and the user is asked to fill out the required fields | Pass |
+| Remove an ingredient amount from one existing ingredient | The form is not submitted and the user is asked to fill out the required fields | Pass |
+| Remove one ingredient line | The removed ingredient is not displayed anymore in the detail page | Pass |
+| Add new ingredients with correct information | The new ingredients are displayed in the detail page | Pass |
+| Remove all the existing tags | The form is not submitted and the user is asked to enter the tags | Pass |
+| Edit the other optional fields | The updated information displays in the detail page | Pass |
+
+
+Delete:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on the delete button | The delete recipe modal opens and the user is asked to confirm that they want to delete the recipe | Pass |
+| Click on cancel, or outside the modal | The modal closes with no action | Pass |
+| Cick on 'confirm' | The recipe is deleted and the user is redirected to the dashboard | Pass |
+
+
+</details>
+
+
+<details>
+<summary>My recipes page</summary>
+
+General:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Check the results section | Because there are no filters selected, all recipes added by this user show n this section | Pass |
+| Check the pagination | If there are more than 6 recipes, the recipes are split in multiple pages | Pass |
+| Click on the single page number | The user is rediected to the selected page | Pass |
+| Click on the 'previous' button | If there is a previous page, the user is redirected to that page, otherwise the button is disabled | Pass |
+| Click on the 'next' button | If there is a following page, the user is redirected to that page, otherwise the button is disabled | Pass |
+| click on the recipe card | The user is redirected to the selected recipe detail page | Pass |
+
+
+Filtering:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on filter button, without selecting any filter | All the recipes are displayed | Pass |
+| Enter some keywords in the 'title contains' section and click on 'filter'| If there is any recipe with the entered string in the title, the results section will display those recipes only | Pass |
+| Remove the title and enter one tag in the 'tags contains' filter, and click on 'filter' | If there is any recipe with that tag, it will be displayed in the results section | Pass |
+| Enter multiple tags, separated by commas, and click on 'filter' | Only the recipes that contain all the tags are displayed (if any) | Pass |
+| Remove the tags and select one 'difficulty' and click on 'filter' | Only the recipes for which the specific difficulty was selected are displayed (if any) | Pass |
+| Try to combine multiple filters | Only the recipes that match all the filters are displayed (if any) | Pass |
+
+</details>
+
+
+<details>
+<summary>Profile page</summary>
+
+General:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Check the information in the profile page | The information match the user information | Pass |
+| Check the user image | If the user has not provided a profile image, the default account icon is displayed | Pass |
+| Check the password | The password just shows some asteriscs | Pass |
 
 
 
