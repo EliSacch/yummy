@@ -804,6 +804,21 @@ The website performance were measured using the Chrome built in tool __Lighthous
 </details>
 
 
+Note: For the following pages (Add recipe page / Edit recipe page and My recipes page) the accessibility score is 87%, although in all three cases, the only issue found by lighthouse is a missing label for a select input, which is provided by materilize CSS library, and for which I do not have control.
+
+The input that we can see in the screenshots, which is causing the issue, does not have an id, therefore I could not even add a custom label to my template.
+
+<details>
+<summary>Screenshots</summary>
+
+![Accessibility issue 1](media/testing/lighthouse/edit-recipe.png)
+![Accessibility issue 2](media/testing/lighthouse/add-recipe.png)
+![Accessibility issue 3](media/testing/lighthouse/add-recipe-accessibility-issue1.png)
+![Accessibility issue 4](media/testing/lighthouse/add-recipe-accessibility-issue2.png)
+![Accessibility issue 5](media/testing/lighthouse/add-recipe-accessibility-issue3.png)
+</details>
+
+
 [Back to the top](#table-of-content)
 
 Back to [main README](readme.md)
