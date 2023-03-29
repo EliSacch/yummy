@@ -145,8 +145,9 @@ It is a model that stores the ingredients information. It is linked to the Recip
 
 [Back to the top](#table-of-content)
 
-## Features 
+__________
 
+## Features 
 
 ### Landing page
 
@@ -433,25 +434,42 @@ From this page the user can review and manage the profile and login information.
 
 [Back to the top](#table-of-content)
 
+______________
+
 ## Testing 
 
 Check testing [here](testing.md)
 
+______________
+
 ## Deployment
 
-### Deployment on Heroku
+### Live website
+
+To deply this project on Heroku I followed these steps:
+  1. Access my Heroku account (or create one)
+  2. Click on Add App
+  3. Go to Settings > Config Vars
+  4. Add the config KEY and VALUE from my env.py file
+  5. Go to deploy tab
+  6. Select GitHub as deploy method
+  7. Select the relevant GitHub repository
+  8. Click on deploy branch
 
 ### Local Deployment
-  - For a local deployment follow these steps:
-    - Create a new directory on your machine, where you want do deploy the files
-    - Open the existing repository in GitHub
-    - Go to the "Code" tab
-    - Click on the "Code" button
-    - Copy the HTTPS link
-    - Open your terminal and run the command __git clone 'link'__
-    - use the link just copied, without quotes, instead of 'link'
+
+For a local deployment follow these steps:
+  - Create a new directory on your machine, where you want do deploy the files
+  - Open the existing repository in GitHub
+  - Go to the "Code" tab
+  - Click on the "Code" button
+  - Copy the HTTPS link
+  - Open your terminal and run the command __git clone 'link'__
+  - use the link just copied, without quotes, instead of 'link'
 
 [Back to the top](#table-of-content)
+
+_____________
 
 ## Credits 
 
@@ -479,24 +497,43 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
 
 - Background image is from [Mae Mu](https://unsplash.com/@picoftasty?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 
 
-- The favicon is from [Icons8](https://icons8.com/icon/A2GuNMcdfGfC/torta)
+
+The favicon is from [Icons8](https://icons8.com/icon/A2GuNMcdfGfC/torta)
 
 [Back to the top](#table-of-content)
 
+_____________
+
 ## Technologies used
 
+Languages used:
   - HTML
   - CSS
-  - JavaScript and JQuery
+  - JavaScript
   - Python
   - Django
-  - Materialize
-  - PostgreSQL
 
-  Django libraries
-  - Allauth
-  - inline forms
-  - django-filters
+Other libraries:
+  - Materialize CSS - UI component library to simplify the styling
+  - JQuery - JavaScript library to simplify the management of functionalities handled by JavaScript
+
+Python libraries:
+  - Coverage - tool for measuring code coverage of Python programs
+  - Pillow - Python Imaging Library to simplify the upload of images
+  - Requests - Python library for making HTTP requests
+
+Django libraries, frameworks and applications:
+  - Allauth - To manage the user registration and authentication
+  - Formset_factory -  to work with multiple forms on the same page
+  - Inlineformset_factory - to update a number of identical forms on the same page
+  - Django-filters - reusable application that allows users to filter down a queryset based on a model's fields
+  - Messages - framework hat allows you to temporarily store messages in one request and retrieve them for display in a subsequent request
+
+Database and storage:
+  - PostgreSQL - Relational database system
+  - Psycopg2 - PostgreSQL database adapter for the Python programming language
+  - ElephantSQL - Host for the databased used y the live website
+  - Cloudinary - To store the images and static files
   
 [Back to the top](#table-of-content)
 
@@ -504,4 +541,4 @@ The following Images are taken from [Unsplash](https://unsplash.com/photos/_h-2j
 
 A special thank to my mentor __Dick Vlaanderen__ for his precious feedback on this project.
 
-Tutor Ed
+Many thanks also to the tutor Ed, who helped me troubleshoot an issue happening with the inline formset.
