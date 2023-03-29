@@ -33,37 +33,37 @@ class HomeView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         search_form = RecipeSearchForm()
-        if self.request.user.is_authenticated:
-            # We only display the recipes created by the logged in user
-            
+        #if self.request.user.is_authenticated:
+        # We only display the recipes created by the logged in user
+        
 
-            """Removed just for screenshot. To be added again"""
-            #all_recipes = Recipe.objects.filter(user=self.request.user)
+        """Removed just for screenshot. To be added again"""
+        #all_recipes = Recipe.objects.filter(user=self.request.user)
 
-            """Temporary, just for responsive screenshot"""
-            all_recipes = Recipe.objects.order_by('created_on')
-            # We only display 5 random recipes in the home page
-            random_recipes = all_recipes.order_by('?')[:5]
-            user_profile_image = UserProfileImage.objects.filter(
-                user=self.request.user
-                ).first()
+        """Temporary, just for responsive screenshot"""
+        all_recipes = Recipe.objects.order_by('created_on')
+        # We only display 5 random recipes in the home page
+        random_recipes = all_recipes.order_by('?')[:5]
+        #user_profile_image = UserProfileImage.objects.filter(
+            #user=self.request.user
+            #).first()
 
-            context = {
-                'all_recipes': all_recipes,
-                'suggestions': random_recipes,
-                'difficulty_choices': [(1, 'Easy'),
-                                       (2, 'Medium'),
-                                       (3, 'Hard')],
-                'tags': self.get_tags(),
-                'search_form': search_form,
-                'user_profile_image': user_profile_image,
-                }
+        context = {
+            'all_recipes': all_recipes,
+            'suggestions': random_recipes,
+            'difficulty_choices': [(1, 'Easy'),
+                                    (2, 'Medium'),
+                                    (3, 'Hard')],
+            'tags': self.get_tags(),
+            'search_form': search_form,
+            #'user_profile_image': user_profile_image,
+            }
         return context
 
     def get_tags(self):
         # We get all the tags from the recipes created by the user
         all_tags = Recipe.objects.filter(
-            user=self.request.user
+            #user=self.request.user
             ).values_list('tags', flat=True).distinct()
         # Then we remove the duplicates
         tags = []
@@ -77,7 +77,7 @@ class HomeView(generic.ListView):
         return tags
 
     def post(self, request, *args, **kwargs):
-        queryset = Recipe.objects.filter(user=self.request.user)
+        queryset = Recipe.objects.order_by('created_on')
         # The following code was taken from
         # the "Very Academy" tutorial on YouTube
         # The link to the tutorial is:

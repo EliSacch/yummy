@@ -5,21 +5,17 @@
 -->
 
 {% block header %}
-<!-- If the user is not authenticate we don't display the navifation bar -->
+<!-- If the user is not authenticate we don't display the navifation bar 
     {% if user.is_authenticated %}
         {% include "header.html" %}
     {% else %}
-    {% endif %}
+    {% endif %} -->
+    {% include "header.html" %}
 {% endblock header %}
 
 
 {% block content %}
 
-<!-- This is what we display if the user is authenticated -->
-
-
-<!-- Removed just for responsive 
-    {% if user.is_authenticated %}-->
 <h1 class="center subheading">What are we cooking today?</h1>
 
     <!-- 
@@ -106,45 +102,14 @@
                 </div>
             </div>
         </section>
-    <!-- Removed just for responsive {% else %} -->
-    
-    <!-- If the user has not added any recipe, we show the following message and a prompt to add a recipe instead -->
-    <!-- Remove just for responsive <section id="no-recipes-section">
-        <div class="container">
-            <p>Sorry, there are no recipes to display!</p>
-            <p><a href="{% url 'add_recipe' %}">Add a recipe</a> to start.</p>
-        </div>
-    </section>
-    {% endif %} -->
 
-  <!-- Logout Modal -->
   <div id="logout-modal" class="modal">
     <div class="modal-content">
         {% include "account/logout.html" %}
     </div>
   </div>
 
-<!-- {% else %} -->
 
-<!-- If the user is not authenticate we show a pahe with the login and signup buttons -->
-<!-- <section class="landingpage valign-wrapper">
-    <div class="container">
-        <div class="row">
-            <h1 id="logo" class="col s12">Yummy</h1>
-            <h2 class="col s12 subheading">What are we cooking today?</h2>
-        </div>
-
-        <div> -->
-            <!-- Action buttons -->
-       <!--     <ul class="row center">
-                <li class="col s12"><a href="{% url 'account_login' %}" class="btn action-btn">Login</a></li>
-                <li class="col s12"><a href="{% url 'account_signup' %}" class="btn action-btn btn-invert">Signup</a></li>
-            </ul>
-        </div>
-
-    </div>
-</section>
-
-{% endif %}-->
+{% endif %}
 
 {%endblock%}
