@@ -4,18 +4,21 @@ Back to [main README](readme.md)
 
 ## Table of content
 
-Testing
-- [Tests](#tests)
-    - [Unit test](#unit-test)
-    - [Manual test](#manual-test)
-- [Validator Testing](#validator-testing)
-    - [HTML](#html)
-    - [CSS](#css)
-    - [JS](#javascript)
-    - [Python](#python)
-- [Fixed bugs](#fixed-bugs)
-- [Unfixed bugs](#unfixed-bugs)
-- [Performance](#performance)
+[Tests](#tests)
+  - [Unit test](#unit-test)
+  - [Manual test](#manual-test)
+
+[Validator Testing](#validator-testing)
+  - [HTML](#html)
+  - [CSS](#css)
+  - [JS](#javascript)
+  - [Python](#python)
+
+[Fixed bugs](#fixed-bugs)
+
+[Unfixed bugs](#unfixed-bugs)
+
+[Performance](#performance)
 
 
 ## Tests
@@ -26,6 +29,8 @@ Testing
 
 <details>
 <summary>Home page before login</summary>
+
+Landing page / signup:
 
 | Action | Expected result | Pass/Fail |
 |--------|-----------------|-----------|
@@ -39,10 +44,94 @@ Testing
 | Enter all information, but an inavlid username | A message informs the user that the username is invalid | Pass |
 | Enter all information, but an invalid email | A essage informs the user that the email is not valid | Pass |
 | Enter all valid information | The form submits and the user is informed that a verification email has been sent to their email address | Pass |
+| Click on the 'Go home' button | The user is redirected to the landing page | Pass |
+| Try to login before verifying the email | The user is redirected to a page that informs them to check their inbox for the verification email | Pass |
+| Check emails received | An email with the verification link is received | Pass |
+| Click on the verification link | A new page opens in the browser, asking the user to confirm the email address | Pass |
+| Click on 'confirm' button | The user is redirected to the login page, and a message informs them that the email address has been verified | Pass |
+| From the login page, click on the link that redirects to the signup page | The user is redirected to the signup page | Pass |
+| From the signup page, click on the link that redirects to the login page | The user is redirected back to the login page | Pass |
+
+
+Login:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Try to login without entering any information | The user is asked to enter the username | Pass |
+| Enter the username but not the password | The user is asked to enter the password | Pass |
+| Enter an incorrect password and submit | A message informs the user that the username and/or password are incorrect | Pass |
+| Enter a correct password but an incorrect username | A message informs the user that the username and/or password are incorrect | Pass |
+| Enter all valid information | The user is logged in and the dashboard is displayed | Pass |
+| Find the logout button and click it | A pop up opens, asking the use to log out | Pass |
+| Click on sign out | The user is logged out and the landing page is displayed | Pass |
+| Click on the login button | The user is redirected to the login page | Pass |
+| This time enter the email adddress instead of the username, and the password | The user is logged in correctly | Pass |
+
+Reset password:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Log out again, open the login page and click on the 'Forgot password' link | The reset password page opens up | Pass |
+| Do not enter any information and submit | A message asks the user to enter the email | Pass |
+| Enter an invalid email address | The user is informed that the email address is invalid | Pass |
+| Enter the correct email address and submit | The user is informed that an email has been sent with the link to reset their password | Pass |
+| Click on the 'go home' button | The user is redirected to the landing page | Pass |
+| Check the email inbox | The reset password email has been received | Pass |
+| Click on the link | The 'change password' page is opened in the browser | Pass |
+| Do not enter any information and submit | The user is informed that they need to fill out the form | Pass |
+| Enter just the first password and submit | The user is informed that they need to eneter the password again | Pass |
+| Fill out both fields, but with different passwords | The user is informed that the passwords don't match | Pass |
+| Fill out the form correctly and submit | The user is redirected to a new page that informs them that the password has been updated | Pass |
+| Duplicate the tab, so that we can check both buttons | | |
+| Click on the 'log in' button | The user is redirected to the login page | Pass |
+| Click on the 'go home' button | The user is redirected to the landing page | Pass |
+| Try and log in with the new credentials | The user is logged in correctly | Pass |
+
+</details>
+
+
+<details>
+<summary>Dashboard</summary>
+
+Dashboard general:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Check the user handle on the top left corner | The username shows correctly | Pass |
+| Check the middle section of the page | Because there are no recipes added, the page shows a messag informing the user to add a new recipe | Pass |
+| Click on the 'Add recipe' link in the middle of the page | The user is redirected to the 'add recipe' page | Pass |
+| Click on the 'go back' arrow on the top left corner, without submitting the form | The user is redirected to the dashboard, and the same msaage appears again, since no recipe has been added yet | Pass |
+| Shrink and stretch the size of the window | The menu expands or collapses every time we pass the breakpoint | Pass |
+| When the menu is collapsed, and we see the hamburger menu, click on the menu icon | The side menu opens | Pass |
+| Click outside the menu | The side menu closes | Pass |
+
+
+Navigation:
+
+The following actions have been performed for both navigation bar (expanded navigation and side bar)
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+| Click on the home link | The user is redirected to the home page | Pass |
+| Click on the 'all recipes' link | The user is redirected to the 'my recipes' page | Pass |
+| Click on the 'add recipe' link | The user is redirected to the 'add recipe' page | Pass |
+| Click on the 'prfile' link (from the side bar), or on the user handle (from the expanded menu) | The user is redirected to the 'profie' page | Pass |
+| Click on the 'logout' link | The 'logout' modal opens up | Pass |
 
 
 </details>
 
+
+<details>
+<summary>Add recipe</summary>
+
+Enter invalid information:
+
+| Action | Expected result | Pass/Fail |
+|--------|-----------------|-----------|
+
+
+</details>
 
 
 [Back to the top](#table-of-content)
@@ -452,7 +541,7 @@ There are currently 0 known unfixed bugs
 The website performance were measured using the Chrome built in tool __Lighthouse__
 
 <details>
-<summary>Home page begore login</summary>
+<summary>Home page before login</summary>
 
 ![Image](media/testing/lighthouse/index-before-login.png)
 </details>
