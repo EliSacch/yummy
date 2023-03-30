@@ -26,6 +26,14 @@ Back to [main README](readme.md)
 
 ### Unit test
 
+Unit test was performed on the main functionalities.
+
+[See forms testing](https://github.com/EliSacch/yummy/blob/main/recipebook/test_forms.py)
+
+[See models testing](https://github.com/EliSacch/yummy/blob/main/recipebook/test_models.py)
+
+[See views testing](https://github.com/EliSacch/yummy/blob/main/recipebook/test_views.py)
+
 ### Manual test
 
 <details>
