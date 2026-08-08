@@ -4,7 +4,6 @@ Yummy is a recipe book web application, that allows users to save and store thei
 
 ![Preview](media/testing/responsive/desktop-dashboard.png)
 
-[See deployed website](https://yummy-recipe-book.herokuapp.com/)
 
 ## Table of content
 
