@@ -23,10 +23,6 @@ Yummy is a recipe book web application, that allows users to save and store thei
 
 - [Testing](#testing)
 
-- [Deployment](#deployment)
-  - [Live Website](#live-website)
-  - [Local Deployment](#local-deployment)
-
 - [Credits](#credits)
   - [Code](#code)
   - [Content](#content)
@@ -439,34 +435,6 @@ ______________
 
 Check testing [here](testing.md)
 
-______________
-
-## Deployment
-
-### Live website
-
-To deply this project on Heroku I followed these steps:
-  1. Access my Heroku account (or create one)
-  2. Click on Add App
-  3. Go to Settings > Config Vars
-  4. Add the config KEY and VALUE from my env.py file
-  5. Go to deploy tab
-  6. Select GitHub as deploy method
-  7. Select the relevant GitHub repository
-  8. Click on deploy branch
-
-### Local Deployment
-
-For a local deployment follow these steps:
-  - Create a new directory on your machine, where you want do deploy the files
-  - Open the existing repository in GitHub
-  - Go to the "Code" tab
-  - Click on the "Code" button
-  - Copy the HTTPS link
-  - Open your terminal and run the command __git clone 'link'__
-  - use the link just copied, without quotes, instead of 'link'
-
-[Back to the top](#table-of-content)
 
 _____________
 
